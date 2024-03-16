@@ -1,0 +1,314 @@
+const jwt = require("jsonwebtoken");
+const ejs = require("ejs");
+const { uploadFile } = require('../helpers')
+const {
+    makeHash,
+    checkHash,
+    mailer,
+    makeToken,
+    checkToken,
+    makeRefreshToken,
+    env: {
+        HEADER,
+        ENVIRONMENT,
+        LOCAL_URL,
+        OTP_SEND_URL,
+        MSG91_AUTH_KEY,
+        MSG91_OTP_TEMP_ID,
+    },
+    sequelize,
+} = require("../config");
+const {
+ CarModel
+} = require("../models");
+const { Op } = require("sequelize");
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
+
+const getCarModels = async (req, res) => {
+    try {
+        const {
+            id,
+            model_name
+        } = req.query
+        let filter = {}
+        if (id) filter = {
+            ...filter,
+            id
+        }
+        if (model_name) filter = {
+            ...filter,
+            model_name
+        }
+        const modelName = await CarModel.findAll({
+            where: filter,
+            raw: true
+        })
+        return res
+            .response({
+                code: 200,
+                status:'success',
+                message: "Car Models fetched successfully",
+                modelName
+            })
+            .code(200);
+    } catch (error) {
+        console.log(error)
+        return res
+            .response({
+                code: 401,
+                status: "error",
+                message: "Something Wrong",
+            })
+            .code(200);
+    }
+};
+
+const addCarModels = async (req, res) => {
+    try {
+        const { model_name , image , start_year , end_year } = req.payload;
+        
+        const existingCarBrands = await CarModel.findOne({
+            where: {
+                model_name,
+            },
+            raw: true
+        });
+
+        if (existingCarBrands) {
+            return res
+                .response({
+                    code: 409,
+                    status: "error",
+                    message: `${model_name} already exists`,
+                })
+                .code(200);
+        }
+
+        const { file_url } = await uploadFile(req, image , 'uploads/carbrands/') 
+
+        const newCarModel = await CarModel.create({
+            model_name,
+            start_year,
+            end_year,
+            image_url: file_url,
+            status: true
+        });
+
+        return res
+            .response({
+                code: 201,
+                status: 'success',
+                message: "Car Model created successfully",
+                category: newCarModel,
+            })
+            .code(200);
+    } catch (error) {
+        console.error(error);
+        return res
+            .response({
+                code: 500,
+                status: "error",
+                message: "Something went wrong",
+            })
+            .code(200);
+    }
+};
+
+const editCarModel = async (req, res) => {
+    try {
+        const { car_model_id, model_name, image, start_year, end_year } = req.payload;
+
+        // Check if the specified car model exists
+        const existingCarModel = await CarModel.findOne({
+            where: {
+                id: car_model_id,
+            },
+        });
+
+        if (!existingCarModel) {
+            return res
+                .response({
+                    code: 404,
+                    status: "error",
+                    message: "Car model not found",
+                })
+                .code(200);
+        }
+
+        // Check if the new model_name conflicts with existing models
+        const modelConflict = await CarModel.findOne({
+            where: {
+                model_name,
+                id: {
+                    [Op.not]: car_model_id, // Exclude the current car_model_id from the search
+                },
+            },
+        });
+
+        if (modelConflict) {
+            return res
+                .response({
+                    code: 409,
+                    status: "error",
+                    message: `${model_name} already exists`,
+                })
+                .code(200);
+        }
+
+        if (model_name) {
+            existingCarModel.model_name = model_name;
+        }
+        
+        if (start_year) {
+            existingCarModel.start_year = start_year;
+        }
+        
+        if (end_year) {
+            existingCarModel.end_year = end_year;
+        }
+
+        if (image) {
+            const { file_url } = await uploadFile(req, image, 'uploads/carbrands/');
+            existingCarModel.image_url = file_url;
+        }
+
+        await existingCarModel.save();
+
+        return res
+            .response({
+                code: 200,
+                status: 'success',
+                message: "Car model updated successfully",
+                carModel: existingCarModel,
+            })
+            .code(200);
+    } catch (error) {
+        console.error(error);
+        return res
+            .response({
+                code: 500,
+                status: "error",
+                message: "Something went wrong",
+            })
+            .code(200);
+    }
+};
+
+
+const deleteCarModel = async (req, res) => {
+    try {
+        const { car_model_id } = req.query; // Assuming car_model_id is passed as a URL parameter
+
+        // Check if the specified car model exists
+        const existingCarModel = await CarModel.findOne({
+            where: {
+                id: car_model_id,
+            },
+        });
+
+        if (!existingCarModel) {
+            return res
+                .response({
+                    code: 404,
+                    status: "error",
+                    message: "Car model not found",
+                })
+                .code(200);
+        }
+
+        // Delete the car model
+        await existingCarModel.destroy();
+
+        return res
+            .response({
+                code: 200,
+                status: 'success',
+                message: "Car model deleted successfully",
+            })
+            .code(200);
+    } catch (error) {
+        console.error(error);
+        return res
+            .response({
+                code: 500,
+                status: "error",
+                message: "Something went wrong",
+            })
+            .code(200);
+    }
+};
+
+module.exports = {
+    deleteCarModel
+};
+
+
+const toggleCarModelStatus = async (req, res) => {
+    try {
+        const { car_model_id } = req.query;
+
+        if (!Number.isInteger(car_model_id) || car_model_id <= 0) {
+            return res
+                .response({
+                    code: 400,
+                    status: "error",
+                    message: "Invalid car_model_id",
+                })
+                .code(200);
+        }
+
+        const existingCarModel = await CarModel.findOne({
+            where: {
+                id: car_model_id,
+            },
+        });
+
+        if (!existingCarModel) {
+            return res
+                .response({
+                    code: 404,
+                    status: "error",
+                    message: "Car Model not found",
+                })
+                .code(200);
+        }
+
+        // Toggle the category status (assuming you have a boolean 'status' field)
+        existingCarModel.status = !existingCarModel.status;
+
+        // Save the updated category to the database
+        await existingCarModel.save();
+
+        return res
+            .response({
+                code: 200,
+                status:'success',
+                message: "Status toggled successfully",
+                category: existingCarModel,
+            })
+            .code(200);
+    } catch (error) {
+        console.error(error);
+        return res
+            .response({
+                code: 500,
+                status: "error",
+                message: "Something went wrong",
+            })
+            .code(200);
+    }
+};
+
+
+
+
+
+module.exports = {
+    getCarModels,
+    addCarModels,
+    editCarModel,
+    deleteCarModel,
+    toggleCarModelStatus
+}

@@ -1,0 +1,32 @@
+const Joi = require('joi');
+
+const bannerCreationValidator = Joi.object({
+    banner_name: Joi.string().required(),
+    banner_type: Joi.string().valid('product', 'category').required(),
+    category_id: Joi.when('banner_type', {
+        is: 'category',
+        then: Joi.number().integer().positive().required(),
+        otherwise: Joi.optional(),
+    }),
+    sub_category_id: Joi.when('banner_type', {
+        is: 'category',
+        then: Joi.number().integer().positive(),
+        otherwise: Joi.optional(),
+    }),
+    super_sub_category_id: Joi.when('banner_type', {
+        is: 'category',
+        then: Joi.number().integer().positive(),
+        otherwise: Joi.optional(),
+    }),
+    product_ids: Joi.string().allow(null).allow(''),
+    web_image_url: Joi.any().required(),
+    mob_image_url: Joi.any().required()
+});
+
+const product_id_for_banner = Joi.array().items(Joi.number().positive().required())
+
+
+module.exports = {
+    bannerCreationValidator,
+    product_id_for_banner
+};

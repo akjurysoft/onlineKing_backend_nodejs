@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/vision": "^7.0.2",
+    "axios": "^1.6.3",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "hapi-cors": "^1.0.3",
+    "hapi-response-time": "^2.2.4",
+    "hapi-swagger": "^17.0.0",
+    "haversine-distance": "^1.2.1",
+    "html-pdf": "^3.0.1",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "moment": "^2.29.4",
+    "mysql2": "^3.4.2",
+    "nodemailer": "^6.9.8",
+    "sequelize": "^6.32.1"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "name": "kardify_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Subham jena , Debanjan Dasgupta",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
