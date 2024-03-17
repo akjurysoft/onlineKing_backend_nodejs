@@ -21,6 +21,7 @@ const super_sub_category_routes = require("./super_sub_category_routes");
 const testimonials_info_routes = require("./testimonials_routes");
 const user_routes = require("./user_routes");
 const carts_routes = require("./carts_routes");
+const wishlist_routes = require("./wishlist_routes");
 
 // making a router plugin
 module.exports = {
@@ -49,5 +50,6 @@ module.exports = {
     server.route(store_info_routes);
     server.route(testimonials_info_routes);
     server.route(carts_routes);
+    server.route(wishlist_routes);
   },
 };

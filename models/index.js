@@ -36,4 +36,6 @@ module.exports = {
     StaticPages: require('./static_pages_model'),
     StoreInfo: require('./store_info_model'),
     Testimonials: require('./testimonials_model'),
+    Carts: require('./cart_model'),
+    Wishlists: require('./wishlists_model'),
 }

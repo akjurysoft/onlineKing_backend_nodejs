@@ -19,6 +19,7 @@ const stories_controllers = require('./stories_controllers')
 const static_controllers = require('./static_page_controller')
 const store_info_controllers = require('./store_info_controllers')
 const testimonials_controllers = require('./testimonials_controllers')
+const carts_controllers = require('./carts_controllers')
 
 
 module.exports = {
@@ -42,5 +43,6 @@ module.exports = {
   stories_controllers,
   static_controllers,
   store_info_controllers,
-  testimonials_controllers
+  testimonials_controllers,
+  carts_controllers
 };

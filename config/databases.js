@@ -38,5 +38,7 @@ module.exports = {
   customers: 'customers',
   dealers: 'dealers',
   otps:'otps',
-  stories_product_associations: 'stories_product_associations'
+  stories_product_associations: 'stories_product_associations',
+  carts: 'carts',
+  wishlists: 'wishlists',
 };

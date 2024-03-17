@@ -20,6 +20,7 @@ module.exports = {
   StaticPagesValidators: require('./static_pages_validators'),
   StoreInfoValidator: require('./store_info_validators'),
   TestimonialsValidator: require('./testimonials_validators'),
+  CartValidators: require('./carts_validators'),
   headerValidator: joi.object({
     authorization: joi.string().required()
   }).options({ allowUnknown: true }),

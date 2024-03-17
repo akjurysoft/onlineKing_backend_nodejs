@@ -1,11 +1,12 @@
 const tags = ["api", "Carts"];
 
-const { category_controllers } = require("../controllers");
+const { category_controllers, carts_controllers } = require("../controllers");
 
 const {
     categoriesValidators,
     usersValidation,
-    headerValidator
+    headerValidator,
+    CartValidators
 } = require("../validators");
 
 const carts_routes = [
@@ -15,11 +16,10 @@ const carts_routes = [
         options: {
             description: "Fetch all Carts Items.",
             validate: {
-                headers: headerValidator,
-                query: categoriesValidators.fetch_categories_payload
+                headers: headerValidator
             },
             tags,
-            handler: category_controllers.getCategories,
+            handler: carts_controllers.getCart,
         },
     },
     {
@@ -29,10 +29,24 @@ const carts_routes = [
             description: "Add to cart for customers",
             validate: {
                 headers: headerValidator,
-                query: categoriesValidators.change_status_category_validator
+                payload: CartValidators.add_to_cart_payload
             },
             tags,
-            handler: category_controllers.toggleCategoryStatus,
+            handler: carts_controllers.addToCart,
+        },
+    },
+
+    {
+        method: "POST",
+        path: "/remove-from-cart",
+        options: {
+            description: "Remove product from cart for customers",
+            validate: {
+                headers: headerValidator,
+                payload: CartValidators.remove_from_cart_payload
+            },
+            tags,
+            handler: carts_controllers.removeFromCart,
         },
     }
     

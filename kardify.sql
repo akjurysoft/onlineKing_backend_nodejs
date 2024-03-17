@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2024 at 10:00 AM
+-- Generation Time: Mar 17, 2024 at 07:26 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `fullname`, `email`, `password`, `accessToken`, `refreshToken`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 'Admin', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA5ODIxMjgwLCJleHAiOjE3MDk4MzU2ODB9.jtFyE6Esh4_fl1BJw8nbcQjVqshOY0tJRarHToMHB1c', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA5ODIxMjgwLCJleHAiOjE3NDEzNzg4ODB9.oZ9Jdeuc_niUXi-Iot-fZZS3uLkW22Omlzn5UsD0rjA', '2023-08-26 00:00:00', '2024-03-07 14:21:20', NULL),
+(1, 'Admin', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzEwNTgyMDEyLCJleHAiOjE3MTA1OTY0MTJ9.J_CU4KL9sfQU9oe8G_---tWVghe6u4Y0e98LgpC0wGc', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzEwNTgyMDEyLCJleHAiOjE3NDIxMzk2MTJ9.HPpfgbFGsxGR9b8UQGmq4aYsANco2VAPtoRruIBjXmQ', '2023-08-26 00:00:00', '2024-03-16 09:40:12', NULL),
 (4, 'Admin2', 'admin2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZnVsbG5hbWUiOiJBZG1pbjIiLCJlbWFpbCI6ImFkbWluMkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwMzkzNDgxOCwiZXhwIjoxNzAzOTQ5MjE4fQ.gXqHQyBVA4uu2yB94eqC0ZL-YtUyN3ksZxJh8fVrLg0', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZnVsbG5hbWUiOiJBZG1pbjIiLCJlbWFpbCI6ImFkbWluMkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwMzkzNDgxOCwiZXhwIjoxNzM1NDkyNDE4fQ._CRZD4fwx4g0Sduz9YQrq64UphnMKG60x_JM3Y9Sbn8', '2023-08-26 00:00:00', '2023-12-30 11:13:38', NULL),
 (5, 'Admin3', 'admin3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJBZG1pbjMiLCJlbWFpbCI6ImFkbWluM0BnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwNDIwNTcyNiwiZXhwIjoxNzA0MjIwMTI2fQ.ijbR-mgV1Klm39j4e8QEke-zC4zouCoiohswIrWuHP8', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJBZG1pbjMiLCJlbWFpbCI6ImFkbWluM0BnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwNDIwNTcyNiwiZXhwIjoxNzM1NzYzMzI2fQ.fdkYEI1QEdPqXXYAMn_tEyf3dT59ZNDMCHFBNcUfFLI', '2023-08-26 00:00:00', '2024-01-02 14:28:46', NULL),
 (6, 'subham', 'admin10@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZnVsbG5hbWUiOiJzdWJoYW0iLCJlbWFpbCI6ImFkbWluMTBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA0MzY3OTY2LCJleHAiOjE3MDQzODIzNjZ9.ZPvJoj_NalRu4VP7xXToHeQMIWaJznlQ4-2HNqh-UdM', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZnVsbG5hbWUiOiJzdWJoYW0iLCJlbWFpbCI6ImFkbWluMTBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA0MzY3OTY2LCJleHAiOjE3MzU5MjU1NjZ9.2bOp3uciGdY9Q2aZ39gafp6noBOHGzj5JiKeXUxOCnQ', '2024-01-03 09:38:50', '2024-01-04 11:32:46', NULL);
@@ -132,6 +132,35 @@ INSERT INTO `banner_product_associations` (`id`, `banner_id`, `product_id`, `cre
 (2, 1, 1, '2024-03-01 10:19:37', '2024-03-01 10:19:37', NULL),
 (3, 3, 2, '2024-03-01 13:31:37', '2024-03-01 13:31:37', NULL),
 (4, 3, 1, '2024-03-01 13:31:37', '2024-03-01 13:31:37', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `dealer_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT NULL,
+  `deletedAt` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `user_id`, `dealer_id`, `product_id`, `quantity`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+(1, 3, NULL, 1, 1, '2024-03-17 17:24:57', '2024-03-17 17:24:57', '2024-03-17 18:15:06'),
+(2, 3, NULL, 3, 7, '2024-03-17 17:25:18', '2024-03-17 17:34:36', NULL),
+(3, 3, NULL, 2, 6, '2024-03-17 17:33:34', '2024-03-17 17:33:47', NULL),
+(4, 13, NULL, 3, 5, '2024-03-17 17:36:43', '2024-03-17 17:36:43', NULL),
+(5, NULL, 13, 3, 15, '2024-03-17 17:40:15', '2024-03-17 17:40:38', NULL),
+(6, NULL, 13, 2, 2, '2024-03-17 17:40:52', '2024-03-17 17:40:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -313,7 +342,7 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `fullname`, `dob`, `language`, `username`, `email`, `phone`, `password`, `verified`, `accessToken`, `refreshToken`, `device_token`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
 (1, 'Subham', NULL, NULL, '918249229465', 'subham.kj@jurysoft.com', NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, NULL, NULL, NULL, '2024-02-26 06:54:26', '2024-02-26 06:54:26', '2024-02-26 07:30:18'),
 (2, 'Subham', NULL, NULL, '918249229465', 'subham.kj@jurysoft.com', NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJTdWJoYW0iLCJ1c2VybmFtZSI6IjkxODI0OTIyOTQ2NSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcwODkzNDE1MSwiZXhwIjoxNzA4OTQ4NTUxfQ.5bhEulPuguckVU5x02PrmzO9aHDd5sYVNQLuCpnPM9M', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJTdWJoYW0iLCJ1c2VybmFtZSI6IjkxODI0OTIyOTQ2NSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcwODkzNDE1MSwiZXhwIjoxNzQwNDkxNzUxfQ.uSNoMQ4S9KqzWYOXQWmLgoky8Sm9AzlGiKvum51L2bc', NULL, '2024-02-26 07:30:18', '2024-02-26 07:55:51', '2024-02-26 11:49:53'),
-(3, 'subham kumar jena', NULL, NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcwOTcwMzQzMSwiZXhwIjoxNzA5NzE3ODMxfQ.4tEf5xN-vFIY5c-l1dow8HHudR9eemi5lUvVKDZBgHI', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcwOTcwMzQzMSwiZXhwIjoxNzQxMjYxMDMxfQ.-6GKmQhHJWBzJl9AEM1nnjiWyZ03y-Ks84UghtyAxeE', NULL, '2024-02-26 07:42:14', '2024-03-06 05:37:11', NULL),
+(3, 'subham kumar jena', NULL, NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Mzg0OCwiZXhwIjoxNzEwNzA4MjQ4fQ.oIzbeoe_jdDu3poG4LExzO8OsHHraQqbvtsOb838Whc', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Mzg0OCwiZXhwIjoxNzQyMjUxNDQ4fQ.s5vdVTFhQYtX9sbxxbUEum-tU6IQVcDcLppdw-kh_Fg', NULL, '2024-02-26 07:42:14', '2024-03-17 16:44:08', NULL),
 (4, 'Subham jenaaaaa', NULL, NULL, '918249229465', NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, NULL, NULL, NULL, '2024-02-26 11:49:53', '2024-02-26 11:49:53', '2024-02-26 11:52:27'),
 (5, 'Subham jenaaaaa', NULL, NULL, '918249229465', NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJTdWJoYW0gamVuYWFhYWEiLCJlbWFpbCI6bnVsbCwicm9sZSI6IkNVU1RPTUVSIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA4OTQ4NDA0LCJleHAiOjE3MDg5NjI4MDR9.8zKcmcf1yzTTHwEQDPWGEeWzQjBENw3oPhVdkM7fGts', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJTdWJoYW0gamVuYWFhYWEiLCJlbWFpbCI6bnVsbCwicm9sZSI6IkNVU1RPTUVSIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA4OTQ4NDA0LCJleHAiOjE3NDA1MDYwMDR9.dTSkYuikErI7jAVj4EC3X7ByXDdQGp-mwLGpGh7rKJM', NULL, '2024-02-26 11:52:27', '2024-02-26 11:53:24', '2024-02-26 12:08:17'),
 (6, 'Subham jenaaaaa', NULL, NULL, '918249229465', 'subhamjena0001@gmail.com', NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, NULL, NULL, NULL, '2024-02-26 12:08:17', '2024-02-26 12:08:17', '2024-02-26 12:10:23'),
@@ -385,7 +414,7 @@ INSERT INTO `dealers` (`id`, `verified`, `approved`, `is_active`, `fullname`, `f
 (10, 0, 0, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:10:37', '2024-02-13 06:10:37', '2024-02-13 06:16:21'),
 (11, 0, 1, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:16:21', '2024-02-13 07:10:38', '2024-02-26 07:37:41'),
 (12, 0, 0, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:17:41', '2024-02-13 06:17:41', '2024-02-13 06:34:07'),
-(13, 1, 1, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-26 09:34:09', NULL),
+(13, 1, 1, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZ1bGxuYW1lIjoiU3ViaGFtIiwidXNlcm5hbWUiOiJzdWJoYW0ua2pAanVyeXNvZnQuY29tIiwicm9sZSI6IkRFQUxFUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Njk4MywiZXhwIjoxNzEwNzExMzgzfQ.kIWdo7rzcuAD98aAWJ5gkNEfS7xFzCSKs-cJw_DyS3c', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZ1bGxuYW1lIjoiU3ViaGFtIiwidXNlcm5hbWUiOiJzdWJoYW0ua2pAanVyeXNvZnQuY29tIiwicm9sZSI6IkRFQUxFUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Njk4MywiZXhwIjoxNzQyMjU0NTgzfQ.JUN3Jq67UWcysZhFYD-76rmVlZXM0uciuGgUD95GgOw', NULL, '2024-02-13 06:34:07', '2024-03-17 17:36:23', NULL),
 (14, 1, 0, 1, 'Subhamsdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 07:08:16', NULL),
 (15, 1, 0, 1, 'Subhamsdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 11:41:26', NULL),
 (16, 1, 0, 1, 'Subhamsdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Not Interested', NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 11:57:31', NULL),
@@ -1055,7 +1084,10 @@ INSERT INTO `stories` (`id`, `customer_id`, `image_url`, `heading`, `description
 (4, 3, '/uploads/stories/1709703853858.png', 'Preetam', 'Testa sbhajkdl', 1, NULL, 'image', 1, '2024-03-06 05:44:13', '2024-03-06 05:49:14', NULL),
 (5, 3, '/uploads/stories/1709703886189.mp4', 'jena subham', 'jjwi basjajsdkad', 1, NULL, 'video', 1, '2024-03-06 05:44:46', '2024-03-06 17:49:01', NULL),
 (6, 3, '/uploads/stories/1709704315713.jpeg', 'sdf', 'sdf', 1, NULL, 'image', 1, '2024-03-06 05:51:55', '2024-03-06 19:09:56', NULL),
-(7, 3, '/uploads/stories/1709704507186.mp4', '4k', '4k video', NULL, NULL, 'video', 1, '2024-03-06 05:55:07', '2024-03-06 05:55:07', NULL);
+(7, 3, '/uploads/stories/1709704507186.mp4', '4k', '4k video', 1, NULL, 'video', 1, '2024-03-06 05:55:07', '2024-03-16 10:25:03', NULL),
+(8, 3, '/uploads/stories/1710584679965.mp4', 'adsa test video', 'asdkhja sadjasd asiudhjkas akjsndka', 1, NULL, 'video', 1, '2024-03-16 10:24:40', '2024-03-16 10:25:05', NULL),
+(9, 3, '/uploads/stories/1710584756664.png', 'Test image upload', 'faghjskdn ajhsdkhlasd iaukjshda sdakjsdhl', 1, NULL, 'image', 1, '2024-03-16 10:25:56', '2024-03-16 10:25:56', NULL),
+(10, 7, '/uploads/stories/1710584815547.png', 'tea ajshdbaykwejn kajsd', 'tea ajshdbaykwejn kajsdaasc sdtea ajshdbaykwejn kajsd tea ajshdbaykwejn kajsd', 1, NULL, 'image', 1, '2024-03-16 10:26:55', '2024-03-16 10:27:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -1342,6 +1374,22 @@ CREATE TABLE `variants_attributes` (
   `deletedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlists`
+--
+
+CREATE TABLE `wishlists` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `dealer_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `createdAt` timestamp NULL DEFAULT NULL,
+  `updatedAt` timestamp NULL DEFAULT NULL,
+  `deletedAt` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -1368,6 +1416,12 @@ ALTER TABLE `banners`
 -- Indexes for table `banner_product_associations`
 --
 ALTER TABLE `banner_product_associations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1569,6 +1623,12 @@ ALTER TABLE `variants_attributes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1595,6 +1655,12 @@ ALTER TABLE `banners`
 --
 ALTER TABLE `banner_product_associations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `car_brands`
@@ -1738,7 +1804,7 @@ ALTER TABLE `store_infos`
 -- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `stories_product_associations`
@@ -1792,6 +1858,12 @@ ALTER TABLE `variants`
 -- AUTO_INCREMENT for table `variants_attributes`
 --
 ALTER TABLE `variants_attributes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `wishlists`
+--
+ALTER TABLE `wishlists`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
