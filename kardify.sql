@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2024 at 07:26 PM
+-- Generation Time: Mar 22, 2024 at 12:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `fullname`, `email`, `password`, `accessToken`, `refreshToken`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 'Admin', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzEwNTgyMDEyLCJleHAiOjE3MTA1OTY0MTJ9.J_CU4KL9sfQU9oe8G_---tWVghe6u4Y0e98LgpC0wGc', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzEwNTgyMDEyLCJleHAiOjE3NDIxMzk2MTJ9.HPpfgbFGsxGR9b8UQGmq4aYsANco2VAPtoRruIBjXmQ', '2023-08-26 00:00:00', '2024-03-16 09:40:12', NULL),
+(1, 'Admin', 'admin@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzExMTAyMzU0LCJleHAiOjE3MTExMTY3NTR9.43DHuThwh1gvfussSnV31QZIzVzM9mI8WIe1mRrf3nQ', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbG5hbWUiOiJBZG1pbiIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzExMTAyMzU0LCJleHAiOjE3NDI2NTk5NTR9.oDqUDe7w_fFyhCCVy_unBGwI42m6yy6D6HFaWzRaDOU', '2023-08-26 00:00:00', '2024-03-22 10:12:34', NULL),
 (4, 'Admin2', 'admin2@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZnVsbG5hbWUiOiJBZG1pbjIiLCJlbWFpbCI6ImFkbWluMkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwMzkzNDgxOCwiZXhwIjoxNzAzOTQ5MjE4fQ.gXqHQyBVA4uu2yB94eqC0ZL-YtUyN3ksZxJh8fVrLg0', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZnVsbG5hbWUiOiJBZG1pbjIiLCJlbWFpbCI6ImFkbWluMkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwMzkzNDgxOCwiZXhwIjoxNzM1NDkyNDE4fQ._CRZD4fwx4g0Sduz9YQrq64UphnMKG60x_JM3Y9Sbn8', '2023-08-26 00:00:00', '2023-12-30 11:13:38', NULL),
 (5, 'Admin3', 'admin3@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJBZG1pbjMiLCJlbWFpbCI6ImFkbWluM0BnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwNDIwNTcyNiwiZXhwIjoxNzA0MjIwMTI2fQ.ijbR-mgV1Klm39j4e8QEke-zC4zouCoiohswIrWuHP8', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJBZG1pbjMiLCJlbWFpbCI6ImFkbWluM0BnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJhcHBsaWNhdGlvbiI6ImNsb3NlMmJ1eSIsImlhdCI6MTcwNDIwNTcyNiwiZXhwIjoxNzM1NzYzMzI2fQ.fdkYEI1QEdPqXXYAMn_tEyf3dT59ZNDMCHFBNcUfFLI', '2023-08-26 00:00:00', '2024-01-02 14:28:46', NULL),
 (6, 'subham', 'admin10@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZnVsbG5hbWUiOiJzdWJoYW0iLCJlbWFpbCI6ImFkbWluMTBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA0MzY3OTY2LCJleHAiOjE3MDQzODIzNjZ9.ZPvJoj_NalRu4VP7xXToHeQMIWaJznlQ4-2HNqh-UdM', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZnVsbG5hbWUiOiJzdWJoYW0iLCJlbWFpbCI6ImFkbWluMTBAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA0MzY3OTY2LCJleHAiOjE3MzU5MjU1NjZ9.2bOp3uciGdY9Q2aZ39gafp6noBOHGzj5JiKeXUxOCnQ', '2024-01-03 09:38:50', '2024-01-04 11:32:46', NULL);
@@ -76,7 +76,25 @@ INSERT INTO `attributes_combinations` (`id`, `combination_id`, `attribute_id`, `
 (4, 4, 1, 'Red', '2024-02-18 15:05:21', '2024-02-18 15:05:21', NULL),
 (5, 5, 1, 'White', '2024-02-18 15:05:21', '2024-02-18 15:05:21', NULL),
 (6, 6, 1, 'Blue', '2024-02-18 15:05:21', '2024-02-18 15:05:21', NULL),
-(7, 7, 2, 'M', '2024-03-07 10:12:31', '2024-03-07 10:12:31', NULL);
+(7, 7, 2, 'M', '2024-03-07 10:12:31', '2024-03-07 10:12:31', NULL),
+(8, 8, 2, 'L', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(9, 8, 1, 'Red', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(10, 9, 2, 'L', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(11, 9, 1, 'Green', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(12, 10, 2, 'L', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(13, 10, 1, 'Pink', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(14, 11, 2, 'M', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(15, 11, 1, 'Red', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(16, 12, 2, 'M', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(17, 12, 1, 'Green', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(18, 13, 2, 'M', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(19, 13, 1, 'Pink', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(20, 14, 2, 'S', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(21, 14, 1, 'Red', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(22, 15, 2, 'S', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(23, 15, 1, 'Green', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(24, 16, 2, 'S', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(25, 16, 1, 'Pink', '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -155,12 +173,56 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `user_id`, `dealer_id`, `product_id`, `quantity`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 3, NULL, 1, 1, '2024-03-17 17:24:57', '2024-03-17 17:24:57', '2024-03-17 18:15:06'),
-(2, 3, NULL, 3, 7, '2024-03-17 17:25:18', '2024-03-17 17:34:36', NULL),
-(3, 3, NULL, 2, 6, '2024-03-17 17:33:34', '2024-03-17 17:33:47', NULL),
-(4, 13, NULL, 3, 5, '2024-03-17 17:36:43', '2024-03-17 17:36:43', NULL),
-(5, NULL, 13, 3, 15, '2024-03-17 17:40:15', '2024-03-17 17:40:38', NULL),
-(6, NULL, 13, 2, 2, '2024-03-17 17:40:52', '2024-03-17 17:40:52', NULL);
+(1, 3, NULL, 3, 1, '2024-03-18 09:18:25', '2024-03-18 09:37:09', '2024-03-18 09:39:26'),
+(2, 3, NULL, 2, 2, '2024-03-18 09:18:29', '2024-03-18 09:49:26', '2024-03-18 09:52:43'),
+(3, 3, NULL, 2, 1, '2024-03-18 09:53:23', '2024-03-18 10:50:07', '2024-03-18 10:50:11'),
+(4, 3, NULL, 3, 1, '2024-03-18 09:53:24', '2024-03-18 10:50:05', '2024-03-18 10:50:10'),
+(5, 3, NULL, 3, 18, '2024-03-18 10:50:16', '2024-03-18 10:52:01', '2024-03-18 10:52:08'),
+(6, 3, NULL, 2, 2, '2024-03-18 10:50:22', '2024-03-18 11:13:47', '2024-03-18 11:43:03'),
+(7, 3, NULL, 2, 2, '2024-03-18 11:43:11', '2024-03-18 12:07:52', '2024-03-18 12:15:35'),
+(8, 3, NULL, 3, 8, '2024-03-18 11:43:12', '2024-03-18 12:08:56', '2024-03-18 12:15:36'),
+(9, 3, NULL, 3, 1, '2024-03-18 12:17:11', '2024-03-18 12:17:11', '2024-03-18 12:19:36'),
+(10, 3, NULL, 3, 3, '2024-03-18 12:22:06', '2024-03-19 10:06:34', '2024-03-19 12:27:15'),
+(11, 3, NULL, 2, 4, '2024-03-18 13:46:58', '2024-03-19 12:06:09', '2024-03-19 12:27:15'),
+(12, 3, NULL, 3, 1, '2024-03-19 12:31:05', '2024-03-19 12:31:05', '2024-03-19 12:34:34'),
+(13, 3, NULL, 2, 1, '2024-03-19 12:32:28', '2024-03-19 12:32:28', '2024-03-19 12:34:31'),
+(14, 3, NULL, 1, 1, '2024-03-19 12:35:13', '2024-03-19 12:35:13', '2024-03-19 13:04:17'),
+(15, 3, NULL, 2, 3, '2024-03-19 12:35:21', '2024-03-19 12:55:37', '2024-03-19 13:04:17'),
+(16, 3, NULL, 3, 2, '2024-03-19 12:35:21', '2024-03-19 12:55:35', '2024-03-19 13:04:17'),
+(17, 3, NULL, 3, 1, '2024-03-19 13:05:02', '2024-03-19 13:05:02', '2024-03-19 13:05:43'),
+(18, 3, NULL, 2, 1, '2024-03-19 13:05:02', '2024-03-19 13:05:02', '2024-03-19 13:05:43'),
+(19, 3, NULL, 2, 1, '2024-03-19 13:06:26', '2024-03-19 13:06:26', '2024-03-19 13:20:21'),
+(20, 3, NULL, 3, 1, '2024-03-19 13:06:27', '2024-03-19 13:06:27', '2024-03-19 13:20:21'),
+(21, 3, NULL, 3, 1, '2024-03-19 13:23:09', '2024-03-19 13:23:09', '2024-03-19 13:52:02'),
+(22, 3, NULL, 2, 1, '2024-03-19 13:23:09', '2024-03-19 13:23:09', '2024-03-19 13:52:02'),
+(23, 3, NULL, 3, 1, '2024-03-19 13:53:08', '2024-03-19 13:53:08', '2024-03-20 11:17:52'),
+(24, 3, NULL, 2, 1, '2024-03-19 13:53:08', '2024-03-19 13:53:08', '2024-03-20 11:17:52'),
+(25, 3, NULL, 2, 1, '2024-03-20 11:18:16', '2024-03-20 11:18:16', '2024-03-20 11:18:49'),
+(26, 3, NULL, 3, 1, '2024-03-20 11:18:17', '2024-03-20 11:18:17', '2024-03-20 11:18:50'),
+(27, 3, NULL, 3, 1, '2024-03-20 11:19:19', '2024-03-20 11:19:19', '2024-03-20 11:19:34'),
+(28, 3, NULL, 2, 1, '2024-03-20 11:19:22', '2024-03-20 11:19:22', '2024-03-20 11:19:40'),
+(29, 3, NULL, 1, 2, '2024-03-20 11:19:55', '2024-03-20 11:33:53', '2024-03-20 11:35:11'),
+(30, 3, NULL, 2, 1, '2024-03-20 11:24:02', '2024-03-20 11:24:02', '2024-03-20 11:35:11'),
+(31, 3, NULL, 3, 1, '2024-03-20 11:24:03', '2024-03-20 11:24:03', '2024-03-20 11:24:14'),
+(32, 3, NULL, 3, 1, '2024-03-20 11:35:16', '2024-03-20 11:35:16', '2024-03-20 11:37:16'),
+(33, 3, NULL, 2, 1, '2024-03-20 11:35:17', '2024-03-20 11:35:17', '2024-03-20 11:37:16'),
+(34, 3, NULL, 3, 1, '2024-03-20 11:50:19', '2024-03-20 11:50:19', '2024-03-20 12:57:59'),
+(35, 3, NULL, 2, 6, '2024-03-20 11:50:19', '2024-03-20 11:52:45', '2024-03-20 12:57:59'),
+(36, 3, NULL, 3, 1, '2024-03-20 13:03:35', '2024-03-20 13:03:35', '2024-03-20 13:04:13'),
+(37, 3, NULL, 2, 1, '2024-03-20 13:03:35', '2024-03-20 13:03:35', '2024-03-20 13:04:13'),
+(38, 3, NULL, 3, 1, '2024-03-20 13:06:56', '2024-03-20 13:06:56', '2024-03-20 13:08:18'),
+(39, 3, NULL, 2, 1, '2024-03-20 13:06:56', '2024-03-20 13:06:56', '2024-03-20 13:08:18'),
+(40, 3, NULL, 3, 1, '2024-03-20 13:53:04', '2024-03-20 13:53:04', '2024-03-20 13:55:17'),
+(41, 3, NULL, 2, 1, '2024-03-20 13:53:05', '2024-03-20 13:53:05', '2024-03-20 13:55:17'),
+(42, 3, NULL, 3, 1, '2024-03-20 17:26:35', '2024-03-20 17:26:35', '2024-03-20 18:31:03'),
+(43, 3, NULL, 2, 5, '2024-03-20 17:26:38', '2024-03-20 18:21:02', '2024-03-20 18:31:03'),
+(44, 3, NULL, 2, 3, '2024-03-20 18:31:10', '2024-03-21 07:55:05', '2024-03-21 09:42:05'),
+(45, 3, NULL, 3, 1, '2024-03-21 07:49:48', '2024-03-21 07:49:48', '2024-03-21 09:42:05'),
+(46, 3, NULL, 3, 1, '2024-03-21 11:05:01', '2024-03-21 11:05:01', '2024-03-21 11:05:32'),
+(47, 3, NULL, 2, 1, '2024-03-21 11:05:01', '2024-03-21 11:05:01', '2024-03-21 11:05:32'),
+(48, NULL, 34, 4, 1, '2024-03-22 07:21:07', '2024-03-22 07:21:07', NULL),
+(49, NULL, 34, 3, 1, '2024-03-22 07:21:08', '2024-03-22 07:21:08', NULL),
+(50, NULL, 34, 2, 1, '2024-03-22 07:21:09', '2024-03-22 07:21:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -307,9 +369,13 @@ CREATE TABLE `coupons` (
 
 INSERT INTO `coupons` (`id`, `coupon_type`, `coupon_title`, `coupon_name`, `status`, `max_use_per_user`, `max_use`, `discount_type`, `discount`, `min_order_amount`, `max_discount`, `user_id`, `dealer_id`, `start_date`, `expiry_date`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
 (1, 'Default', 'subham', 'KAR40', 1, 1, NULL, 'Percent', 40, 499, 80, NULL, NULL, '2024-02-15 00:00:00', '2024-02-10 00:00:00', '2024-02-02 09:43:39', '2024-02-02 10:18:00', '2024-02-02 10:18:00'),
-(2, 'Default', 'Subham', 'SUBHAM50', 1, 20, NULL, 'Percent', 10, 20, 100, NULL, NULL, '2024-02-03 00:00:00', '2024-02-03 00:00:00', '2024-02-02 10:18:35', '2024-02-10 10:17:25', NULL),
+(2, 'Default', 'Subham', 'SUBHAM50', 1, 20, NULL, 'Percent', 10, 20, 100, NULL, NULL, '2024-02-03 00:00:00', '2024-02-03 00:00:00', '2024-02-02 10:18:35', '2024-03-20 05:37:45', NULL),
 (3, 'Dealer Wise', 'DELAER', 'DEALER70', 1, 2, NULL, 'Percent', 10, 699, 70, NULL, 1, '2024-02-10 00:00:00', '2024-02-17 00:00:00', '2024-02-02 10:22:35', '2024-02-03 05:22:01', NULL),
-(4, 'First Order', 'welcome ', 'WELCOME40', 1, 1, NULL, 'Percent', 20, 299, 90, NULL, NULL, NULL, NULL, '2024-02-02 10:24:47', '2024-02-03 05:22:03', NULL);
+(4, 'First Order', 'welcome ', 'WELCOME40', 1, 1, NULL, 'Percent', 20, 299, 90, 3, NULL, '2024-03-20 06:58:44', '2024-03-23 06:58:50', '2024-02-02 10:24:47', '2024-02-03 05:22:03', NULL),
+(5, 'Customer wise', 'Subham jena', 'SUMMER20', 1, 1, NULL, 'Percent', 10, 299, 80, 3, NULL, '2024-03-20 00:00:00', '2024-03-18 00:00:00', '2024-03-20 05:37:06', '2024-03-20 10:16:28', NULL),
+(6, 'Free Delivery', 'Subham jena', 'SUBHAM10', 1, 2, NULL, 'Percent', 12, 499, 80, NULL, NULL, '2024-03-20 00:00:00', '2024-03-23 00:00:00', '2024-03-20 07:16:49', '2024-03-20 10:16:55', NULL),
+(7, 'Subscribed Customer', 'Subscriber', 'TANISQ20', 1, 1, NULL, 'Amount', 12, 399, 80, NULL, NULL, '2024-03-23 00:00:00', '2024-03-23 00:00:00', '2024-03-20 09:26:08', '2024-03-20 11:15:41', NULL),
+(8, 'Dealer Wise', 'Delaer Welcome', 'DEALER40', 1, 2, NULL, 'Percent', 10, 399, 80, NULL, 1, '2024-03-15 00:00:00', '2024-03-16 00:00:00', '2024-03-22 07:27:32', '2024-03-22 07:27:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -342,7 +408,7 @@ CREATE TABLE `customers` (
 INSERT INTO `customers` (`id`, `fullname`, `dob`, `language`, `username`, `email`, `phone`, `password`, `verified`, `accessToken`, `refreshToken`, `device_token`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
 (1, 'Subham', NULL, NULL, '918249229465', 'subham.kj@jurysoft.com', NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, NULL, NULL, NULL, '2024-02-26 06:54:26', '2024-02-26 06:54:26', '2024-02-26 07:30:18'),
 (2, 'Subham', NULL, NULL, '918249229465', 'subham.kj@jurysoft.com', NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJTdWJoYW0iLCJ1c2VybmFtZSI6IjkxODI0OTIyOTQ2NSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcwODkzNDE1MSwiZXhwIjoxNzA4OTQ4NTUxfQ.5bhEulPuguckVU5x02PrmzO9aHDd5sYVNQLuCpnPM9M', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJTdWJoYW0iLCJ1c2VybmFtZSI6IjkxODI0OTIyOTQ2NSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcwODkzNDE1MSwiZXhwIjoxNzQwNDkxNzUxfQ.uSNoMQ4S9KqzWYOXQWmLgoky8Sm9AzlGiKvum51L2bc', NULL, '2024-02-26 07:30:18', '2024-02-26 07:55:51', '2024-02-26 11:49:53'),
-(3, 'subham kumar jena', NULL, NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Mzg0OCwiZXhwIjoxNzEwNzA4MjQ4fQ.oIzbeoe_jdDu3poG4LExzO8OsHHraQqbvtsOb838Whc', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Mzg0OCwiZXhwIjoxNzQyMjUxNDQ4fQ.s5vdVTFhQYtX9sbxxbUEum-tU6IQVcDcLppdw-kh_Fg', NULL, '2024-02-26 07:42:14', '2024-03-17 16:44:08', NULL),
+(3, 'subham kumar jena', NULL, NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, 'e10adc3949ba59abbe56e057f20f883e', 1, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMTA4NzA5MCwiZXhwIjoxNzExMTAxNDkwfQ.fd9Tyqc6kBnBuUZ_3qzqzz4RGfPymkwjaIN-A5-RRJI', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZnVsbG5hbWUiOiJzdWJoYW0ga3VtYXIgamVuYSIsInVzZXJuYW1lIjoic3ViaGFtLmtqQGp1cnlzb2Z0LmNvbSIsInJvbGUiOiJDVVNUT01FUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMTA4NzA5MCwiZXhwIjoxNzQyNjQ0NjkwfQ.oJlW2hFXSb1w1Lnr1AYzm0O3K41V1J_ydrDMZRqFMVI', NULL, '2024-02-26 07:42:14', '2024-03-22 05:58:10', NULL),
 (4, 'Subham jenaaaaa', NULL, NULL, '918249229465', NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, NULL, NULL, NULL, '2024-02-26 11:49:53', '2024-02-26 11:49:53', '2024-02-26 11:52:27'),
 (5, 'Subham jenaaaaa', NULL, NULL, '918249229465', NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJTdWJoYW0gamVuYWFhYWEiLCJlbWFpbCI6bnVsbCwicm9sZSI6IkNVU1RPTUVSIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA4OTQ4NDA0LCJleHAiOjE3MDg5NjI4MDR9.8zKcmcf1yzTTHwEQDPWGEeWzQjBENw3oPhVdkM7fGts', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZnVsbG5hbWUiOiJTdWJoYW0gamVuYWFhYWEiLCJlbWFpbCI6bnVsbCwicm9sZSI6IkNVU1RPTUVSIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzA4OTQ4NDA0LCJleHAiOjE3NDA1MDYwMDR9.dTSkYuikErI7jAVj4EC3X7ByXDdQGp-mwLGpGh7rKJM', NULL, '2024-02-26 11:52:27', '2024-02-26 11:53:24', '2024-02-26 12:08:17'),
 (6, 'Subham jenaaaaa', NULL, NULL, '918249229465', 'subhamjena0001@gmail.com', NULL, '827ccb0eea8a706c4c34a16891f84e7b', 0, NULL, NULL, NULL, '2024-02-26 12:08:17', '2024-02-26 12:08:17', '2024-02-26 12:10:23'),
@@ -402,28 +468,8 @@ CREATE TABLE `dealers` (
 --
 
 INSERT INTO `dealers` (`id`, `verified`, `approved`, `is_active`, `fullname`, `first_name`, `last_name`, `dob`, `gender`, `password`, `language`, `username`, `personal_email`, `personal_mobile`, `personal_alt_mobile`, `add1`, `add2`, `area`, `city`, `state`, `country`, `pincode`, `landmark`, `lat`, `lng`, `rejected_reason`, `identity_proof_name`, `identity_proof_file_url`, `accessToken`, `refreshToken`, `device_token`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 0, 1, 1, 'subham', 'asd', 'asd', 'asd', 'asd', '827ccb0eea8a706c4c34a16891f84e7b', 'asd', 'subham.kj@jurysoft.com', 'as@gmail.com', '918249229465', '918249229465', 'qweqwe', 'qweqwe', 'strqweqweing', 'eqwe', 'eqwe', 'wqe', '754019', 'asdas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-04 11:23:55', '2024-01-04 11:24:15', '2024-02-13 06:17:41'),
-(2, 0, 0, 1, 'subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-05 12:12:34', '2024-02-05 12:12:34', '2024-02-05 12:14:27'),
-(3, 0, 0, 1, 'subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-05 12:14:27', '2024-02-05 12:14:27', '2024-02-05 12:14:27'),
-(4, 0, 0, 1, 'subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-05 12:14:28', '2024-02-05 12:14:28', '2024-02-05 12:24:55'),
-(5, 0, 0, 1, 'subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-05 12:24:55', '2024-02-05 12:24:55', '2024-02-13 06:10:03'),
-(6, 0, 0, 1, 'subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.mj@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-05 12:43:01', '2024-02-05 12:43:01', NULL),
-(7, 0, 0, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:10:03', '2024-02-13 06:10:03', '2024-02-13 06:10:21'),
-(8, 0, 0, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:10:21', '2024-02-13 06:10:21', '2024-02-13 06:10:36'),
-(9, 0, 0, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:10:36', '2024-02-13 06:10:36', '2024-02-13 06:10:37'),
-(10, 0, 0, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:10:37', '2024-02-13 06:10:37', '2024-02-13 06:16:21'),
-(11, 0, 1, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, '918249229465', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:16:21', '2024-02-13 07:10:38', '2024-02-26 07:37:41'),
-(12, 0, 0, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:17:41', '2024-02-13 06:17:41', '2024-02-13 06:34:07'),
-(13, 1, 1, 1, 'Subham', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZ1bGxuYW1lIjoiU3ViaGFtIiwidXNlcm5hbWUiOiJzdWJoYW0ua2pAanVyeXNvZnQuY29tIiwicm9sZSI6IkRFQUxFUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Njk4MywiZXhwIjoxNzEwNzExMzgzfQ.kIWdo7rzcuAD98aAWJ5gkNEfS7xFzCSKs-cJw_DyS3c', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZ1bGxuYW1lIjoiU3ViaGFtIiwidXNlcm5hbWUiOiJzdWJoYW0ua2pAanVyeXNvZnQuY29tIiwicm9sZSI6IkRFQUxFUiIsImFwcGxpY2F0aW9uIjoia2FyZGlmeSIsImlhdCI6MTcxMDY5Njk4MywiZXhwIjoxNzQyMjU0NTgzfQ.JUN3Jq67UWcysZhFYD-76rmVlZXM0uciuGgUD95GgOw', NULL, '2024-02-13 06:34:07', '2024-03-17 17:36:23', NULL),
-(14, 1, 0, 1, 'Subhamsdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 07:08:16', NULL),
-(15, 1, 0, 1, 'Subhamsdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 11:41:26', NULL),
-(16, 1, 0, 1, 'Subhamsdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Not Interested', NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 11:57:31', NULL),
-(17, 1, 0, 0, 'Subhamsdad asndm,asdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ahgsjdkllad', NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 12:24:45', NULL),
-(18, 1, 0, 0, 'Subhamsdad asndm,asdad', NULL, NULL, NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ahgsjdkllad', NULL, NULL, NULL, NULL, NULL, '2024-02-13 06:34:07', '2024-02-13 12:23:26', NULL),
-(21, 1, NULL, 1, 'Kardify Main Office', NULL, NULL, NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', NULL, 'info.kardify@gmail.com', 'info.kardify@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-14 06:25:00', '2024-02-14 06:25:00', '2024-02-14 06:25:01'),
-(26, 1, 0, 0, 'Kardify', NULL, NULL, NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, 'info.kardify@gmail.com', 'info.kardify@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Not Interested in this', NULL, NULL, NULL, NULL, NULL, '2024-02-14 11:24:59', '2024-02-14 11:26:33', NULL),
-(27, 0, NULL, 1, 'Subham', NULL, NULL, NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', NULL, '918249229465', 'subham.kj@jurysoft.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-26 07:37:41', '2024-02-26 07:37:41', '2024-02-26 07:41:03'),
-(28, 0, NULL, 1, 'Subham', NULL, NULL, NULL, NULL, '827ccb0eea8a706c4c34a16891f84e7b', NULL, '918249229465', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-26 07:41:03', '2024-02-26 07:41:03', NULL);
+(1, 1, 0, 0, 'Subham Jena', 'Subham', 'Jena', NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', 'subham.kj@jurysoft.com', NULL, 'Jurysoft', 'Jurysoft', 'Rr nagar', 'bengaluru', 'karnataka', 'india', '560098', 'hyderbadi biriyani', NULL, NULL, 'Not interested', NULL, NULL, NULL, NULL, NULL, '2024-03-22 10:21:00', '2024-03-22 10:43:12', NULL),
+(2, 1, 1, 1, 'Debanjan Dasgupta', 'Debanjan', 'das', NULL, NULL, '81dc9bdb52d04dc20036dbd8313ed055', NULL, 'debanjan.d@jurysoft.com', 'debanjan.d@jurysoft.com', 'debanjan.d@jurysoft.com', NULL, 'asd', 'dasd', 'asd', 'dasd', 'das', 'fasdas', '560098', 'dasd', NULL, NULL, NULL, NULL, NULL, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJEZWJhbmphbiBEYXNndXB0YSIsInVzZXJuYW1lIjoiZGViYW5qYW4uZEBqdXJ5c29mdC5jb20iLCJyb2xlIjoiREVBTEVSIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzExMTA0MzMwLCJleHAiOjE3MTExMTg3MzB9.FRMTztH7xZdS35xWvP-XgbiKSC6qnHY6KBk7DMJ_-Ks', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZnVsbG5hbWUiOiJEZWJhbmphbiBEYXNndXB0YSIsInVzZXJuYW1lIjoiZGViYW5qYW4uZEBqdXJ5c29mdC5jb20iLCJyb2xlIjoiREVBTEVSIiwiYXBwbGljYXRpb24iOiJrYXJkaWZ5IiwiaWF0IjoxNzExMTA0MzMwLCJleHAiOjE3NDI2NjE5MzB9.AtXL86Rsc5t7MDYRLr0H2r_SPs_FBpV9m6udh6EbLdw', NULL, '2024-03-22 10:36:13', '2024-03-22 10:45:30', NULL);
 
 -- --------------------------------------------------------
 
@@ -533,6 +579,8 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `order_id` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `user_type` varchar(255) DEFAULT NULL,
+  `dealer_id` int(11) DEFAULT NULL,
   `user_address_id` int(11) DEFAULT NULL,
   `delivery_type_id` int(11) DEFAULT NULL,
   `order_status_id` int(11) DEFAULT NULL,
@@ -558,19 +606,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_id`, `user_id`, `user_address_id`, `delivery_type_id`, `order_status_id`, `order_date`, `order_accepted_date`, `accepted`, `rejected_reason`, `payment_ref_id`, `shipping_link`, `shipping_id`, `coupon_id`, `total_discount_amount`, `total_paid_amount`, `total_gst_amount`, `total_shipping_amount`, `total_product_amount`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 'kardify-1', 3, 1, 1, 3, NULL, '2024-01-28 14:56:29', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 07:49:42', '2024-01-28 14:57:04', NULL),
-(2, 'kardify-2', 1, 1, 2, 10, NULL, '2024-01-27 10:02:18', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 07:49:42', '2024-01-27 10:47:36', NULL),
-(3, 'kardify-3', 0, 1, 1, 10, NULL, '2024-01-25 11:52:52', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 10:18:11', '2024-01-27 13:56:24', NULL),
-(4, 'kardify-4', 1, 1, 1, 6, NULL, '2024-01-27 12:19:31', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-27 12:16:17', '2024-01-28 14:46:06', NULL),
-(5, 'kardify-5', 1, 1, 1, 5, NULL, '2024-01-27 12:32:28', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-27 12:32:09', '2024-02-03 06:13:43', NULL),
-(6, 'kardify-6', 1, 1, 1, 3, NULL, '2024-01-28 14:39:28', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-28 14:39:01', '2024-01-28 14:52:08', NULL),
-(7, 'kardify-7', 2, 1, 1, 3, NULL, '2024-01-29 05:49:54', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 05:47:31', '2024-01-29 05:52:28', NULL),
-(8, 'kardify-8', 2, 1, 1, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 05:56:45', '2024-01-29 06:00:31', NULL),
-(9, 'kardify-9', 2, 1, 1, 3, NULL, '2024-01-29 06:05:12', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 06:03:42', '2024-01-29 06:05:47', NULL),
-(10, 'kardify-10', 2, 1, 1, 3, NULL, '2024-01-29 09:10:07', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 06:07:45', '2024-01-29 09:10:22', NULL),
-(11, 'kardify-11', 2, 1, 1, 3, NULL, '2024-01-29 12:36:23', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 09:53:46', '2024-01-29 12:36:34', NULL),
-(12, 'kardify-12', 1, 1, 1, 3, NULL, '2024-02-12 10:58:19', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 10:56:53', '2024-02-12 10:59:03', NULL);
+INSERT INTO `orders` (`id`, `order_id`, `user_id`, `user_type`, `dealer_id`, `user_address_id`, `delivery_type_id`, `order_status_id`, `order_date`, `order_accepted_date`, `accepted`, `rejected_reason`, `payment_ref_id`, `shipping_link`, `shipping_id`, `coupon_id`, `total_discount_amount`, `total_paid_amount`, `total_gst_amount`, `total_shipping_amount`, `total_product_amount`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+(1, 'kardify-1', 3, 'CUSTOMER', NULL, 5, 2, 3, NULL, '2024-03-21 11:05:50', 1, NULL, 'pay_NoyyPAkAeYwp0G', NULL, NULL, NULL, NULL, 338.1, NULL, 106, 208.48, '2024-03-21 11:05:32', '2024-03-21 11:06:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -603,25 +640,8 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `category_id`, `sub_category_id`, `super_sub_category_id`, `product_type`, `car_brand_id`, `car_model_id`, `unit_price`, `quantity`, `sub_total`, `gst`, `total_amount`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 07:49:42', '2024-01-25 07:49:42', NULL),
-(2, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 07:49:42', '2024-01-25 07:49:42', NULL),
-(3, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 10:18:11', '2024-01-25 10:18:11', NULL),
-(4, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 10:18:11', '2024-01-25 10:18:11', NULL),
-(5, 4, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-27 12:16:17', '2024-01-27 12:16:17', NULL),
-(6, 5, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-27 12:32:09', '2024-01-27 12:32:09', NULL),
-(7, 6, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-28 14:39:01', '2024-01-28 14:39:01', NULL),
-(8, 7, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 05:47:31', '2024-01-29 05:47:31', NULL),
-(9, 7, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 05:47:31', '2024-01-29 05:47:31', NULL),
-(10, 8, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 05:56:45', '2024-01-29 05:56:45', NULL),
-(11, 8, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 05:56:45', '2024-01-29 05:56:45', NULL),
-(12, 9, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 06:03:42', '2024-01-29 06:03:42', NULL),
-(13, 9, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 06:03:42', '2024-01-29 06:03:42', NULL),
-(14, 10, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 06:07:45', '2024-01-29 06:07:45', NULL),
-(15, 10, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 06:07:45', '2024-01-29 06:07:45', NULL),
-(16, 11, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 09:53:46', '2024-01-29 09:53:46', NULL),
-(17, 11, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-29 09:53:46', '2024-01-29 09:53:46', NULL),
-(18, 12, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 10:56:53', '2024-02-12 10:56:53', NULL),
-(19, 12, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-02-12 10:56:53', '2024-02-12 10:56:53', NULL);
+(1, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-21 11:05:32', '2024-03-21 11:05:32', NULL),
+(2, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-21 11:05:32', '2024-03-21 11:05:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -643,16 +663,16 @@ CREATE TABLE `order_statuses` (
 --
 
 INSERT INTO `order_statuses` (`id`, `status_name`, `active`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 'Pending', 1, '2024-01-27 10:39:04', '2024-01-27 10:39:04', NULL),
-(2, 'Confirmed', 1, '2024-01-27 10:39:38', '2024-01-27 10:39:38', NULL),
-(3, 'Packaging', 1, '2024-01-27 10:39:53', '2024-01-27 10:39:53', NULL),
-(4, 'Out For Delivery', 1, '2024-01-27 10:40:17', '2024-01-27 10:40:17', NULL),
-(5, 'Delivered', 1, '2024-01-27 10:43:06', '2024-01-27 10:43:06', NULL),
-(6, 'Return Initiated', 1, '2024-01-27 10:43:25', '2024-01-27 10:43:25', NULL),
-(7, 'Return Approved By Vendor', 1, '2024-01-27 10:43:43', '2024-01-27 10:43:43', NULL),
-(8, 'Return Completed', 1, '2024-01-27 10:44:09', '2024-01-27 10:44:09', NULL),
-(9, 'Cancelled By Customer', 1, '2024-01-27 10:44:30', '2024-01-27 10:44:30', NULL),
-(10, 'Cancelled By Kardify', 1, '2024-01-27 10:44:48', '2024-01-27 10:44:48', NULL);
+(1, 'Pending', 1, '2024-01-27 05:09:04', '2024-01-27 05:09:04', NULL),
+(2, 'Confirmed', 1, '2024-01-27 05:09:38', '2024-01-27 05:09:38', NULL),
+(3, 'Packaging', 1, '2024-01-27 05:09:53', '2024-01-27 05:09:53', NULL),
+(4, 'Out For Delivery', 1, '2024-01-27 05:10:17', '2024-01-27 05:10:17', NULL),
+(5, 'Delivered', 1, '2024-01-27 05:13:06', '2024-01-27 05:13:06', NULL),
+(6, 'Return Initiated', 1, '2024-01-27 05:13:25', '2024-01-27 05:13:25', NULL),
+(7, 'Return Approved By Vendor', 1, '2024-01-27 05:13:43', '2024-01-27 05:13:43', NULL),
+(8, 'Return Completed', 1, '2024-01-27 05:14:09', '2024-01-27 05:14:09', NULL),
+(9, 'Cancelled By Customer', 1, '2024-01-27 05:14:30', '2024-01-27 05:14:30', NULL),
+(10, 'Cancelled By Kardify', 1, '2024-01-27 05:14:48', '2024-01-27 05:14:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -674,79 +694,9 @@ CREATE TABLE `order_status_logs` (
 --
 
 INSERT INTO `order_status_logs` (`id`, `order_id`, `order_status_id`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 1, 1, '2024-01-25 07:49:42', '2024-01-25 07:49:42', NULL),
-(2, 1, 2, '2024-01-25 07:49:42', '2024-01-25 07:49:42', NULL),
-(3, 1, 2, '2024-01-25 09:06:32', '2024-01-25 09:06:32', NULL),
-(4, 1, 3, '2024-01-25 09:10:10', '2024-01-25 09:10:10', NULL),
-(5, 1, 3, '2024-01-25 09:10:53', '2024-01-25 09:10:53', NULL),
-(6, 1, 3, '2024-01-25 09:11:35', '2024-01-25 09:11:35', NULL),
-(7, 1, 3, '2024-01-25 09:12:11', '2024-01-25 09:12:11', NULL),
-(8, 3, 1, '2024-01-25 10:18:11', '2024-01-25 10:18:11', NULL),
-(9, 3, 2, '2024-01-25 11:52:52', '2024-01-25 11:52:52', NULL),
-(10, 2, 2, '2024-01-25 12:58:40', '2024-01-25 12:58:40', NULL),
-(11, 2, 2, '2024-01-27 06:59:44', '2024-01-27 06:59:44', NULL),
-(12, 3, 2, '2024-01-27 09:42:34', '2024-01-27 09:42:34', NULL),
-(13, 1, 3, '2024-01-27 09:44:15', '2024-01-27 09:44:15', NULL),
-(14, 1, 2, '2024-01-27 09:44:20', '2024-01-27 09:44:20', NULL),
-(15, 1, 1, '2024-01-27 09:44:54', '2024-01-27 09:44:54', NULL),
-(16, 1, 2, '2024-01-27 09:45:07', '2024-01-27 09:45:07', NULL),
-(17, 1, 6, '2024-01-27 09:45:12', '2024-01-27 09:45:12', NULL),
-(18, 1, 8, '2024-01-27 09:46:12', '2024-01-27 09:46:12', NULL),
-(19, 1, 2, '2024-01-27 09:51:13', '2024-01-27 09:51:13', NULL),
-(20, 1, 2, '2024-01-27 09:51:25', '2024-01-27 09:51:25', NULL),
-(21, 1, 2, '2024-01-27 09:52:03', '2024-01-27 09:52:03', NULL),
-(22, 1, 2, '2024-01-27 09:52:16', '2024-01-27 09:52:16', NULL),
-(23, 1, 6, '2024-01-27 09:52:50', '2024-01-27 09:52:50', NULL),
-(24, 2, 2, '2024-01-27 09:53:45', '2024-01-27 09:53:45', NULL),
-(25, 2, 3, '2024-01-27 09:53:47', '2024-01-27 09:53:47', NULL),
-(26, 2, 1, '2024-01-27 09:53:48', '2024-01-27 09:53:48', NULL),
-(27, 2, 3, '2024-01-27 10:00:18', '2024-01-27 10:00:18', NULL),
-(28, 2, 2, '2024-01-27 10:02:18', '2024-01-27 10:02:18', NULL),
-(29, 2, 2, '2024-01-27 10:05:23', '2024-01-27 10:05:23', NULL),
-(30, 2, 1, '2024-01-27 10:05:46', '2024-01-27 10:05:46', NULL),
-(31, 2, 3, '2024-01-27 10:06:27', '2024-01-27 10:06:27', NULL),
-(32, 3, 5, '2024-01-27 10:06:42', '2024-01-27 10:06:42', NULL),
-(33, 2, 4, '2024-01-27 10:23:48', '2024-01-27 10:23:48', NULL),
-(34, 3, 1, '2024-01-27 10:25:13', '2024-01-27 10:25:13', NULL),
-(35, 3, 2, '2024-01-27 10:25:28', '2024-01-27 10:25:28', NULL),
-(36, 3, 3, '2024-01-27 10:26:53', '2024-01-27 10:26:53', NULL),
-(37, 2, 5, '2024-01-27 10:47:36', '2024-01-27 10:47:36', NULL),
-(38, 1, 7, '2024-01-27 11:10:02', '2024-01-27 11:10:02', NULL),
-(39, 1, 8, '2024-01-27 11:10:09', '2024-01-27 11:10:09', NULL),
-(40, 4, 1, '2024-01-27 12:16:17', '2024-01-27 12:16:17', NULL),
-(41, 4, 2, '2024-01-27 12:19:31', '2024-01-27 12:19:31', NULL),
-(42, 4, 2, '2024-01-27 12:19:43', '2024-01-27 12:19:43', NULL),
-(43, 5, 1, '2024-01-27 12:32:09', '2024-01-27 12:32:09', NULL),
-(44, 5, 2, '2024-01-27 12:32:28', '2024-01-27 12:32:28', NULL),
-(45, 5, 2, '2024-01-27 12:32:43', '2024-01-27 12:32:43', NULL),
-(46, 3, 9, '2024-01-27 13:56:24', '2024-01-27 13:56:24', NULL),
-(47, 4, 3, '2024-01-27 18:55:33', '2024-01-27 18:55:33', NULL),
-(48, 5, 3, '2024-01-28 10:07:07', '2024-01-28 10:07:07', NULL),
-(49, 6, 1, '2024-01-28 14:39:01', '2024-01-28 14:39:01', NULL),
-(50, 6, 2, '2024-01-28 14:39:28', '2024-01-28 14:39:28', NULL),
-(51, 4, 4, '2024-01-28 14:43:13', '2024-01-28 14:43:13', NULL),
-(52, 4, 5, '2024-01-28 14:46:06', '2024-01-28 14:46:06', NULL),
-(53, 6, 2, '2024-01-28 14:52:08', '2024-01-28 14:52:08', NULL),
-(54, 1, 2, '2024-01-28 14:56:29', '2024-01-28 14:56:29', NULL),
-(55, 1, 2, '2024-01-28 14:57:04', '2024-01-28 14:57:04', NULL),
-(56, 7, 1, '2024-01-29 05:47:31', '2024-01-29 05:47:31', NULL),
-(57, 7, 2, '2024-01-29 05:49:54', '2024-01-29 05:49:54', NULL),
-(58, 7, 2, '2024-01-29 05:52:28', '2024-01-29 05:52:28', NULL),
-(59, 8, 1, '2024-01-29 05:56:45', '2024-01-29 05:56:45', NULL),
-(60, 8, 1, '2024-01-29 06:00:31', '2024-01-29 06:00:31', NULL),
-(61, 9, 1, '2024-01-29 06:03:42', '2024-01-29 06:03:42', NULL),
-(62, 9, 2, '2024-01-29 06:05:12', '2024-01-29 06:05:12', NULL),
-(63, 9, 2, '2024-01-29 06:05:47', '2024-01-29 06:05:47', NULL),
-(64, 10, 1, '2024-01-29 06:07:45', '2024-01-29 06:07:45', NULL),
-(65, 10, 2, '2024-01-29 09:10:07', '2024-01-29 09:10:07', NULL),
-(66, 10, 2, '2024-01-29 09:10:22', '2024-01-29 09:10:22', NULL),
-(67, 11, 1, '2024-01-29 09:53:46', '2024-01-29 09:53:46', NULL),
-(68, 11, 2, '2024-01-29 12:36:23', '2024-01-29 12:36:23', NULL),
-(69, 11, 2, '2024-01-29 12:36:34', '2024-01-29 12:36:34', NULL),
-(70, 5, 4, '2024-02-03 06:13:43', '2024-02-03 06:13:43', NULL),
-(71, 12, 1, '2024-02-12 10:56:53', '2024-02-12 10:56:53', NULL),
-(72, 12, 2, '2024-02-12 10:58:19', '2024-02-12 10:58:19', NULL),
-(73, 12, 2, '2024-02-12 10:59:03', '2024-02-12 10:59:03', NULL);
+(1, 1, 1, '2024-03-21 11:05:32', '2024-03-21 11:05:32', NULL),
+(2, 1, 2, '2024-03-21 11:05:50', '2024-03-21 11:05:50', NULL),
+(3, 1, 2, '2024-03-21 11:06:41', '2024-03-21 11:06:41', NULL);
 
 -- --------------------------------------------------------
 
@@ -784,7 +734,20 @@ INSERT INTO `otps` (`id`, `user_id`, `dealer_id`, `otp`, `createdAt`, `updatedAt
 (13, 9, NULL, '5456', '2024-02-29 13:52:38', '2024-02-29 13:52:38', '2024-02-29 13:54:38'),
 (14, 11, NULL, '1056', '2024-02-29 14:03:05', '2024-02-29 14:03:05', '2024-02-29 14:05:05'),
 (15, 12, NULL, '9075', '2024-02-29 14:08:42', '2024-02-29 14:08:42', '2024-02-29 14:10:42'),
-(16, 13, NULL, '6796', '2024-02-29 14:17:53', '2024-02-29 14:17:53', '2024-02-29 14:19:53');
+(16, 13, NULL, '6796', '2024-02-29 14:17:53', '2024-02-29 14:17:53', '2024-02-29 14:19:53'),
+(17, NULL, 29, '6992', '2024-03-22 07:09:11', '2024-03-22 07:09:11', '2024-03-22 07:11:11'),
+(18, NULL, 30, '7307', '2024-03-22 07:11:13', '2024-03-22 07:11:13', '2024-03-22 07:13:13'),
+(19, NULL, 31, '5011', '2024-03-22 07:12:14', '2024-03-22 07:12:14', '2024-03-22 07:14:14'),
+(20, NULL, 32, '5506', '2024-03-22 07:14:06', '2024-03-22 07:14:06', '2024-03-22 07:16:06'),
+(21, NULL, 33, '8494', '2024-03-22 07:16:51', '2024-03-22 07:16:51', '2024-03-22 07:18:51'),
+(22, NULL, 34, '4667', '2024-03-22 07:18:37', '2024-03-22 07:18:37', '2024-03-22 07:19:01'),
+(23, NULL, 35, '1502', '2024-03-22 07:36:03', '2024-03-22 07:36:03', '2024-03-22 07:38:03'),
+(24, NULL, 36, '9278', '2024-03-22 10:03:24', '2024-03-22 10:03:24', '2024-03-22 10:03:54'),
+(25, NULL, 1, '2340', '2024-03-22 10:05:46', '2024-03-22 10:05:46', '2024-03-22 10:06:48'),
+(26, NULL, 1, '4301', '2024-03-22 10:09:26', '2024-03-22 10:09:26', '2024-03-22 10:09:46'),
+(27, NULL, 1, '1642', '2024-03-22 10:11:48', '2024-03-22 10:11:48', '2024-03-22 10:12:03'),
+(28, NULL, 1, '8883', '2024-03-22 10:21:00', '2024-03-22 10:21:00', '2024-03-22 10:21:21'),
+(29, NULL, 2, '4711', '2024-03-22 10:36:13', '2024-03-22 10:36:13', '2024-03-22 10:37:04');
 
 -- --------------------------------------------------------
 
@@ -820,6 +783,7 @@ CREATE TABLE `products` (
   `quantity` int(11) DEFAULT NULL,
   `has_warranty` tinyint(1) DEFAULT NULL,
   `warranty` varchar(99) DEFAULT NULL,
+  `weight` double DEFAULT NULL,
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL,
   `deletedAt` timestamp NULL DEFAULT NULL
@@ -829,10 +793,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_name`, `product_desc`, `product_brand_id`, `category_id`, `sub_category_id`, `super_sub_category_id`, `minimum_order`, `default_price`, `stock`, `status`, `discount_type`, `discount`, `tax_type`, `tax_rate`, `product_type`, `car_brand_id`, `car_model_id`, `start_year`, `end_year`, `has_exchange_policy`, `exchange_policy`, `has_cancellaton_policy`, `cancellation_policy`, `quantity`, `has_warranty`, `warranty`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 'Alloy 32', 'Subham', 3, 6, 26, 2, 232, 543, 12, 1, 'percent', 12, 'percent', NULL, 'vehicle selection', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 32423, NULL, NULL, '2024-02-18 14:53:56', '2024-02-18 15:09:00', NULL),
-(2, 'Seat Cover ', 'Best seat cover', 1, 2, 8, 2, 988, 200, 12, 1, 'amount', 12, 'percent', NULL, 'vehicle selection', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 12312, NULL, NULL, '2024-02-18 15:05:21', '2024-02-20 13:44:01', NULL),
-(3, 'Black seat cover', 'asdasd', 1, 2, 11, 5, 12, 21, 21, 1, 'percent', 12, 'percent', NULL, 'general', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, NULL, '2024-03-07 10:12:31', '2024-03-07 10:12:31', NULL);
+INSERT INTO `products` (`id`, `product_name`, `product_desc`, `product_brand_id`, `category_id`, `sub_category_id`, `super_sub_category_id`, `minimum_order`, `default_price`, `stock`, `status`, `discount_type`, `discount`, `tax_type`, `tax_rate`, `product_type`, `car_brand_id`, `car_model_id`, `start_year`, `end_year`, `has_exchange_policy`, `exchange_policy`, `has_cancellaton_policy`, `cancellation_policy`, `quantity`, `has_warranty`, `warranty`, `weight`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+(1, 'Alloy 32', 'Subham', 3, 6, 26, 2, 232, 543, 12, 1, 'percent', 12, 'percent', 30, 'vehicle selection', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 32423, NULL, NULL, 2.3, '2024-02-18 14:53:56', '2024-02-18 15:09:00', NULL),
+(2, 'Seat Cover ', 'Best seat cover', 1, 2, 8, 2, 988, 200, 50, 1, 'percent', 5, 'percent', 12, 'vehicle selection', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 12312, NULL, NULL, 1.2, '2024-02-18 15:05:21', '2024-02-20 13:44:01', NULL),
+(3, 'Black seat cover', 'asdasd', 1, 2, 11, 5, 12, 21, 21, 1, 'percent', 12, 'percent', 5, 'general', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 12, NULL, NULL, 1, '2024-03-07 10:12:31', '2024-03-07 10:12:31', NULL),
+(4, 'Car Care', 'asdasd', 1, 5, 26, 3, 123, 1234, 12, 1, 'percent', 12, 'percent', 12, 'vehicle selection', 5, 1, NULL, NULL, NULL, NULL, NULL, NULL, 123, NULL, NULL, NULL, '2024-03-21 13:16:45', '2024-03-22 04:49:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -885,7 +850,16 @@ INSERT INTO `product_attributes_associations` (`id`, `combination`, `price`, `st
 (4, 'Red', 200, 12, 2, '2024-02-18 15:05:21', '2024-02-18 15:05:21', NULL),
 (5, 'White', 300, 110, 2, '2024-02-18 15:05:21', '2024-02-18 15:05:21', NULL),
 (6, 'Blue', 200, 12, 2, '2024-02-18 15:05:21', '2024-02-18 15:05:21', NULL),
-(7, 'M', 123, 2, 3, '2024-03-07 10:12:31', '2024-03-07 10:12:31', NULL);
+(7, 'M', 123, 2, 3, '2024-03-07 10:12:31', '2024-03-07 10:12:31', NULL),
+(8, 'L-Red', 299, 122, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(9, 'L-Green', 399, 12, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(10, 'L-Pink', 233, 21, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(11, 'M-Red', 234, 12, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(12, 'M-Green', 1234, 12, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(13, 'M-Pink', 1233, 12, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(14, 'S-Red', 123123, 12, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(15, 'S-Green', 3213, 1231, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL),
+(16, 'S-Pink', 123, 123, 4, '2024-03-21 13:16:45', '2024-03-21 13:16:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -1087,7 +1061,8 @@ INSERT INTO `stories` (`id`, `customer_id`, `image_url`, `heading`, `description
 (7, 3, '/uploads/stories/1709704507186.mp4', '4k', '4k video', 1, NULL, 'video', 1, '2024-03-06 05:55:07', '2024-03-16 10:25:03', NULL),
 (8, 3, '/uploads/stories/1710584679965.mp4', 'adsa test video', 'asdkhja sadjasd asiudhjkas akjsndka', 1, NULL, 'video', 1, '2024-03-16 10:24:40', '2024-03-16 10:25:05', NULL),
 (9, 3, '/uploads/stories/1710584756664.png', 'Test image upload', 'faghjskdn ajhsdkhlasd iaukjshda sdakjsdhl', 1, NULL, 'image', 1, '2024-03-16 10:25:56', '2024-03-16 10:25:56', NULL),
-(10, 7, '/uploads/stories/1710584815547.png', 'tea ajshdbaykwejn kajsd', 'tea ajshdbaykwejn kajsdaasc sdtea ajshdbaykwejn kajsd tea ajshdbaykwejn kajsd', 1, NULL, 'image', 1, '2024-03-16 10:26:55', '2024-03-16 10:27:19', NULL);
+(10, 7, '/uploads/stories/1710584815547.png', 'tea ajshdbaykwejn kajsd', 'tea ajshdbaykwejn kajsdaasc sdtea ajshdbaykwejn kajsd tea ajshdbaykwejn kajsd', 1, NULL, 'image', 1, '2024-03-16 10:26:55', '2024-03-16 10:27:19', NULL),
+(11, 3, '/uploads/stories/1710763982901.mp4', 'sdfsdf', 'sdfsdfsdf', NULL, NULL, 'video', 1, '2024-03-18 12:13:02', '2024-03-18 12:13:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -1148,7 +1123,7 @@ CREATE TABLE `subscribed_customers` (
 --
 
 INSERT INTO `subscribed_customers` (`id`, `email`, `status`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 'subham.kj@gmail.com', 0, '2024-02-19 05:59:36', '2024-02-19 06:32:51', '2024-02-19 06:32:51'),
+(1, 'subham.kj@jurysoft.com', 0, '2024-02-19 05:59:36', '2024-02-19 06:32:51', '2024-02-19 06:32:51'),
 (2, 'asdjad@j.com', 0, '2024-02-19 06:01:37', '2024-02-19 06:34:21', '2024-02-19 06:34:21'),
 (3, 'ahsgdjasd@gmail.com', 1, '2024-02-19 06:33:22', '2024-02-19 06:33:35', '2024-02-19 06:33:35'),
 (4, 'ahsgdjasd@gmail.com', 1, '2024-02-19 06:34:57', '2024-02-19 07:00:15', NULL),
@@ -1164,7 +1139,7 @@ INSERT INTO `subscribed_customers` (`id`, `email`, `status`, `createdAt`, `updat
 (14, 'prehm.m@jurysoft.com', 1, '2024-02-28 07:05:33', '2024-02-28 07:05:33', NULL),
 (15, 'prhm.m@jurysoft.com', 1, '2024-02-28 07:07:01', '2024-02-28 07:07:01', NULL),
 (16, 'm.m@jurysoft.com', 1, '2024-02-28 07:07:34', '2024-02-28 16:57:59', NULL),
-(17, '1@g.com', 1, '2024-02-28 07:09:48', '2024-02-29 06:07:33', NULL),
+(17, 'subham.kj@jurysoft.com', 1, '2024-02-28 07:09:48', '2024-02-29 06:07:33', NULL),
 (18, '1@gd.com', 1, '2024-02-28 07:11:36', '2024-02-28 07:11:36', NULL),
 (19, '2@gmail.com', 1, '2024-02-28 07:12:02', '2024-02-28 07:12:02', NULL),
 (20, '3@gmail.com', 1, '2024-02-28 07:16:11', '2024-02-28 07:16:11', NULL),
@@ -1277,7 +1252,8 @@ CREATE TABLE `testimonials` (
 INSERT INTO `testimonials` (`id`, `customer_id`, `rating`, `heading`, `description`, `status`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
 (1, 3, 4.5, 'Test Testimonial', 'Tetstettsvt tegss. ', 1, '2024-02-28 10:09:35', '2024-02-28 10:09:35', NULL),
 (2, 7, 2.5, 'fdghjakl', 'fdghajksjbd ajshdkhadslasd', 1, '2024-02-28 10:12:00', '2024-02-28 17:01:53', NULL),
-(3, 3, 4.5, 'Lorem Ipsum', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 1, '2024-02-28 11:59:49', '2024-02-28 17:01:22', NULL);
+(3, 3, 4.5, 'Lorem Ipsum', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 1, '2024-02-28 11:59:49', '2024-02-28 17:01:22', NULL),
+(4, 7, 3.5, 'hgjksld', 'asjhdklasdsa', 1, '2024-03-21 07:46:47', '2024-03-21 07:46:47', NULL);
 
 -- --------------------------------------------------------
 
@@ -1312,6 +1288,7 @@ CREATE TABLE `user_addresses` (
   `zipcode` varchar(100) DEFAULT NULL,
   `fullname` varchar(255) DEFAULT NULL,
   `mobile` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `lat` float DEFAULT NULL,
   `lng` float DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -1323,23 +1300,23 @@ CREATE TABLE `user_addresses` (
 -- Dumping data for table `user_addresses`
 --
 
-INSERT INTO `user_addresses` (`id`, `user_id`, `add_type`, `add1`, `add2`, `city`, `state`, `country`, `area`, `landmark`, `zipcode`, `fullname`, `mobile`, `lat`, `lng`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
-(1, 2, 'home', 'thanisandra', 'thanisandra', 'bengaluru', 'KA', 'India', 'thanisandra', 'thanisandra', '560077', 'subham jena', '8249229465', 13.0601, 77.6321, '2023-12-30 12:42:21', '2023-12-30 12:42:21', '2024-01-03 16:21:50'),
-(2, 3, 'Select here', 'SF02', 'Subramanyapura', 'Bengaluru', 'Karnataka', 'India', 'Subramanyapura', 'ISKCON South bangalore', '560062', 'Shankar', '9916053272', 12.888, 77.5481, '2023-12-30 12:47:22', '2023-12-30 12:47:22', NULL),
-(3, 3, 'Friend', '1st floor', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'Bagmane', '560098', 'Karthik', '9916053272', 12.9204, 77.5208, '2023-12-30 13:39:01', '2023-12-30 13:39:01', NULL),
-(4, 3, 'sanju', 'jurysoft', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'Hyderabad biryani ', '560098', 'sanju', '8105128578', 12.9204, 77.5208, '2023-12-30 13:40:54', '2023-12-30 13:40:54', NULL),
-(5, 3, 'Friend', '1st floor', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'Bagmane', '560098', 'Shankar', '9916053272', 12.9204, 77.5208, '2023-12-30 13:43:55', '2023-12-30 13:43:55', NULL),
-(6, 4, 'Home', '123', 'Vasundhara', 'Ghaziabad', 'Uttar Pradesh', 'India', 'Vasundhara', 'tedt', '201007', 'Sanjay Kirti', '8860626363', 28.6646, 77.388, '2023-12-30 15:20:21', '2023-12-30 15:20:21', NULL),
-(7, 5, 'Home', '7', 'Basaveshwara Nagar Ward', 'Bengaluru', 'Karnataka', 'India', 'Basaveshwara Nagar Ward', 'near carmal high school', '560079', 'Kaushik ', '9900004120', 12.9884, 77.545, '2023-12-31 03:44:12', '2023-12-31 03:44:12', NULL),
-(8, 5, 'Work', '6', 'Vasanth Nagar', 'Bengaluru', 'Karnataka', 'India', 'Vasanth Nagar', 'next to swathi ', '560080', 'fittclub ', '9900004120', 12.9984, 77.5824, '2023-12-31 03:45:22', '2023-12-31 03:45:22', NULL),
-(9, 5, 'Select here', '4', 'Peenya Industrial Area', 'Bengaluru', 'Karnataka', 'India', 'Peenya Industrial Area', 'uuuvc', '560018', 'freshcakes ', '9900004120', 13.009, 77.4984, '2023-12-31 03:46:34', '2023-12-31 03:46:34', NULL),
-(10, 5, 'Select here', '56t', 'Sarvagna Nagar', 'Bengaluru', 'Karnataka', 'India', 'Sarvagna Nagar', 'rghhh', '560038', 'office ', '9900004120', 12.988, 77.6304, '2023-12-31 03:47:41', '2023-12-31 03:47:41', NULL),
-(11, 6, 'Home', '8', 'BTM Layout Ward', 'Bengaluru', 'Karnataka', 'India', 'BTM Layout Ward', 'Hm hi hai landmark', '560069', 'aman', '7992231165', 12.9109, 77.6075, '2023-12-31 20:58:56', '2023-12-31 20:58:56', NULL),
-(12, 7, 'Home', '13', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'ground floor ', '560098', 'harsh ', '7204719512', 12.9204, 77.5208, '2024-01-01 11:38:01', '2024-01-01 11:38:01', NULL),
-(13, 12, 'home', 'Marathahalli', 'Marathahalli', 'Bengaluru', 'Karnataka ', 'India', 'Marathahalli', 'Opposite to hyderabadi biryani ', '560098', 'Subham jena', '8249229465', 12.9569, 77.7007, '2024-01-02 20:00:03', '2024-01-02 20:00:03', NULL),
-(14, 8, 'Select here', 'hshs', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'sgsb', '560098', 'hd hd', '8105128578', 12.9204, 77.5208, '2024-01-03 12:58:04', '2024-01-03 12:58:04', NULL),
-(15, 2, 'home', 'Families supermarket ', 'Thanisandra ', 'Bengaluru ', 'Karnataka ', 'India', 'Thanisandra ', 'Near manyata tech park', '560077', 'Subham jena', '8249229465', 13.0335, 77.6091, '2024-01-03 16:20:57', '2024-01-03 16:22:53', NULL),
-(16, 16, 'home', 'BEML layout', 'near GRT jewellers', 'bangalore', 'Karnataka', 'India', 'BEML layout', 'Ideal Homes TWP', '560098', 'rudra', '7067272092', 12.9061, 77.5196, '2024-01-04 09:56:04', '2024-01-04 09:56:04', NULL);
+INSERT INTO `user_addresses` (`id`, `user_id`, `add_type`, `add1`, `add2`, `city`, `state`, `country`, `area`, `landmark`, `zipcode`, `fullname`, `mobile`, `email`, `lat`, `lng`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+(1, 2, 'home', 'thanisandra', 'thanisandra', 'bengaluru', 'KA', 'India', 'thanisandra', 'thanisandra', '560077', 'subham jena', '8249229465', NULL, 13.0601, 77.6321, '2023-12-30 12:42:21', '2023-12-30 12:42:21', '2024-01-03 16:21:50'),
+(2, 3, 'Select here', 'SF02', 'Subramanyapura', 'Bengaluru', 'Karnataka', 'India', 'Subramanyapura', 'ISKCON South bangalore', '560062', 'Shankar', '9916053272', NULL, 12.888, 77.5481, '2023-12-30 12:47:22', '2023-12-30 12:47:22', NULL),
+(3, 3, 'Friend', '1st floor', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'Bagmane', '560098', 'Karthik', '9916053272', NULL, 12.9204, 77.5208, '2023-12-30 13:39:01', '2023-12-30 13:39:01', NULL),
+(4, 3, 'sanju', 'jurysoft', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'Hyderabad biryani ', '560098', 'sanju', '8105128578', NULL, 12.9204, 77.5208, '2023-12-30 13:40:54', '2023-12-30 13:40:54', NULL),
+(5, 3, 'Friend', '1st floor', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'Bagmane', '560098', 'Shankar', '9916053272', NULL, 12.9204, 77.5208, '2023-12-30 13:43:55', '2023-12-30 13:43:55', NULL),
+(6, 4, 'Home', '123', 'Vasundhara', 'Ghaziabad', 'Uttar Pradesh', 'India', 'Vasundhara', 'tedt', '201007', 'Sanjay Kirti', '8860626363', NULL, 28.6646, 77.388, '2023-12-30 15:20:21', '2023-12-30 15:20:21', NULL),
+(7, 5, 'Home', '7', 'Basaveshwara Nagar Ward', 'Bengaluru', 'Karnataka', 'India', 'Basaveshwara Nagar Ward', 'near carmal high school', '560079', 'Kaushik ', '9900004120', NULL, 12.9884, 77.545, '2023-12-31 03:44:12', '2023-12-31 03:44:12', NULL),
+(8, 5, 'Work', '6', 'Vasanth Nagar', 'Bengaluru', 'Karnataka', 'India', 'Vasanth Nagar', 'next to swathi ', '560080', 'fittclub ', '9900004120', NULL, 12.9984, 77.5824, '2023-12-31 03:45:22', '2023-12-31 03:45:22', NULL),
+(9, 5, 'Select here', '4', 'Peenya Industrial Area', 'Bengaluru', 'Karnataka', 'India', 'Peenya Industrial Area', 'uuuvc', '560018', 'freshcakes ', '9900004120', NULL, 13.009, 77.4984, '2023-12-31 03:46:34', '2023-12-31 03:46:34', NULL),
+(10, 5, 'Select here', '56t', 'Sarvagna Nagar', 'Bengaluru', 'Karnataka', 'India', 'Sarvagna Nagar', 'rghhh', '560038', 'office ', '9900004120', NULL, 12.988, 77.6304, '2023-12-31 03:47:41', '2023-12-31 03:47:41', NULL),
+(11, 6, 'Home', '8', 'BTM Layout Ward', 'Bengaluru', 'Karnataka', 'India', 'BTM Layout Ward', 'Hm hi hai landmark', '560069', 'aman', '7992231165', NULL, 12.9109, 77.6075, '2023-12-31 20:58:56', '2023-12-31 20:58:56', NULL),
+(12, 7, 'Home', '13', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'ground floor ', '560098', 'harsh ', '7204719512', NULL, 12.9204, 77.5208, '2024-01-01 11:38:01', '2024-01-01 11:38:01', NULL),
+(13, 12, 'home', 'Marathahalli', 'Marathahalli', 'Bengaluru', 'Karnataka ', 'India', 'Marathahalli', 'Opposite to hyderabadi biryani ', '560098', 'Subham jena', '8249229465', NULL, 12.9569, 77.7007, '2024-01-02 20:00:03', '2024-01-02 20:00:03', NULL),
+(14, 8, 'Select here', 'hshs', 'Rajarajeshwari Nagar', 'Bengaluru', 'Karnataka', 'India', 'Rajarajeshwari Nagar', 'sgsb', '560098', 'hd hd', '8105128578', NULL, 12.9204, 77.5208, '2024-01-03 12:58:04', '2024-01-03 12:58:04', NULL),
+(15, 2, 'home', 'Families supermarket ', 'Thanisandra ', 'Bengaluru ', 'Karnataka ', 'India', 'Thanisandra ', 'Near manyata tech park', '560077', 'Subham jena', '8249229465', NULL, 13.0335, 77.6091, '2024-01-03 16:20:57', '2024-01-03 16:22:53', NULL),
+(16, 16, 'home', 'BEML layout', 'near GRT jewellers', 'bangalore', 'Karnataka', 'India', 'BEML layout', 'Ideal Homes TWP', '560098', 'rudra', '7067272092', NULL, 12.9061, 77.5196, '2024-01-04 09:56:04', '2024-01-04 09:56:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -1389,6 +1366,37 @@ CREATE TABLE `wishlists` (
   `updatedAt` timestamp NULL DEFAULT NULL,
   `deletedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlists`
+--
+
+INSERT INTO `wishlists` (`id`, `user_id`, `dealer_id`, `product_id`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+(1, 3, NULL, 3, '2024-03-18 05:47:20', '2024-03-18 05:47:20', '2024-03-18 06:16:38'),
+(2, 3, NULL, 2, '2024-03-18 05:47:27', '2024-03-18 05:47:27', '2024-03-18 06:13:17'),
+(3, 3, NULL, 2, '2024-03-18 06:16:39', '2024-03-18 06:16:39', '2024-03-18 06:16:41'),
+(4, 3, NULL, 3, '2024-03-18 06:16:40', '2024-03-18 06:16:40', '2024-03-18 06:16:42'),
+(5, 3, NULL, 2, '2024-03-18 06:16:43', '2024-03-18 06:16:43', '2024-03-18 06:16:45'),
+(6, 3, NULL, 2, '2024-03-18 06:16:46', '2024-03-18 06:16:46', '2024-03-18 06:16:47'),
+(7, 3, NULL, 2, '2024-03-18 06:17:00', '2024-03-18 06:17:00', '2024-03-18 06:17:03'),
+(8, 3, NULL, 3, '2024-03-18 06:17:02', '2024-03-18 06:17:02', '2024-03-18 06:17:04'),
+(9, 3, NULL, 2, '2024-03-18 06:17:07', '2024-03-18 06:17:07', '2024-03-18 06:17:09'),
+(10, 3, NULL, 3, '2024-03-18 06:17:08', '2024-03-18 06:17:08', '2024-03-18 06:17:22'),
+(11, 3, NULL, 2, '2024-03-18 06:17:21', '2024-03-18 06:17:21', '2024-03-18 07:09:59'),
+(12, 3, NULL, 1, '2024-03-18 06:17:33', '2024-03-18 06:17:33', '2024-03-18 06:50:16'),
+(13, 3, NULL, 1, '2024-03-18 06:50:19', '2024-03-18 06:50:19', '2024-03-18 06:50:23'),
+(14, 3, NULL, 1, '2024-03-18 06:50:24', '2024-03-18 06:50:24', '2024-03-18 07:07:27'),
+(15, 3, NULL, 1, '2024-03-18 07:07:28', '2024-03-18 07:07:28', '2024-03-18 07:07:34'),
+(16, 3, NULL, 3, '2024-03-18 07:08:01', '2024-03-18 07:08:01', '2024-03-18 09:47:17'),
+(17, 3, NULL, 2, '2024-03-18 07:10:00', '2024-03-18 07:10:00', '2024-03-18 09:47:18'),
+(18, 3, NULL, 3, '2024-03-18 09:47:18', '2024-03-18 09:47:18', '2024-03-18 10:43:33'),
+(19, 3, NULL, 2, '2024-03-18 09:47:19', '2024-03-18 09:47:19', '2024-03-18 09:49:06'),
+(20, 3, NULL, 2, '2024-03-18 09:49:08', '2024-03-18 09:49:08', '2024-03-18 10:43:34'),
+(21, 3, NULL, 2, '2024-03-18 10:43:48', '2024-03-18 10:43:48', '2024-03-18 10:49:25'),
+(22, 3, NULL, 3, '2024-03-18 10:43:49', '2024-03-18 10:43:49', NULL),
+(23, 3, NULL, 2, '2024-03-18 10:49:26', '2024-03-18 10:49:26', '2024-03-21 07:48:32'),
+(24, 3, NULL, 1, '2024-03-19 12:35:16', '2024-03-19 12:35:16', NULL),
+(25, 3, NULL, 2, '2024-03-21 07:49:53', '2024-03-21 07:49:53', '2024-03-21 07:53:32');
 
 --
 -- Indexes for dumped tables
@@ -1642,7 +1650,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `attributes_combinations`
 --
 ALTER TABLE `attributes_combinations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `banners`
@@ -1660,7 +1668,7 @@ ALTER TABLE `banner_product_associations`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `car_brands`
@@ -1690,7 +1698,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -1702,7 +1710,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `dealers`
 --
 ALTER TABLE `dealers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `delivery_types`
@@ -1726,13 +1734,13 @@ ALTER TABLE `installers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `order_statuses`
@@ -1744,19 +1752,19 @@ ALTER TABLE `order_statuses`
 -- AUTO_INCREMENT for table `order_status_logs`
 --
 ALTER TABLE `order_status_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `otps`
 --
 ALTER TABLE `otps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product_attributes`
@@ -1768,7 +1776,7 @@ ALTER TABLE `product_attributes`
 -- AUTO_INCREMENT for table `product_attributes_associations`
 --
 ALTER TABLE `product_attributes_associations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `product_brands`
@@ -1804,7 +1812,7 @@ ALTER TABLE `store_infos`
 -- AUTO_INCREMENT for table `stories`
 --
 ALTER TABLE `stories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `stories_product_associations`
@@ -1834,7 +1842,7 @@ ALTER TABLE `super_sub_categories`
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -1864,7 +1872,7 @@ ALTER TABLE `variants_attributes`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
