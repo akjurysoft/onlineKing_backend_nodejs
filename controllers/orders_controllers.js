@@ -19,7 +19,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    CarBrands, OrderDetails, Orders, Categories, SubCategories, SuperSubCategories, Products, DeliveryTypes, OrderStatusLogs, OrderStatuses, ProductImages
+    CarBrands, OrderDetails, Orders, Categories, SubCategories, SuperSubCategories, Products, DeliveryTypes, OrderStatusLogs, OrderStatuses, ProductImages, Carts
 } = require("../models");
 const { Op, Model } = require("sequelize");
 const axios = require("axios");
@@ -28,65 +28,186 @@ const path = require("path");
 
 const getAllOrdersAdmin = async (req, res) => {
     try {
-        const allOrders = await Orders.findAll({
-            include: [
-                DeliveryTypes,
-                {
-                    model: OrderStatuses,
-                    as: 'order_status',
-                    attributes: ['id', 'status_name', 'createdAt', 'updatedAt'],
-                },
-                {
-                    model: OrderStatusLogs,
-                    attributes: ['id', 'order_status_id', 'createdAt', 'updatedAt'],
-                    include:[
-                        {
-                            model: OrderStatuses,
-                            required: true
-                        }
-                    ]
-                },
-                {
-                    model: OrderDetails,
-                    include: [
-                        Categories,
-                        SubCategories,
-                        SuperSubCategories,
-                        Products,
-                        {
-                            model: ProductImages,
-                            as: 'product_images', 
-                            where: {
-                                status: 1,
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+
+        const allowed_user = ['ADMIN']
+        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+            const allOrders = await Orders.findAll({
+                include: [
+                    DeliveryTypes,
+                    {
+                        model: OrderStatuses,
+                        as: 'order_status',
+                        attributes: ['id', 'status_name', 'createdAt', 'updatedAt'],
+                    },
+                    {
+                        model: OrderStatusLogs,
+                        attributes: ['id', 'order_status_id', 'createdAt', 'updatedAt'],
+                        include:[
+                            {
+                                model: OrderStatuses,
+                                required: true
+                            }
+                        ]
+                    },
+                    {
+                        model: OrderDetails,
+                        include: [
+                            Categories,
+                            SubCategories,
+                            SuperSubCategories,
+                            Products,
+                            {
+                                model: ProductImages,
+                                as: 'product_images', 
+                                where: {
+                                    status: 1,
+                                },
+                                attributes: ['id', 'image_url'],
+                                required: false,
+                                raw: true,
                             },
-                            attributes: ['id', 'image_url'],
-                            required: false,
-                            raw: true,
-                        },
-                        
-                    ],
-                },
-               
-            ],
-        });
-
-        const images = await ProductImages.findAll({
-            where: {
-                product_id: allOrders.map(product => product.id),
-                status: 1,
-            },
-            attributes: ['id', 'product_id' , 'image_url'],
-            raw: true,
-        });
-
+                            
+                        ],
+                    },
+                   
+                ],
+            });
+            
+    
+            // const images = await ProductImages.findAll({
+            //     where: {
+            //         product_id: allOrders.map(product => product.id),
+            //         status: 1,
+            //     },
+            //     attributes: ['id', 'product_id' , 'image_url'],
+            //     raw: true,
+            // });
+    
+            return res
+                .response({
+                    code: 200,
+                    status: 'success',
+                    message: 'All orders fetched successfully',
+                    orders: allOrders,
+                })
+                .code(200);
+        }else if (user == 'Session expired') {
+            return res
+                .response({
+                    code: 401,
+                    status: 'error',
+                    message: user,
+                })
+                .code(200);
+        } else {
+            return res
+                .response({
+                    code: 403,
+                    status: 'error',
+                    message: "You dont have permission for this action.",
+                })
+                .code(200);
+        }
+    } catch (error) {
+        console.error(error);
         return res
             .response({
-                code: 200,
-                status: 'success',
-                message: 'All orders fetched successfully',
-                orders: allOrders,
+                code: 500,
+                status: 'error',
+                message: 'Something went wrong',
             })
             .code(200);
+    }
+};
+
+const getOrderForCustomer = async (req, res) => {
+    try {
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+
+        const allowed_user = ['CUSTOMER' , 'DEALER']
+        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+            
+            const customerId = user.id
+            let ownerId;
+            let user_type;
+            if (user.role === 'DEALER') {
+                ownerId = 'dealer_id'
+                user_type= "DEALER"
+            } else if (user.role === 'CUSTOMER') {
+                ownerId = 'user_id'
+                user_type= "CUSTOMER"
+            }
+
+            const customerOrders = await Orders.findAll({
+                where: {
+                    [ownerId]: customerId,
+                    user_type
+                },
+                include: [
+                    DeliveryTypes,
+                    {
+                        model: OrderStatuses,
+                        as: 'order_status',
+                        attributes: ['id', 'status_name', 'createdAt', 'updatedAt'],
+                    },
+                    {
+                        model: OrderStatusLogs,
+                        attributes: ['id', 'order_status_id', 'createdAt', 'updatedAt'],
+                        include:[
+                            {
+                                model: OrderStatuses,
+                                required: true
+                            }
+                        ]
+                    },
+                    {
+                        model: OrderDetails,
+                        include: [
+                            Categories,
+                            SubCategories,
+                            SuperSubCategories,
+                            Products,
+                            {
+                                model: ProductImages,
+                                as: 'product_images', 
+                                where: {
+                                    status: 1,
+                                },
+                                attributes: ['id', 'image_url'],
+                                required: false,
+                                raw: true,
+                            },
+                        ],
+                    },
+                ],
+            });
+
+            return res
+                .response({
+                    code: 200,
+                    status: 'success',
+                    message: 'Orders fetched successfully',
+                    orders: customerOrders,
+                })
+                .code(200);
+        } else if (user === 'Session expired') {
+            return res
+                .response({
+                    code: 401,
+                    status: 'error',
+                    message: user,
+                })
+                .code(200);
+        } else {
+            return res
+                .response({
+                    code: 403,
+                    status: 'error',
+                    message: "You don't have permission for this action.",
+                })
+                .code(200);
+        }
     } catch (error) {
         console.error(error);
         return res
@@ -103,44 +224,129 @@ const createOrder = async (req, res) => {
     const t = await sequelize.transaction();
 
     try {
-        const { user_id, delivery_address, products } = req.payload;
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+        const allowed_user = ['CUSTOMER', 'DEALER']
 
+        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+            const {  
+                address_id, 
+                delivery_type_id, 
+                coupon_id,
+                payment_id, 
+                shipping_charge,  
+                total_product_amount,
+                products ,
+                total_amount
+            } = req.payload;
+            let ownerId;
+            if (user.role === 'DEALER') {
+                ownerId = 'dealer_id';
+            } else if (user.role === 'CUSTOMER') {
+                ownerId = 'user_id';
+                if (!address_id) {
+                    return res.response({
+                        code: 400,
+                        status: 'error',
+                        message: "Address is required for customers.",
+                    }).code(400);
+                }
+            } else {
+                return res.response({
+                    code: 403,
+                    status: 'error',
+                    message: "You dont have permission for this action.",
+                }).code(200);
+            }
 
+            const isAvalibelPending = await OrderStatuses.findOne({
+                where:{
+                    status_name: 'Pending'
+                }
+            })
+            if(!isAvalibelPending) {
+                return res.response({
+                    code: 400,
+                    status: 'error',
+                    message: "Pending status not found.",
+                }).code(400);
+            }
 
-        const newOrder = await Orders.create({
-            user_id,
-            user_address_id: 1,
-            delivery_type_id: 1,
-            order_status_id: 1, 
-        }, { transaction: t });
+            const isAvailibelDeliverType = await DeliveryTypes.findOne({
+                where:{
+                    id: delivery_type_id
+                }
+            })
+            if(!isAvailibelDeliverType) {
+                return res.response({
+                    code: 400,
+                    status: 'error',
+                    message: `${isAvailibelDeliverType.delivery_type_name} is not available.`,
+                }).code(400);
+            }
 
-        newOrder.order_id = `kardify-${newOrder.id}`;
-        await newOrder.save({ transaction: t });
-
-        for (const product of products) {
-            await OrderDetails.create({
-                order_id: newOrder.id,
-                product_id: product.product_id
+            const newOrder = await Orders.create({
+                [ownerId]: user.id,
+                user_address_id: address_id,
+                coupon_id,
+                delivery_type_id: isAvailibelDeliverType.id,
+                order_status_id: isAvalibelPending.id, 
+                total_product_amount,
+                payment_ref_id: payment_id,
+                total_shipping_amount: shipping_charge,
+                total_paid_amount: total_amount,
+                user_type: user.role
             }, { transaction: t });
+    
+            newOrder.order_id = `kardify-${newOrder.id}`;
+            await newOrder.save({ transaction: t });
+    
+            for (const product of products) {
+                await OrderDetails.create({
+                    order_id: newOrder.id,
+                    product_id: product.product_id
+                }, { transaction: t });
+            }
+    
+            await OrderStatusLogs.create({
+                order_id: newOrder.id,
+                order_status_id: newOrder.order_status_id,
+            }, { transaction: t });
+
+            await Carts.destroy({
+                where: {
+                    [ownerId]: user.id
+                }
+            }, { transaction: t });
+    
+            await t.commit();
+    
+            const createdOrder = await Orders.findByPk(newOrder.id, {
+                include: [OrderDetails],
+            });
+    
+            return res.response({
+                code: 201,
+                status: 'success',
+                message: 'Order placed successfully',
+                order: createdOrder
+            }).code(201);
+        }else if (user == 'Session expired') {
+            return res
+                .response({
+                    code: 401,
+                    status: 'error',
+                    message: user,
+                })
+                .code(200);
+        } else {
+            return res
+                .response({
+                    code: 403,
+                    status: 'error',
+                    message: "You dont have permission for this action.",
+                })
+                .code(200);
         }
-
-        await OrderStatusLogs.create({
-            order_id: newOrder.id,
-            order_status_id: newOrder.order_status_id,
-        }, { transaction: t });
-
-        await t.commit();
-
-        const createdOrder = await Orders.findByPk(newOrder.id, {
-            include: [OrderDetails],
-        });
-
-        return res.response({
-            code: 201,
-            status: 'success',
-            message: 'Order placed successfully',
-            order: createdOrder
-        }).code(201);
     } catch (error) {
         await t.rollback();
 
@@ -398,6 +604,7 @@ const updateOrderStatus = async (req, res) => {
 
 module.exports = {
     getAllOrdersAdmin,
+    getOrderForCustomer,
     createOrder,
     approveOrderByAdmin,
     cancelOrderByAdmin,

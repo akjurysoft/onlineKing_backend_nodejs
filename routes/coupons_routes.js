@@ -19,6 +19,19 @@ const coupon_routes = [
         },
     },
     {
+        method: "GET",
+        path: "/get-coupons",
+        options: {
+            description: "Getting Coupons for Customers and vendors.",
+            tags,
+            validate: {
+                headers: headerValidator,
+                // query: BannerValidator.banner_fetch_query
+            },
+            handler: coupons_controllers.getCoupon,
+        },
+    },
+    {
         method: "POST",
         path: "/add-coupons",
         options: {

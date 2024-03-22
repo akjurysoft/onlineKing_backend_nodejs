@@ -6,9 +6,14 @@ const productSchema = Joi.object({
 });
 
 const createOrderSchema = Joi.object({
-    user_id: Joi.number().required(),
-    delivery_address: Joi.string().required(),
+    address_id: Joi.number().integer().required().allow(null),
+    delivery_type_id: Joi.number().integer().required(),
+    payment_id: Joi.string().required(),
+    shipping_charge: Joi.number().required().allow(null),
+    total_product_amount: Joi.number().required(),
+    coupon_id: Joi.number().integer().allow(null),
     products: Joi.array().items(productSchema).min(1).required(),
+    total_amount: Joi.number().required(),
 });
 
 const cancelOrderByAdmin = Joi.object({

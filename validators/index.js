@@ -21,6 +21,8 @@ module.exports = {
   StoreInfoValidator: require('./store_info_validators'),
   TestimonialsValidator: require('./testimonials_validators'),
   CartValidators: require('./carts_validators'),
+  WishlistValidators: require('./wishlist_validators'),
+  ShiprocketValidators: require('./shiprocket_validators'),
   headerValidator: joi.object({
     authorization: joi.string().required()
   }).options({ allowUnknown: true }),

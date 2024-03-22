@@ -3,7 +3,7 @@
 
 module.exports = {
   users: 'users',
-  user_address: 'user_addresses',
+  user_addresses: 'user_addresses',
   categories: 'categories',
   sub_categories: 'sub_categories',
   super_sub_categories: 'super_sub_categories',

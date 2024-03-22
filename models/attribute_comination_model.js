@@ -11,6 +11,7 @@ const {
 const Combinations = require("./product_comination_model");
 const ProductAttributes = require("./product_attributes");
 const Categories = require("./categories");
+const VariantAttributes  = require("./variant_attribute_model");
 
 
 class AttributeCombinations extends Model { }
@@ -56,6 +57,13 @@ AttributeCombinations.init(
     }
 );
 
+Combinations.hasMany(AttributeCombinations, {
+    foreignKey: 'combination_id'
+})
+
+AttributeCombinations.belongsTo(Combinations, {
+    foreignKey: 'combination_id'
+})
 
 
 

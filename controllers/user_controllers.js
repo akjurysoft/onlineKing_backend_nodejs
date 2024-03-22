@@ -941,6 +941,19 @@ const verifyUser = async (req, res) => {
       }
     );
 
+    if(type === "DEALER"){
+      await Dealers.update(
+        {
+          approved: null
+        },
+        {
+          where: {
+            id: user.id
+          }
+        }
+      )
+    }
+
     return res
       .response({
         code: 200,
@@ -1419,12 +1432,22 @@ const customerLogin = async (req, res) => {
       });
     }
     if (user) {
-      if (type == "DEALER" && user.approved == false) {
+      if (type == "DEALER" && user.approved == null) {
         return res
           .response({
             code: 403,
             status: "error",
             message: "Verification is in progress.",
+          })
+          .code(200);
+      }
+
+      if (type == "DEALER" && user.approved == false) {
+        return res
+          .response({
+            code: 403,
+            status: "error",
+            message: "Dealer is not approved.",
           })
           .code(200);
       }

@@ -77,6 +77,10 @@ Products.init(
             type: STRING,
             allowNull: true,
         },
+        tax_rate: {
+            type: INTEGER,
+            allowNull: true,
+        },
         product_type: {
             type: STRING,
             allowNull: true,
@@ -123,6 +127,10 @@ Products.init(
         },
         warranty: {
             type: STRING,
+            allowNull: true,
+        },
+        weight: {
+            type: DOUBLE,
             allowNull: true,
         },
         createdAt: {

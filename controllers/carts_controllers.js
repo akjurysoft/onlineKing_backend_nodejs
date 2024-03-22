@@ -19,7 +19,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    Categories, Carts, Products, Customers, Dealers
+    Categories, Carts, Products, Customers, Dealers, ProductImages
 } = require("../models");
 const { Op } = require("sequelize");
 const axios = require("axios");
@@ -34,7 +34,7 @@ const addToCart = async (req, res) => {
         const allowed_user = ['DEALER', 'CUSTOMER']
         if (allowed_user.includes(user.role) && user.application === 'kardify') {
 
-            const { user_id, product_id , quantity} = req.payload;
+            const { product_id, quantity } = req.payload;
 
             const available_product = await Products.findOne({
                 where: {
@@ -69,10 +69,10 @@ const addToCart = async (req, res) => {
                 }).code(200);
             }
 
-            if (user_id) {
+            if (user.id) {
                 const isAvailableUser = await model.findOne({
                     where: {
-                        id: user_id
+                        id: user.id
                     }
                 })
 
@@ -87,7 +87,7 @@ const addToCart = async (req, res) => {
 
             const existingProduct = await Carts.findOne({
                 where: {
-                    [ownerId]: user_id,
+                    [ownerId]: user.id,
                     product_id
                 }
             });
@@ -95,11 +95,16 @@ const addToCart = async (req, res) => {
             const cartQuantity = quantity ? quantity : 1;
 
             if (existingProduct) {
-                existingProduct.quantity += cartQuantity;
-                await existingProduct.save();
+                return res
+                    .response({
+                        code: 400,
+                        status: 'error',
+                        message: "Product is already in the cart",
+                    })
+                    .code(200);
             } else {
                 await Carts.create({
-                    [ownerId]: user_id,
+                    [ownerId]: user.id,
                     product_id,
                     quantity: cartQuantity
                 });
@@ -148,7 +153,7 @@ const getCart = async (req, res) => {
 
         const allowed_user = ['DEALER', 'CUSTOMER'];
         if (allowed_user.includes(user.role) && user.application === 'kardify') {
-            
+
             let model;
             let ownerId;
             if (user.role === 'DEALER') {
@@ -165,6 +170,9 @@ const getCart = async (req, res) => {
                 }).code(200);
             }
 
+            let products = [];
+            let totalPrice = 0; 
+            
             const cartItems = await Carts.findAll({
                 where: {
                     [ownerId]: user.id
@@ -179,10 +187,72 @@ const getCart = async (req, res) => {
                 ],
             });
 
+            for (const cartItem of cartItems) {
+                const product = await Products.findOne({
+                    where: {
+                        id: cartItem.product.id,
+                        status: true
+                    }
+                });
+            
+                if (product) {
+                    products.push(product);
+                }
+            }
+
+
+            const images = await ProductImages.findAll({
+                where: {
+                    product_id: cartItems.map(product => product.product.id), 
+                    status: 1,
+                },
+                attributes: ['id', 'product_id', 'image_url'],
+                raw: true,
+            });
+
+            const imagesMap = images.reduce((acc, image) => {
+                const { product_id } = image;
+                if (!acc[product_id]) {
+                    acc[product_id] = [];
+                }
+                acc[product_id].push(image);
+                return acc;
+            }, {});
+
+            const cartItemsWithImages = cartItems.map(cartItem => {
+                return {
+                    ...cartItem.toJSON(),
+                    images: imagesMap[cartItem.product.id] || []
+                };
+            });
+
+            for (const cartItem of cartItems) {
+                const product = await Products.findOne({
+                    where: {
+                        id: cartItem.product.id,
+                        status: true
+                    }
+                });
+                
+                if (product) {
+                    let itemPrice = product.default_price; 
+
+                    if (product.discount_type === 'amount') {
+                        itemPrice -= product.discount; 
+                    } else if (product.discount_type === 'percent') {
+                        itemPrice -= (product.default_price * (product.discount / 100)); 
+                    }
+
+                    totalPrice += itemPrice * cartItem.quantity;
+                }
+            }
+
+
             return res.response({
                 code: 200,
                 status: 'success',
-                cartItems
+                totalPrice,
+                cartItems: cartItemsWithImages
             }).code(200);
         } else if (user == 'Session expired') {
             return res.response({
@@ -207,10 +277,156 @@ const getCart = async (req, res) => {
     }
 };
 
+const handleIncrement = async (req, res) => {
+    try {
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
+
+        const allowed_user = ['DEALER', 'CUSTOMER'];
+        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+            const { product_id } = req.payload;
+
+            let ownerId;
+            if (user.role === 'DEALER') {
+                ownerId = 'dealer_id'
+            } else if (user.role === 'CUSTOMER') {
+                ownerId = 'user_id'
+            }
+
+            const existingProduct = await Carts.findOne({
+                where: {
+                    [ownerId]: user.id,
+                    product_id
+                }
+            });
+            if (!existingProduct) {
+                return res.response({
+                    code: 400,
+                    status: 'error',
+                    message: "Product not found in the cart",
+                }).code(200);
+            }
+
+            const availableProduct = await Products.findOne({
+                where: {
+                    id: product_id,
+                    status: true,
+                },
+                raw: true
+            });
+
+            if (!availableProduct) {
+                return res.response({
+                    code: 400,
+                    status: 'error',
+                    message: "Product details not found",
+                }).code(200);
+            }
+
+            const totalQuantityInCart = existingProduct.quantity;
+
+            const remainingStock = availableProduct.stock - totalQuantityInCart;
+
+            if (remainingStock <= 0) {
+                return res.response({
+                    code: 400,
+                    status: 'error',
+                    message: "Maximum quantity reached",
+                }).code(200);
+            }
+
+            existingProduct.quantity += 1; 
+            await existingProduct.save()
+
+            return res.response({
+                code: 200,
+                status: 'success',
+                message: "Quantity incremented successfully",
+            }).code(200);
+        } else if (user == 'Session expired') {
+            return res.response({
+                code: 401,
+                status: 'error',
+                message: user,
+            }).code(200);
+        } else {
+            return res.response({
+                code: 403,
+                status: 'error',
+                message: "You don't have permission for this action.",
+            }).code(200);
+        }
+    } catch (error) {
+        console.error(error);
+        return res.response({
+            code: 500,
+            status: "error",
+            message: "Something went wrong",
+        }).code(200);
+    }
+};
+
+const handleDecrement = async (req, res) => {
+    try {
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
+
+        const allowed_user = ['DEALER', 'CUSTOMER'];
+        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+            const { product_id } = req.payload;
+
+            let ownerId;
+            if (user.role === 'DEALER') {
+                ownerId = 'dealer_id'
+            } else if (user.role === 'CUSTOMER') {
+                ownerId = 'user_id'
+            }
+            
+            const existingProduct = await Carts.findOne({
+                where: {
+                    [ownerId]: user.id,
+                    product_id
+                }
+            });
+
+            if (existingProduct) {
+                if (existingProduct.quantity > 1) { 
+                    existingProduct.quantity -= 1; 
+                    await existingProduct.save();
+                }
+            }
+
+            return res.response({
+                code: 200,
+                status: 'success',
+                message: "Quantity decremented successfully",
+            }).code(200);
+        } else if (user == 'Session expired') {
+            return res.response({
+                code: 401,
+                status: 'error',
+                message: user,
+            }).code(200);
+        } else {
+            return res.response({
+                code: 403,
+                status: 'error',
+                message: "You don't have permission for this action.",
+            }).code(200);
+        }
+    } catch (error) {
+        console.error(error);
+        return res.response({
+            code: 500,
+            status: "error",
+            message: "Something went wrong",
+        }).code(200);
+    }
+};
+
+
 const removeFromCart = async (req, res) => {
     try {
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
-        
+
         const allowed_user = ['DEALER', 'CUSTOMER'];
         if (allowed_user.includes(user.role) && user.application === 'kardify') {
 
@@ -284,5 +500,7 @@ const removeFromCart = async (req, res) => {
 module.exports = {
     addToCart,
     getCart,
+    handleIncrement,
+    handleDecrement,
     removeFromCart
 }

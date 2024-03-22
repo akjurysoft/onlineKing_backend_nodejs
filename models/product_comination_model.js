@@ -6,7 +6,6 @@ const {
         model_data_types: { INTEGER, STRING, DATETIME, BOOLEAN, DOUBLE },
     },
 } = require("../config");
-const AttributeCombinations = require("./attribute_comination_model");
 
 
 class Combinations extends Model { }

@@ -16,9 +16,9 @@ const order_routes = [
         path: "/fetch-orders-admin",
         options: {
             description: "Fetch all Orders for Admins.",
-            // validate: {
-            //     query: carBrandsValidators.fetch_car_brands_payload
-            // },
+            validate: {
+                headers: headerValidator,
+            },
             tags,
             handler: orders_controllers.getAllOrdersAdmin,
         },
@@ -29,11 +29,11 @@ const order_routes = [
         path: "/fetch-orders",
         options: {
             description: "Fetch all Orders for Customers.",
-            // validate: {
-            //     query: carBrandsValidators.fetch_car_brands_payload
-            // },
+            validate: {
+                headers: headerValidator,
+            },
             tags,
-            handler: orders_controllers.getAllOrdersAdmin,
+            handler: orders_controllers.getOrderForCustomer,
         },
     },
 
@@ -43,6 +43,7 @@ const order_routes = [
         options: {
             description: "Place Order for customers.",
             validate: {
+                headers: headerValidator,
                 payload: ordersValidator.createOrderSchema
             },
             tags,

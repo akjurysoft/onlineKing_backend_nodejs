@@ -7,6 +7,8 @@ const {
     },
 } = require("../config");
 const Products = require("./product_model");
+const Users = require("./users");
+const CustomerModel = require("./customers");
 
 // const CarBrands = require("./car_brands_model");
 

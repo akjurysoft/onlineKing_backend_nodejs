@@ -32,6 +32,14 @@ Orders.init(
             type: INTEGER,
             allowNull: true,
         },
+        user_type: {
+            type: STRING,
+            allowNull: true,
+        },
+        dealer_id: {
+            type: INTEGER,
+            allowNull: true,
+        },
         user_address_id: {
             type: INTEGER,
             allowNull: true,

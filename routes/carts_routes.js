@@ -38,6 +38,34 @@ const carts_routes = [
 
     {
         method: "POST",
+        path: "/cart-increament",
+        options: {
+            description: "Increament for procuct in cart for customers",
+            validate: {
+                headers: headerValidator,
+                payload: CartValidators.handle_increament_payload
+            },
+            tags,
+            handler: carts_controllers.handleIncrement,
+        },
+    },
+
+    {
+        method: "POST",
+        path: "/cart-decreament",
+        options: {
+            description: "Decreament for procuct in cart for customers",
+            validate: {
+                headers: headerValidator,
+                payload: CartValidators.handle_decrement_payload
+            },
+            tags,
+            handler: carts_controllers.handleDecrement,
+        },
+    },
+
+    {
+        method: "POST",
         path: "/remove-from-cart",
         options: {
             description: "Remove product from cart for customers",

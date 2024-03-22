@@ -22,6 +22,8 @@ const testimonials_info_routes = require("./testimonials_routes");
 const user_routes = require("./user_routes");
 const carts_routes = require("./carts_routes");
 const wishlist_routes = require("./wishlist_routes");
+const user_address_routes = require("./user_addressess_routes");
+const shiprocket_routes = require("./shiprocket_routes");
 
 // making a router plugin
 module.exports = {
@@ -51,5 +53,7 @@ module.exports = {
     server.route(testimonials_info_routes);
     server.route(carts_routes);
     server.route(wishlist_routes);
+    server.route(user_address_routes);
+    server.route(shiprocket_routes);
   },
 };

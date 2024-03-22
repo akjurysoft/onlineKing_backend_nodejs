@@ -1,38 +1,36 @@
-const tags = ["api", "Wishlists"];
+const tags = ["api", "Wishlist Setup"];
 
-const { category_controllers, carts_controllers } = require("../controllers");
+const {  car_list_controllers, wishlists_controllers } = require("../controllers");
 
 const {
-    categoriesValidators,
-    usersValidation,
-    headerValidator,
-    CartValidators
+    carListsValidators, WishlistValidators, headerValidator
 } = require("../validators");
 
 const wishlist_routes = [
     {
         method: "GET",
-        path: "/get-wishlist",
+        path: "/get-all-wishlists",
         options: {
-            description: "Fetch all Wishlist Items.",
+            description: "Fetch all Car Lists.",
             validate: {
-                headers: headerValidator
+                headers: headerValidator,
             },
             tags,
-            handler: carts_controllers.getCart,
+            handler: wishlists_controllers.getWishList,
         },
     },
+
     {
         method: "POST",
         path: "/add-to-wishlist",
         options: {
-            description: "Add to wishlist for customers",
+            description: "Add Product To wishlist.",
             validate: {
                 headers: headerValidator,
-                payload: CartValidators.add_to_cart_payload
+                payload: WishlistValidators.add_to_wishlist_payload
             },
             tags,
-            handler: carts_controllers.addToCart,
+            handler: wishlists_controllers.addToWishList,
         },
     },
 
@@ -40,15 +38,15 @@ const wishlist_routes = [
         method: "POST",
         path: "/remove-from-wishlist",
         options: {
-            description: "Remove product from wishlist for customers",
+            description: "Remove Product from wishlist.",
             validate: {
                 headers: headerValidator,
-                payload: CartValidators.remove_from_cart_payload
+                payload: WishlistValidators.remove_from_wishlist_payload
             },
             tags,
-            handler: carts_controllers.removeFromCart,
+            handler: wishlists_controllers.removeFromWishlist,
         },
-    }
+    },
     
 ];
 

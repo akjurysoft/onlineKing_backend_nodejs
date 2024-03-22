@@ -6,6 +6,7 @@ const fetch_all_product = Joi.object({
     super_sub_category_id: Joi.number().integer().positive().allow(''),
     car_brand_id: Joi.number().integer().positive().allow(''),
     product_name: Joi.string().max(255).allow(''),
+    product_id: Joi.number().integer().positive().allow(''),
     product_brand_id: Joi.number().integer().positive().allow(''),
 })
 

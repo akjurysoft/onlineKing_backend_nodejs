@@ -20,7 +20,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    Products, Categories, SubCategories, SuperSubCategories, CarBrands, ProductImages, Combinations, ProductAttributes
+    Products, Categories, SubCategories, SuperSubCategories, CarBrands, ProductImages, Combinations, ProductAttributes, AttributeCombinatios, VariantAttributes
 } = require("../models");
 const { Op } = require("sequelize");
 const axios = require("axios");
@@ -40,6 +40,7 @@ const fetchProducts = async (req, res) => {
             super_sub_category_id,
             car_brand_id,
             product_name,
+            product_id,
             product_brand_id
         } = req.query;
 
@@ -67,6 +68,10 @@ const fetchProducts = async (req, res) => {
 
         if (product_brand_id) {
             whereCondition.product_brand_id = product_brand_id
+        }
+
+        if (product_id) {
+            whereCondition.id = product_id
         }
 
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
@@ -191,6 +196,7 @@ const fetchProductCustomer = async (req, res) => {
             super_sub_category_id,
             car_brand_id,
             product_name,
+            product_id,
             product_brand_id
         } = req.query;
 
@@ -220,6 +226,10 @@ const fetchProductCustomer = async (req, res) => {
             whereCondition.product_brand_id = product_brand_id
         }
 
+        if (product_id) {
+            whereCondition.id = product_id
+        }
+
         const products = await Products.findAll({
             where: whereCondition,
             order: [['createdAt', 'DESC']],
@@ -243,54 +253,76 @@ const fetchProductCustomer = async (req, res) => {
                 {
                     model: ProductBrand,
                     required: false
+                },
+                {
+                    model: ProductImages,
+                    required: false,
+                    as: 'images',
+                },
+                {
+                    model: Combinations,
+                    required: false,
+                    include: [
+                        {
+                            model: AttributeCombinations,
+                            required: true,
+                        },
+                        // {
+                        //     model: VariantAttributes,
+                        //     required: true
+                        // }
+                    ],
                 }
             ],
-            raw: true,
-            nest: true,
-            mapToModel: true
+
         });
 
-        const images = await ProductImages.findAll({
-            where: {
-                product_id: products.map(product => product.id),
-                status: 1,
-            },
-            attributes: ['id', 'product_id', 'image_url'],
-            raw: true,
-        });
+        // const images = await ProductImages.findAll({
+        //     where: {
+        //         product_id: products.map(product => product.id),
+        //         status: 1,
+        //     },
+        //     attributes: ['id', 'product_id', 'image_url'],
+        //     raw: true,
+        // });
 
-        const imagesMap = images.reduce((acc, image) => {
-            const { product_id } = image;
-            if (!acc[product_id]) {
-                acc[product_id] = [];
-            }
-            acc[product_id].push(image);
-            return acc;
-        }, {});
+        // const imagesMap = images.reduce((acc, image) => {
+        //     const { product_id } = image;
+        //     if (!acc[product_id]) {
+        //         acc[product_id] = [];
+        //     }
+        //     acc[product_id].push(image);
+        //     return acc;
+        // }, {});
 
 
-        const attributes = await Combinations.findAll({
-            where: {
-                product_id: products.map(product => product.id)
-            },
+        // const attributes = await Combinations.findAll({
+        //     where: {
+        //         product_id: products.map(product => product.id)
+        //     },
 
-            raw: true,
-        });
+        //     include:[
+        //         {
+        //             model: AttributeCombinatios,
+        //             required:true,
+        //         }
+        //     ],
+        // });
 
-        const attributesMap = attributes.reduce((acc, atttr) => {
-            const { product_id } = atttr;
-            if (!acc[product_id]) {
-                acc[product_id] = [];
-            }
-            acc[product_id].push(atttr);
-            return acc;
-        }, {});
+        // const attributesMap = attributes.reduce((acc, atttr) => {
+        //     const { product_id } = atttr;
+        //     if (!acc[product_id]) {
+        //         acc[product_id] = [];
+        //     }
+        //     acc[product_id].push(atttr);
+        //     return acc;
+        // }, {});
 
-        products.forEach(product => {
-            const productId = product.id;
-            product.atributes = attributesMap[productId] || [];
-            product.images = imagesMap[productId] || [];
-        });
+        // products.forEach(product => {
+        //     const productId = product.id;
+        //     product.atributes = attributesMap[productId] || [];
+        //     // product.images = imagesMap[productId] || [];
+        // });
 
         return res
             .response({

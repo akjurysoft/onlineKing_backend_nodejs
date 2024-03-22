@@ -19,7 +19,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    CarBrands, Banners, BannerProductAssociations, Categories, SubCategories, SuperSubCategories, Coupons
+    CarBrands, Banners, BannerProductAssociations, Categories, SubCategories, SuperSubCategories, Customers, Dealers, Coupons, Orders, SubscribedCustomers
 } = require("../models");
 const { Op } = require("sequelize");
 const axios = require("axios");
@@ -31,6 +31,7 @@ const fetchAllCouponsAdmin = async (req, res) => {
     try {
         const allCoupons = await Coupons.findAll({
             attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+            order: [['createdAt', 'DESC']],
         });
 
         return res.response({
@@ -123,6 +124,157 @@ const createCoupon = async (req, res) => {
     }
 };
 
+const getCoupon = async (req, res) => {
+    try {
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+
+        const allowed_user = ['CUSTOMER', 'DEALER']
+        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+
+            let ownerId;
+            let model;
+            let couponType;
+            if (user.role === 'DEALER') {
+                ownerId = 'dealer_id';
+                model = Dealers;
+                couponType = 'Dealer Wise'
+            } else if (user.role === 'CUSTOMER') {
+                ownerId = 'user_id';
+                model = Customers;
+                couponType = 'Customer wise'
+            } else {
+                return res.response({
+                    code: 403,
+                    status: 'error',
+                    message: "You dont have permission for this action.",
+                }).code(200);
+            }
+
+            const userData = await model.findOne({
+                where: {
+                    id: user.id
+                },
+                raw: true
+            })
+
+            const hasOrders = await Orders.findOne({
+                where: {
+                    [ownerId]: user.id
+                }
+            });
+
+            const coupons = [];
+
+            if (!hasOrders) {
+                const firstOrderCoupon = await Coupons.findOne({
+                    where: {
+                        coupon_type: 'First Order',
+                        [ownerId]: user.id
+                    },
+                    attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+                });
+
+                if (firstOrderCoupon) {
+                    coupons.push(firstOrderCoupon);
+                }
+            }
+
+            const freeDeliveryCoupon = await Coupons.findOne({
+                where: {
+                    coupon_type: 'Free Delivery',
+                    status: true
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+            });
+
+            if (freeDeliveryCoupon) {
+                coupons.push(freeDeliveryCoupon);
+            }
+
+            const customerCoupons = await Coupons.findAll({
+                where: {
+                    coupon_type: couponType,
+                },
+                attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+            });
+
+            if (customerCoupons) {
+                coupons.push(...customerCoupons);
+            }
+
+
+            if (userData) {
+                const isSubscribed = await SubscribedCustomers.findOne({
+                    where: {
+                        email: userData.email
+                    },
+                    raw: true
+                })
+
+                if (isSubscribed) {
+                    const subscribeCoupons = await Coupons.findAll({
+                        where: {
+                            coupon_type: 'Subscribed Customer',
+                            status: true
+                        },
+                        attributes: { exclude: ['createdAt', 'updatedAt', 'deletedAt'] },
+                    });
+
+                    if (subscribeCoupons) {
+                        coupons.push(...subscribeCoupons);
+                    }
+                }
+            }
+            
+            if (coupons.length === 0) {
+                return res.response({
+                    code: 404,
+                    status: 'error',
+                    message: 'Coupons not found',
+                }).code(404);
+            }
+
+            const currentDate = new Date();
+
+            const validCoupons = coupons.filter(coupon => {
+                return !coupon.expiry_date || new Date(coupon.expiry_date) > currentDate;
+            });
+
+            return res.response({
+                code: 200,
+                status: 'success',
+                message: 'Coupons fetched successfully',
+                coupons: validCoupons
+            }).code(200);
+        } else if (user == 'Session expired') {
+            return res
+                .response({
+                    code: 401,
+                    status: 'error',
+                    message: user,
+                })
+                .code(200);
+        } else {
+            return res
+                .response({
+                    code: 403,
+                    status: 'error',
+                    message: "You dont have permission for this action.",
+                })
+                .code(200);
+        }
+
+    } catch (error) {
+        console.error(error);
+        return res.response({
+            code: 500,
+            status: 'error',
+            message: 'Something went wrong',
+        }).code(500);
+    }
+};
+
+
 const editCoupon = async (req, res) => {
     try {
 
@@ -136,7 +288,7 @@ const editCoupon = async (req, res) => {
                 message: 'Coupon not found',
             }).code(404);
         }
-        
+
         await existingCoupon.update({
             coupon_name,
             min_order_amount,
@@ -255,6 +407,7 @@ const deleteCoupon = async (req, res) => {
 module.exports = {
     fetchAllCouponsAdmin,
     createCoupon,
+    getCoupon,
     editCoupon,
     toggleCouponStatus,
     deleteCoupon

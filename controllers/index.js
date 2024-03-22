@@ -20,7 +20,9 @@ const static_controllers = require('./static_page_controller')
 const store_info_controllers = require('./store_info_controllers')
 const testimonials_controllers = require('./testimonials_controllers')
 const carts_controllers = require('./carts_controllers')
-
+const wishlists_controllers = require('./wishlists_controller')
+const user_address_controllers = require('./user_address_controllers')
+const shiprocket_controllers = require('./shiprocket_controllers')
 
 module.exports = {
   user_controllers,
@@ -44,5 +46,8 @@ module.exports = {
   static_controllers,
   store_info_controllers,
   testimonials_controllers,
-  carts_controllers
+  carts_controllers,
+  wishlists_controllers,
+  user_address_controllers,
+  shiprocket_controllers
 };

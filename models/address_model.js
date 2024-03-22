@@ -1,7 +1,7 @@
 const { Model } = require("sequelize");
 const {
     sequelize,
-    databases: { user_address },
+    databases: { user_addresses },
     dataTypes: {
         model_data_types: { INTEGER, STRING, DATETIME, BOOLEAN, FLOAT },
     },
@@ -55,13 +55,15 @@ Address_model.init(
             type: STRING,
             allowNull: true,
         },
-
-
         fullname: {
             type: STRING,
             allowNull: true,
         },
         mobile: {
+            type: STRING,
+            allowNull: true,
+        },
+        email: {
             type: STRING,
             allowNull: true,
         },
@@ -77,7 +79,6 @@ Address_model.init(
             type: STRING,
             allowNull: true,
         },
-
         createdAt: {
             type: DATETIME,
             allowNull: true,
@@ -95,7 +96,7 @@ Address_model.init(
         // Other model options go here
         sequelize, // We need to pass the connection instance
         paranoid: true,
-        modelName: user_address, // We need to choose the model name
+        modelName: user_addresses, // We need to choose the model name
     }
 );
 

@@ -6,6 +6,7 @@ const {
         model_data_types: { INTEGER, STRING, DATETIME, BOOLEAN, DOUBLE },
     },
 } = require("../config");
+const Combinations = require("./product_comination_model");
 
 
 class VariantAttribute extends Model { }
@@ -50,5 +51,13 @@ VariantAttribute.init(
         modelName: variants_attribute, // We need to choose the model name
     }
 );
+
+Combinations.hasMany(VariantAttribute, {
+    foreignKey: 'variant_id'
+})
+
+VariantAttribute.belongsTo(Combinations, {
+    foreignKey: 'variant_id'
+})
 
 module.exports = VariantAttribute;
