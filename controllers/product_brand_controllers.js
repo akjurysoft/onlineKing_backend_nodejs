@@ -40,20 +40,12 @@ const getProductBrands = async (req, res) => {
         if (user.role === "ADMIN" && user.application === 'kardify') {
             const brandNames = await ProductBrand.findAll({ where: filter, raw: true });
 
-            if (brandNames.length > 0) {
                 return res.response({
                     code: 200,
                     status: 'success',
                     message: "Product Brands fetched successfully",
                     brandNames
                 }).code(200);
-            } else {
-                return res.response({
-                    code: 404,
-                    status: 'error',
-                    message: "No product brands found with the given criteria."
-                }).code(404);
-            }
         } else if (user === 'Session expired') {
             return res.response({
                 code: 401,
