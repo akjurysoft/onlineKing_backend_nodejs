@@ -5,6 +5,7 @@ const fetch_car_model_payload = Joi.object({
     model_name: Joi.string().allow(null),
 })
 const add_car_model_payload = Joi.object({
+    car_brand_id: Joi.number().integer().positive().required(),
     model_name: Joi.string().required(),
     start_year: Joi.string().regex(/^\d{4}$/).required(),
     end_year: Joi.string().regex(/^\d{4}$/).allow(null).optional(),
@@ -15,6 +16,7 @@ const model_image = Joi.object({
 })
 const update_car_model_payload = Joi.object({
     car_model_id: Joi.number().integer().positive().required(),
+    car_brand_id: Joi.number().integer().positive().required(),
     model_name: Joi.string().required(),
     start_year: Joi.string().required(),
     end_year: Joi.string().allow('').optional(),

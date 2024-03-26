@@ -25,6 +25,19 @@ const car_model_routes = [
     },
 
     {
+        method: "GET",
+        path: "/fetch-car-models-customers",
+        options: {
+            description: "Fetch all Car Models.",
+            validate: {
+                query: carModelsValidators.fetch_car_model_payload
+            },
+            tags,
+            handler: car_models_controllers.getCarModelsCustomers,
+        },
+    },
+
+    {
         method: "POST",
         path: "/add-car-models",
         options: {

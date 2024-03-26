@@ -43,6 +43,48 @@ const getCarBrands = async (req, res) => {
         }
         const brandName = await CarBrands.findAll({
             where: filter,
+            order: [['createdAt', 'DESC']],
+            raw: true
+        })
+        return res
+            .response({
+                code: 200,
+                status:'success',
+                message: "Car Brands fetched successfully",
+                brandName
+            })
+            .code(200);
+    } catch (error) {
+        return res
+            .response({
+                code: 401,
+                status: "error",
+                message: "Something Wrong",
+            })
+            .code(200);
+    }
+};
+
+const getCarBrandsCustomers = async (req, res) => {
+    try {
+        const {
+            id,
+            brand_name
+        } = req.query
+        let filter = {
+            status: true
+        }
+        if (id) filter = {
+            ...filter,
+            id
+        }
+        if (brand_name) filter = {
+            ...filter,
+            brand_name
+        }
+        const brandName = await CarBrands.findAll({
+            where: filter,
+            order: [['createdAt', 'DESC']],
             raw: true
         })
         return res
@@ -284,6 +326,7 @@ const toggleCarBrandStatus = async (req, res) => {
 
 module.exports = {
     getCarBrands,
+    getCarBrandsCustomers,
     addCarBrands,
     editCarBrands,
     deleteCarBrand,

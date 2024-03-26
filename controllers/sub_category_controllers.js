@@ -101,7 +101,9 @@ const fetchSubCategories = async (req, res) => {
 const fetchSubCategoriesCustomer = async (req, res) => {
     try {
         const { sub_category_name, id , category_id} = req.query;
-            const whereCondition = {};
+            const whereCondition = {
+                status: true
+            };
 
             if (sub_category_name) {
                 whereCondition.sub_category_name = sub_category_name;

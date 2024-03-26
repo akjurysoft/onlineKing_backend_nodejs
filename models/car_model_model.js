@@ -6,6 +6,7 @@ const {
         model_data_types: { INTEGER, STRING, DATETIME, BOOLEAN },
     },
 } = require("../config");
+const CarBrands = require("./car_brands_model");
 
 // const CarBrands = require("./car_brands_model");
 
@@ -64,6 +65,14 @@ CarModel.init(
   }
 );
 
-// CarModel.belongsTo(CarBrands, { foreignKey: 'brand_id', as: 'carbrand' }); 
+CarModel.belongsTo(CarBrands, {
+  foreignKey: "brand_id",
+  as: "car_brand",
+});
+
+// CarBrands.belongsTo(CarModel, {
+//   foreignKey: "model_id",
+//   as: "car_model",
+// });
 
 module.exports = CarModel;

@@ -24,6 +24,19 @@ const car_brands_routes = [
     },
 
     {
+        method: "GET",
+        path: "/fetch-car-brands-customers",
+        options: {
+            description: "Fetch all Car Brands.",
+            validate: {
+                query: carBrandsValidators.fetch_car_brands_payload
+            },
+            tags,
+            handler: car_brands_controllers.getCarBrandsCustomers,
+        },
+    },
+
+    {
         method: "POST",
         path: "/add-car-brands",
         options: {

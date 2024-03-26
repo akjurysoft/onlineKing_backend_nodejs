@@ -93,7 +93,9 @@ const getCategoriesCustomers = async (req, res) => {
             id,
             category_name
         } = req.query
-        let filter = {}
+        let filter = {
+            status: true
+        }
         if (id) filter = {
             ...filter,
             id
