@@ -30,12 +30,17 @@ const getCarModels = async (req, res) => {
     try {
         const {
             id,
+            brand_id,
             model_name
         } = req.query
         let filter = {}
         if (id) filter = {
             ...filter,
             id
+        }
+        if (brand_id) filter = {
+            ...filter,
+            brand_id
         }
         if (model_name) filter = {
             ...filter,
@@ -75,6 +80,7 @@ const getCarModelsCustomers = async (req, res) => {
     try {
         const {
             id,
+            brand_id,
             model_name
         } = req.query
         let filter = {
@@ -84,6 +90,12 @@ const getCarModelsCustomers = async (req, res) => {
             ...filter,
             id
         }
+        
+        if (brand_id) filter = {
+            ...filter,
+            brand_id
+        }
+
         if (model_name) filter = {
             ...filter,
             model_name

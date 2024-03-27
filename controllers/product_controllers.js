@@ -20,7 +20,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    Products, Categories, SubCategories, SuperSubCategories, CarBrands, ProductImages, Combinations, ProductAttributes, AttributeCombinatios, VariantAttributes
+    Products, Categories, SubCategories, SuperSubCategories, CarBrands, ProductImages, Combinations, ProductAttributes, AttributeCombinatios, VariantAttributes, CarModel
 } = require("../models");
 const { Op } = require("sequelize");
 const axios = require("axios");
@@ -40,11 +40,12 @@ const fetchProducts = async (req, res) => {
             super_sub_category_id,
             car_brand_id,
             product_name,
+            year,
             product_id,
             product_brand_id
         } = req.query;
 
-        const whereCondition = {};
+        let whereCondition = {};
 
         if (category_id) {
             whereCondition.category_id = category_id;
@@ -72,6 +73,18 @@ const fetchProducts = async (req, res) => {
 
         if (product_id) {
             whereCondition.id = product_id
+        }
+
+        if(year){
+            whereCondition = {
+                ...whereCondition,
+                start_year: {
+                    [Op.lte]: year
+                },
+                end_year: {
+                    [Op.gte]: year
+                }
+            }
         }
 
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
@@ -195,12 +208,13 @@ const fetchProductCustomer = async (req, res) => {
             sub_category_id,
             super_sub_category_id,
             car_brand_id,
+            year,
             product_name,
             product_id,
             product_brand_id
         } = req.query;
 
-        const whereCondition = {};
+        let whereCondition = {};
 
         if (category_id) {
             whereCondition.category_id = category_id;
@@ -230,6 +244,20 @@ const fetchProductCustomer = async (req, res) => {
             whereCondition.id = product_id
         }
 
+        if(year){
+            whereCondition = {
+                ...whereCondition,
+                start_year: {
+                    [Op.lte]: year
+                },
+                end_year: {
+                    [Op.gte]: year
+                }
+            }
+        }
+
+        console.log(whereCondition)
+
         const products = await Products.findAll({
             where: whereCondition,
             order: [['createdAt', 'DESC']],
@@ -248,6 +276,10 @@ const fetchProductCustomer = async (req, res) => {
                 },
                 {
                     model: CarBrands,
+                    required: false
+                },
+                {
+                    model: CarModel,
                     required: false
                 },
                 {
@@ -376,7 +408,6 @@ const addProduct = async (req, res) => {
             image_count,
         } = req.payload;
 
-
         const combinations = JSON.parse(req.payload.combinations)
 
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
@@ -407,6 +438,23 @@ const addProduct = async (req, res) => {
                     image_url_list.push({ image_url: file_url })
                 }
             }
+
+            // const modelData = await CarModel.findOne({
+            //     where: {
+            //         id: car_model_id
+            //     }
+            // })
+
+            // if(start_year && end_year){
+            //     modelData = {
+            //         start_year: {
+            //             [Op.lte]: start_year
+            //         },
+            //         end_year: {
+            //             [Op.gte]: end_year
+            //         }
+            //     }
+            // }
 
 
             const newProduct = await Products.create({

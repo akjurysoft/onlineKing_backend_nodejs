@@ -13,6 +13,7 @@ const SuperSubCategories = require('./super_sub_categories_model');
 const CarBrands = require("./car_brands_model");
 const Combinations = require("./product_comination_model");
 const ProductBrand = require("./product_brand_model");
+const CarModel = require("./car_model_model");
 // const SuperSubCategories = require('./super_sub_categories')
 
 class Products extends Model { }
@@ -94,11 +95,11 @@ Products.init(
             allowNull: true,
         },
         start_year: {
-            type: DATETIME,
+            type: INTEGER,
             allowNull: true,
         },
         end_year: {
-            type: DATETIME,
+            type: INTEGER,
             allowNull: true,
         },
         has_exchange_policy: {
@@ -192,6 +193,10 @@ CarBrands.hasMany(Products, {
 
 Products.belongsTo(CarBrands, {
     foreignKey: 'car_brand_id'
+})
+
+Products.belongsTo(CarModel, {
+    foreignKey: 'car_model_id'
 })
 
 Products.hasOne(Combinations, {
