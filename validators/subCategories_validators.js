@@ -8,7 +8,7 @@ const fetch_sub_categories_payload = Joi.object({
 const add_sub_categories_payload = Joi.object({
     sub_category_name: Joi.string().required(),
     category_id: Joi.number().integer().required(),
-    image: Joi.any().required(),
+    image: Joi.any().allow(null),
 })
 
 const update_sub_categories_payload = Joi.object({

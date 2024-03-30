@@ -228,7 +228,7 @@ const getCoupon = async (req, res) => {
             
             if (coupons.length === 0) {
                 return res.response({
-                    code: 404,
+                    code: 200,
                     status: 'error',
                     message: 'Coupons not found',
                 }).code(404);

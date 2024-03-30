@@ -6,7 +6,8 @@ const {
     categoriesValidators,
     usersValidation,
     headerValidator,
-    CartValidators
+    CartValidators,
+    usersAddressValidation
 } = require("../validators");
 
 const user_address_routes = [
@@ -20,6 +21,20 @@ const user_address_routes = [
             },
             tags,
             handler: user_address_controllers.getAllAddress,
+        },
+    },
+
+    {
+        method: "POST",
+        path: "/add-addresses",
+        options: {
+            description: "Add Address for Customer.",
+            validate: {
+                headers: headerValidator,
+                payload: usersAddressValidation.add_address_payload
+            },
+            tags,
+            handler: user_address_controllers.addAddressForCustomer,
         },
     },
     

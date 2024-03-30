@@ -11,6 +11,18 @@ const {
 const user_routes = [
   {
     method: "GET",
+    path: "/fetch-roles",
+    options: {
+      description: "Fetch Roles",
+      validate: {
+        headers: headerValidator,
+      },
+      tags,
+      handler: user_controllers.getRole,
+    },
+  },
+  {
+    method: "GET",
     path: "/fetch-customers",
     options: {
       description: "Fetch all customers for admin.",

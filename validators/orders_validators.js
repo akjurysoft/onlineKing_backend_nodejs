@@ -6,7 +6,7 @@ const productSchema = Joi.object({
 });
 
 const createOrderSchema = Joi.object({
-    address_id: Joi.number().integer().required().allow(null),
+    address_id: Joi.number().integer().allow(null),
     delivery_type_id: Joi.number().integer().required(),
     payment_id: Joi.string().required(),
     shipping_charge: Joi.number().required().allow(null),

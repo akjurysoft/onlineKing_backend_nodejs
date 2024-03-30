@@ -6,7 +6,7 @@ const fetch_categories_payload = Joi.object({
 })
 const add_categories_payload = Joi.object({
     category_name: Joi.string().required(),
-    image: Joi.any().required(),
+    image: Joi.any().allow(null),
 })
 const category_image = Joi.object({
     image: Joi.string(),

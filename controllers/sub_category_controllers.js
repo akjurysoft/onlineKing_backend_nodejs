@@ -28,7 +28,7 @@ const path = require("path");
 
 const fetchSubCategories = async (req, res) => {
     try {
-        const { sub_category_name, id , category_id} = req.query;
+        const { sub_category_name, id, category_id } = req.query;
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
 
@@ -100,43 +100,43 @@ const fetchSubCategories = async (req, res) => {
 
 const fetchSubCategoriesCustomer = async (req, res) => {
     try {
-        const { sub_category_name, id , category_id} = req.query;
-            const whereCondition = {
-                status: true
-            };
+        const { sub_category_name, id, category_id } = req.query;
+        const whereCondition = {
+            status: true
+        };
 
-            if (sub_category_name) {
-                whereCondition.sub_category_name = sub_category_name;
-            }
+        if (sub_category_name) {
+            whereCondition.sub_category_name = sub_category_name;
+        }
 
-            if (id) {
-                whereCondition.id = id;
-            }
+        if (id) {
+            whereCondition.id = id;
+        }
 
-            if (category_id) {
-                whereCondition.category_id = category_id;
-            }
+        if (category_id) {
+            whereCondition.category_id = category_id;
+        }
 
-            const subcategories = await SubCategories.findAll({
-                include: [{
-                    model: Categories,
-                    as: 'category',
-                    attributes: { exclude: [] },
-                }],
-                nest: true,
-                mapToModel: true,
-                where: whereCondition,
-                raw: true,
-                order: [['createdAt', 'DESC']]
-            });
+        const subcategories = await SubCategories.findAll({
+            include: [{
+                model: Categories,
+                as: 'category',
+                attributes: { exclude: [] },
+            }],
+            nest: true,
+            mapToModel: true,
+            where: whereCondition,
+            raw: true,
+            order: [['createdAt', 'DESC']]
+        });
 
-            return res
-                .response({
-                    code: 200,
-                    message: "Subcategories fetched successfully",
-                    subcategories,
-                })
-                .code(200);
+        return res
+            .response({
+                code: 200,
+                message: "Subcategories fetched successfully",
+                subcategories,
+            })
+            .code(200);
     } catch (error) {
         console.error(error);
         return res
@@ -189,22 +189,43 @@ const createSubcategories = async (req, res) => {
                     .code(200);
             }
 
-            const { file_url } = await uploadFile(req, image, 'uploads/subcategories/')
-            const newSubcategory = await SubCategories.create({
-                category_id,
-                sub_category_name,
-                image_url: file_url,
-                status: true
-            });
+            if (image) {
+                const { file_url } = await uploadFile(req, image, 'uploads/subcategories/')
+                const newSubcategory = await SubCategories.create({
+                    category_id,
+                    sub_category_name,
+                    image_url: file_url,
+                    status: true
+                });
 
-            return res
-                .response({
-                    code: 201,
-                    status: 'success',
-                    message: "Subcategory created successfully",
-                    subcategory: newSubcategory,
-                })
-                .code(200);
+                return res
+                    .response({
+                        code: 201,
+                        status: 'success',
+                        message: "Subcategory created successfully",
+                        subcategory: newSubcategory,
+                    })
+                    .code(200);
+            } else {
+                const file_url = '/uploads/default/default.png'
+                const newSubcategory = await SubCategories.create({
+                    category_id,
+                    sub_category_name,
+                    image_url: file_url,
+                    status: true
+                });
+
+                return res
+                    .response({
+                        code: 201,
+                        status: 'success',
+                        message: "Subcategory created successfully",
+                        subcategory: newSubcategory,
+                    })
+                    .code(200);
+            }
+
+
         } else if (user == 'Session expired') {
             return res
                 .response({
@@ -299,9 +320,8 @@ const updateSubcategories = async (req, res) => {
             }
             if (image) {
                 const { file_url } = await uploadFile(req, image, 'uploads/subcategories/')
-                console.log(file_url)
                 existingSubcategory.image_url = file_url;
-            }else {
+            } else {
                 existingSubcategory.image_url = existingSubcategory.image_url;
             }
 

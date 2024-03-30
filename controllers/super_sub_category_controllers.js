@@ -169,24 +169,41 @@ const addSuperSubcategory = async (req, res) => {
                 .code(200);
         }
 
-        const { file_url } = await uploadFile(req, image, 'uploads/supersubcategories/');
-
-        const newSuperSubcategory = await SuperSubCategories.create({
-            super_sub_category_name,
-            sub_category_id,
-            category_id,
-            image_url: file_url,
-            status: true,
-        });
-
-        return res
-            .response({
-                code: 201,
-                status: "success",
-                message: "Super Subcategory created successfully",
-                superSubcategory: newSuperSubcategory,
-            })
-            .code(200);
+        if(image) {
+            const { file_url } = await uploadFile(req, image, 'uploads/supersubcategories/');
+            const newSuperSubcategory = await SuperSubCategories.create({
+                super_sub_category_name,
+                sub_category_id,
+                category_id,
+                image_url: file_url,
+                status: true,
+            });
+            return res
+                .response({
+                    code: 201,
+                    status: "success",
+                    message: "Super Subcategory created successfully",
+                    superSubcategory: newSuperSubcategory,
+                })
+                .code(200);
+        }else{
+            const file_url =  '/uploads/default/default.png';
+            const newSuperSubcategory = await SuperSubCategories.create({
+                super_sub_category_name,
+                image_url: file_url,
+                sub_category_id,
+                category_id,
+                status: true,
+            });
+            return res
+                .response({
+                    code: 201,
+                    status: "success",
+                    message: "Super Subcategory created successfully",
+                    superSubcategory: newSuperSubcategory,
+                })
+                .code(200);
+        }
     } catch (error) {
         console.error(error);
         return res

@@ -10,7 +10,7 @@ const add_super_sub_categories_payload = Joi.object({
     super_sub_category_name: Joi.string().required(),
     sub_category_id: Joi.number().integer().required(),
     category_id: Joi.number().integer().required(),
-    image: Joi.any().required(),
+    image: Joi.any().allow(null),
 })
 
 const update_super_sub_categories_payload = Joi.object({

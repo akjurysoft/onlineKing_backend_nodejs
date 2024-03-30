@@ -78,7 +78,83 @@ const getAllAddress = async (req, res) => {
     }
 };
 
+const addAddressForCustomer = async (req, res) => {
+    try {
+      const user = await checkToken(
+        req.headers["Authorization"]
+          ? req.headers["Authorization"]
+          : req.headers.authorization
+      );
+      if (user.role == "CUSTOMER" && user.application == "kardify") {
+        const { 
+            fullname,
+            mobile,
+            email,
+            add_type,
+            add1,
+            add2,
+            city,
+            state,
+            country,
+            pincode,
+            area,
+            landmark
+         } = req.payload;
+
+        const created_address = await AddressModel.create({
+            user_id: user.id,
+            fullname,
+            mobile,
+            email,
+            add_type,
+            add1,
+            add2,
+            city,
+            state,
+            country,
+            pincode,
+            area,
+            landmark
+        });
+        return res
+          .response({
+            code: 200,
+            status: "success",
+            message: "Address created successfully.",
+            created_address,
+          })
+          .code(200); 
+      } else if (user == "Session expired") {
+        return res
+          .response({
+            code: 401,
+            status: "error",
+            message: user,
+          })
+          .code(200);
+      } else {
+        return res
+          .response({
+            code: 403,
+            status: "error",
+            message: "You dont have permission for this action.",
+          })
+          .code(200);
+      } 
+    } catch (error) {
+      console.log(error);
+      return res
+        .response({
+          code: 400,
+          status: "error",
+          message: error.message,
+        })
+        .code(200);
+    }
+  }
+
 
 module.exports = {
-    getAllAddress
+    getAllAddress,
+    addAddressForCustomer
 }

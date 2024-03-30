@@ -153,22 +153,45 @@ const addCategories = async (req, res) => {
                     .code(200);
             }
 
-            const { file_url } = await uploadFile(req, image, 'uploads/categories/')
+            if (image) {
+                const { file_url } = await uploadFile(req, image, 'uploads/categories/')
 
-            const newCategory = await Categories.create({
-                category_name,
-                image_url: file_url,
-                status: true
-            });
+                const newCategory = await Categories.create({
+                    category_name,
+                    image_url: file_url,
+                    status: true
+                });
 
-            return res
-                .response({
-                    code: 201,
-                    status: 'success',
-                    message: "Category created successfully",
-                    category: newCategory,
-                })
-                .code(200);
+                return res
+                    .response({
+                        code: 201,
+                        status: 'success',
+                        message: "Category created successfully",
+                        category: newCategory,
+                    })
+                    .code(200);
+            } else {
+                const file_url = '/uploads/default/default.png'
+                const newCategory = await Categories.create({
+                    category_name,
+                    image_url: file_url,
+                    status: true
+                });
+                return res
+                    .response({
+                        code: 201,
+                        status: 'success',
+                        message: "Category created successfully",
+                        category: newCategory,
+                    })
+
+            }
+
+
+
+
+
+
         } else if (user == 'Session expired') {
             return res
                 .response({

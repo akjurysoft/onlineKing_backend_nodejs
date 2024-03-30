@@ -286,7 +286,7 @@ const createOrder = async (req, res) => {
 
             const newOrder = await Orders.create({
                 [ownerId]: user.id,
-                user_address_id: address_id,
+                user_address_id: address_id ? address_id : null,
                 coupon_id,
                 delivery_type_id: isAvailibelDeliverType.id,
                 order_status_id: isAvalibelPending.id, 
@@ -303,7 +303,8 @@ const createOrder = async (req, res) => {
             for (const product of products) {
                 await OrderDetails.create({
                     order_id: newOrder.id,
-                    product_id: product.product_id
+                    product_id: product.product_id,
+                    quantity: product.quantity
                 }, { transaction: t });
             }
     

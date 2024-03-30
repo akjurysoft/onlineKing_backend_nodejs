@@ -1,6 +1,7 @@
 const joi = require('joi')
 module.exports = {
   usersValidation: require("./user_validators"),
+  usersAddressValidation: require("./user_addressess_validators"),
   categoriesValidators: require("./categories_validators"),
   subCategoriesValidators: require("./subCategories_validators"),
   superSubCategoriesValidators: require("./superSubCategories_validators"),

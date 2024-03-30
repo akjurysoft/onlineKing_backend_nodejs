@@ -39,11 +39,64 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 
+
+const getRole = async (req, res) => {
+  try {
+    const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+
+    if (user.role === "CUSTOMER" && user.application === 'kardify') {
+      return res
+        .response({
+          code: 200,
+          status: 'success',
+          message: "Users fetched successfully",
+          role: user.role
+        })
+        .code(200);
+    } if (user.role === "DEALER" && user.application === 'kardify') {
+      return res
+        .response({
+          code: 200,
+          status: 'success',
+          message: "Dealers fetched successfully",
+          role: user.role
+        })
+        .code(200);
+    }
+    else if (user == 'Session expired') {
+      return res
+        .response({
+          code: 401,
+          status: 'error',
+          message: user,
+        })
+        .code(200);
+    } else {
+      return res
+        .response({
+          code: 403,
+          status: 'error',
+          message: "You dont have permission for this action.",
+        })
+        .code(200);
+    }
+  } catch (error) {
+    return res
+      .response({
+        code: 401,
+        status: "error",
+        message: "Session expired",
+      })
+      .code(200);
+  }
+};
+
 const getUser = async (req, res) => {
   try {
     const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
-    if (user.role === "ADMIN" && user.application === 'kardify') {
+    const allowed_users = ["ADMIN"]
+    if (allowed_users.includes(user.role) && user.application === 'kardify') {
       const users = await Customers.findAll({
         where: {
           verified: true
@@ -70,23 +123,23 @@ const getUser = async (req, res) => {
               {
                 model: OrderDetails,
                 include: [
-                    Categories,
-                    SubCategories,
-                    SuperSubCategories,
-                    Products,
-                    {
-                        model: ProductImages,
-                        as: 'product_images', 
-                        where: {
-                            status: 1,
-                        },
-                        attributes: ['id', 'image_url'],
-                        required: false,
-                        raw: true,
+                  Categories,
+                  SubCategories,
+                  SuperSubCategories,
+                  Products,
+                  {
+                    model: ProductImages,
+                    as: 'product_images',
+                    where: {
+                      status: 1,
                     },
-                    
+                    attributes: ['id', 'image_url'],
+                    required: false,
+                    raw: true,
+                  },
+
                 ],
-            },
+              },
             ]
           }
         ],
@@ -857,21 +910,46 @@ async function createUserIfPasswordMatches({ type, fullname, username, password,
   try {
     if (password === confirm_password) {
       let created_user = null;
+      const isEmail = isValid(username);
+      const isPhone = isValid(username);
       if (type === "CUSTOMER") {
-        created_user = await Customers.create({
-          fullname,
-          username,
-          password: await makeHash(password),
-          verified: false,
-        });
+        if (isEmail) {
+          created_user = await Customers.create({
+            fullname,
+            username,
+            email: username,
+            password: await makeHash(password),
+            verified: false,
+          });
+        } else if (isPhone) {
+          created_user = await Customers.create({
+            fullname,
+            username,
+            phone: username,
+            password: await makeHash(password),
+            verified: false,
+          });
+        }
       } else if (type === "DEALER") {
-        created_user = await Dealers.create({
-          fullname,
-          username,
-          password: await makeHash(password),
-          verified: false,
-          approved: null,
-        });
+        if (isEmail) {
+          created_user = await Dealers.create({
+            fullname,
+            username,
+            email: username,
+            password: await makeHash(password),
+            verified: false,
+            approved: null,
+          });
+        } else if (isPhone) {
+          created_user = await Dealers.create({
+            fullname,
+            username,
+            phone: username,
+            password: await makeHash(password),
+            verified: false,
+            approved: null,
+          });
+        }
       }
       return created_user;
     } else {
@@ -941,7 +1019,7 @@ const verifyUser = async (req, res) => {
       }
     );
 
-    if(type === "DEALER"){
+    if (type === "DEALER") {
       await Dealers.update(
         {
           approved: null
@@ -1442,6 +1520,16 @@ const customerLogin = async (req, res) => {
           .code(200);
       }
 
+      if (type == "DEALER" && user.is_active == false) {
+        return res
+          .response({
+            code: 403,
+            status: "error",
+            message: "Your Dealer Account is not active.",
+          })
+          .code(200);
+      }
+
       if (type == "DEALER" && user.approved == false) {
         return res
           .response({
@@ -1655,7 +1743,7 @@ const fetchDealerDetails = async (req, res) => {
         ? req.headers["Authorization"]
         : req.headers.authorization
     );
-    if (user.role == "ADMIN" && user.application == "kardify") {
+    if (user.role == "DEALER" && user.application == "kardify") {
       const dealer = await Dealers.findOne({
         where: {
           id: user.id,
@@ -1665,62 +1753,13 @@ const fetchDealerDetails = async (req, res) => {
         },
         raw: true,
       });
-      // const store = await Store.findOne({
-      //   where: {
-      //     vendor_id: user.id,
-      //   },
-      //   raw: true,
-      // });
-      // const branches = await StoreBranches.findAll({
-      //   where: {
-      //     store_id: store.id,
-      //     vendor_id: user.id,
-      //   },
-      //   raw: true,
-      // });
-      // const encrypted_vendor_bank_details = await VendorBankDetails.findOne({
-      //   where: {
-      //     vendor_id: user.id,
-      //   },
-      //   raw: true,
-      // });
-      // const decrypted_vendor_bank_details = {
-      //   account_holder_name: await decrypt_text(
-      //     encrypted_vendor_bank_details.account_holder_name
-      //   ),
-      //   bank_name: await decrypt_text(encrypted_vendor_bank_details.bank_name),
-      //   account_number: await decrypt_text(
-      //     encrypted_vendor_bank_details.account_number
-      //   ),
-      //   city: await decrypt_text(encrypted_vendor_bank_details.city),
-      //   branch: await decrypt_text(encrypted_vendor_bank_details.branch),
-      //   ifsc_code: await decrypt_text(encrypted_vendor_bank_details.ifsc_code),
-      // };
-      // const vendor_product_types = await VendorProductAssociation.findAll({
-      //   where: {
-      //     vendor_id: user.id,
-      //   },
-      //   raw: true,
-      // });
-      // const vendor_delivery_partners = await VendorDeliveryPartner.findAll({
-      //   where: {
-      //     vendor_id: user.id,
-      //   },
-      //   raw: true,
-      // });
+
       return res
         .response({
           code: 200,
           status: "success",
           message: "Dealer data fetched successfully.",
-          dealer_data: {
-            dealer
-            // store,
-            // branches,
-            // bank_details: decrypted_vendor_bank_details,
-            // vendor_product_types,
-            // vendor_delivery_partners,
-          },
+          dealer_data: dealer
         })
         .code(200);
     } else if (user == "Session expired") {
@@ -1767,7 +1806,6 @@ const fetchCustomerDetails = async (req, res) => {
         attributes: {
           exclude: ["password", "accessToken", "refreshToken"],
         },
-        raw: true,
       });
       const customer_addresses = await AddressModel.findAll({
         where: {
@@ -1818,7 +1856,10 @@ const fetchCustomerDetails = async (req, res) => {
 
 
 
+
+
 module.exports = {
+  getRole,
   getUser,
   getDealers,
   addNewAdmin,
