@@ -146,7 +146,6 @@ const addToCart = async (req, res) => {
     }
 };
 
-
 const getCart = async (req, res) => {
     try {
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
@@ -421,7 +420,6 @@ const handleDecrement = async (req, res) => {
         }).code(200);
     }
 };
-
 
 const removeFromCart = async (req, res) => {
     try {

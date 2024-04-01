@@ -1,9 +1,9 @@
 const Joi = require("joi");
 
 const fetch_all_product = Joi.object({
-    category_id: Joi.number().integer().positive().allow(''),
-    sub_category_id: Joi.number().integer().positive().allow(''),
-    super_sub_category_id: Joi.number().integer().positive().allow(''),
+    category_id: Joi.number().integer().positive().required(),
+    sub_category_id: Joi.number().integer().positive().allow(null),
+    super_sub_category_id: Joi.number().integer().positive().allow(null),
     car_brand_id: Joi.number().integer().positive().allow(''),
     car_model_id: Joi.number().integer().positive().allow(''),
     year: Joi.number().integer().allow(''),

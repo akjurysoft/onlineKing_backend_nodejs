@@ -486,8 +486,6 @@ const approveOrderByAdmin = async (req, res) => {
     }
 };
 
-
-
 const cancelOrderByAdmin = async (req, res) => {
     try {
         const { order_id, cancellation_reason } = req.payload;
@@ -599,8 +597,6 @@ const updateOrderStatus = async (req, res) => {
         }).code(500);
     }
 };
-
-
 
 
 module.exports = {
