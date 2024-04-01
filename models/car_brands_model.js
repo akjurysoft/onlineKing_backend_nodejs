@@ -33,6 +33,7 @@ CarBrands.init(
     createdAt: {
       type: DATETIME,
       allowNull: true,
+      immutable: true,
     },
     updatedAt: {
       type: DATETIME,

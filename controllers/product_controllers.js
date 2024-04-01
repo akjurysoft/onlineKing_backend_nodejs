@@ -92,7 +92,7 @@ const fetchProducts = async (req, res) => {
         if (user.role === "ADMIN" && user.application === 'kardify') {
             const products = await Products.findAll({
                 where: whereCondition,
-                order: [['createdAt', 'DESC']],
+                
                 include: [
                     {
                         model: Categories,
@@ -117,7 +117,8 @@ const fetchProducts = async (req, res) => {
                 ],
                 raw: true,
                 nest: true,
-                mapToModel: true
+                mapToModel: true,
+                order: [['createdAt', 'DESC']],
             });
 
             const images = await ProductImages.findAll({

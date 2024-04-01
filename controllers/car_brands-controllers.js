@@ -43,8 +43,8 @@ const getCarBrands = async (req, res) => {
         }
         const brandName = await CarBrands.findAll({
             where: filter,
-            order: [['createdAt', 'DESC']],
-            raw: true
+            raw: true,
+            order: [['id', 'DESC']]
         })
         return res
             .response({
@@ -266,48 +266,105 @@ const deleteCarBrand = async (req, res) => {
     }
 };
 
+// const toggleCarBrandStatus = async (req, res) => {
+//     try {
+//         const { car_brand_id } = req.query;
+
+//         if (!Number.isInteger(car_brand_id) || car_brand_id <= 0) {
+//             return res
+//                 .response({
+//                     code: 400,
+//                     status: "error",
+//                     message: "Invalid car_brand_id",
+//                 })
+//                 .code(200);
+//         }
+
+//         const existingCarBrand = await CarBrands.findOne({
+//             where: {
+//                 id: car_brand_id,
+//             },
+//         });
+
+//         if (!existingCarBrand) {
+//             return res
+//                 .response({
+//                     code: 404,
+//                     status: "error",
+//                     message: "Car Brand not found",
+//                 })
+//                 .code(200);
+//         }
+
+//         existingCarBrand.status = !existingCarBrand.status;
+
+//         await existingCarBrand.save();
+
+//         return res
+//             .response({
+//                 code: 200,
+//                 status:'success',
+//                 message: "Status toggled successfully",
+//                 carbrand: existingCarBrand,
+//             })
+//             .code(200);
+//     } catch (error) {
+//         console.error(error);
+//         return res
+//             .response({
+//                 code: 500,
+//                 status: "error",
+//                 message: "Something went wrong",
+//             })
+//             .code(200);
+//     }
+// };
+
 const toggleCarBrandStatus = async (req, res) => {
     try {
         const { car_brand_id } = req.query;
 
-        if (!Number.isInteger(car_brand_id) || car_brand_id <= 0) {
+            if (!Number.isInteger(car_brand_id) || car_brand_id <= 0) {
+                return res
+                    .response({
+                        code: 400,
+                        status: "error",
+                        message: "Invalid car_brand_id",
+                    })
+                    .code(200);
+            }
+
+            const existingCarBrand = await CarBrands.findOne({
+                where: {
+                    id: car_brand_id,
+                },
+            });
+
+            if (!existingCarBrand) {
+                return res
+                    .response({
+                        code: 404,
+                        status: "error",
+                        message: "Car Brand not found",
+                    })
+                    .code(200);
+            }
+
+            // Toggle the category status (assuming you have a boolean 'status' field)
+            existingCarBrand.status = !existingCarBrand.status;
+
+            // Save the updated category to the database
+            await existingCarBrand.save();
+
             return res
                 .response({
-                    code: 400,
-                    status: "error",
-                    message: "Invalid car_brand_id",
+                    code: 200,
+                    status: 'success',
+                    message: "Car Brand status toggled successfully",
+                    category: existingCarBrand,
                 })
                 .code(200);
-        }
 
-        const existingCarBrand = await CarBrands.findOne({
-            where: {
-                id: car_brand_id,
-            },
-        });
-
-        if (!existingCarBrand) {
-            return res
-                .response({
-                    code: 404,
-                    status: "error",
-                    message: "Car Brand not found",
-                })
-                .code(200);
-        }
-
-        existingCarBrand.status = !existingCarBrand.status;
-
-        await existingCarBrand.save();
-
-        return res
-            .response({
-                code: 200,
-                status:'success',
-                message: "Status toggled successfully",
-                carbrand: existingCarBrand,
-            })
-            .code(200);
     } catch (error) {
         console.error(error);
         return res

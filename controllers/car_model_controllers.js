@@ -54,7 +54,7 @@ const getCarModels = async (req, res) => {
                     as: 'car_brand',
                 }
             ],
-            order: [['createdAt', 'DESC']]
+            order: [['id', 'DESC']]
         })
         return res
             .response({
