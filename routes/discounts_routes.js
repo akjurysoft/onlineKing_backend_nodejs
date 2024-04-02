@@ -24,6 +24,12 @@ const discount_routes = [
         options: {
             description: "Adding Discounts for kardify.",
             tags,
+            payload: {
+                maxBytes: 20 * 1024 * 1024,
+                output: 'file',
+                parse: true,
+                multipart: true  
+            },
             validate: {
                 // headers: headerValidator,
                 payload: discountValidators.createDiscountValidator

@@ -3,12 +3,11 @@ const Joi = require("joi");
 const createDiscountValidator = Joi.object({
     discount_name: Joi.string().required(),
     product_brand_id: Joi.number().integer().positive().allow(null),
+    image: Joi.any().required(),
     category_id: Joi.number().integer().positive().allow(null),
     sub_category_id: Joi.number().integer().positive().allow(null),
     super_sub_category_id: Joi.number().integer().positive().allow(null),
-    products: Joi.array().items(Joi.object({
-        product_id: Joi.number().integer().positive().required(),
-    })).required(),
+    products: Joi.string().allow(''),
     discount_type: Joi.string().required(),
     discount: Joi.number().required(),
     min_amount: Joi.number().required(),

@@ -40,5 +40,5 @@ module.exports = {
   otps:'otps',
   stories_product_associations: 'stories_product_associations',
   carts: 'carts',
-  wishlists: 'wishlists',
+  wishlists: 'wishlists'
 };

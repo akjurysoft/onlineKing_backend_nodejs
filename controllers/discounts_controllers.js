@@ -19,7 +19,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    CarBrands, Banners, BannerProductAssociations, Categories, SubCategories, SuperSubCategories, Coupons, Discounts, ProductDiscounts, Products
+    CarBrands, Banners, BannerProductAssociations, Categories, SubCategories, SuperSubCategories, Coupons, Discounts, ProductDiscounts, Products, ProductBrands
 } = require("../models");
 const { Op } = require("sequelize");
 const axios = require("axios");
@@ -28,14 +28,55 @@ const path = require("path");
 
 const fetchAllDiscounts = async (req, res) => {
     try {
-        const allDiscounts = await Discounts.findAll();
 
-        return res.response({
-            code: 200,
-            status: 'success',
-            message: 'All discounts fetched successfully',
-            discounts: allDiscounts,
-        }).code(200);
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+        if (user.role === "ADMIN" && user.application === 'kardify') {
+            const allDiscounts = await Discounts.findAll({
+                include: [
+                    {
+                        model: Categories
+                    },
+                    {
+                        model: SubCategories
+                    },
+                    {
+                        model: SuperSubCategories
+                    },
+                    {
+                        model: ProductBrands
+                    },
+                    {
+                        model: ProductDiscounts,
+                        include: [
+                            {
+                                model: Products
+                            }
+                        ]
+                    }
+                ],
+                nest: true,
+                mapToModel: true,
+                // raw: true
+            });
+            return res.response({
+                code: 200,
+                status: 'success',
+                message: 'All discounts fetched successfully',
+                discounts: allDiscounts,
+            }).code(200);
+        } else if (user === 'Session expired') {
+            return res.response({
+                code: 401,
+                status: 'error',
+                message: user
+            }).code(401);
+        } else {
+            return res.response({
+                code: 403,
+                status: 'error',
+                message: "You don't have permission for this action."
+            }).code(403);
+        }
     } catch (error) {
         console.error(error);
         return res.response({
@@ -50,6 +91,7 @@ const createDiscount = async (req, res) => {
     try {
         const {
             discount_name,
+            image,
             product_brand_id,
             category_id,
             sub_category_id,
@@ -77,9 +119,11 @@ const createDiscount = async (req, res) => {
             }).code(400);
         }
 
+        const { file_url } = await uploadFile(req, image, 'uploads/offers/')
 
         const createdDiscount = await Discounts.create({
             discount_name,
+            image: file_url,
             product_brand_id,
             category_id,
             sub_category_id,
@@ -95,19 +139,25 @@ const createDiscount = async (req, res) => {
 
         const associatedProducts = [];
 
-        for (const product of products) {
-           const productAssociation = await ProductDiscounts.create({
-                discount_id: createdDiscount.id,
-                product_id: product.product_id,
-            });
+        if (products) {
+            const productsParse = JSON.parse(products);
+            if (productsParse) {
+                for (const product of productsParse) {
+                    const productAssociation = await ProductDiscounts.create({
+                        discount_id: createdDiscount.id,
+                        product_id: product.product_id,
+                    });
 
-            const associatedProductDetails = await Products.findOne({
-                where: { id: productAssociation.product_id },
-                attributes: ['id', 'product_name'], 
-            });
+                    const associatedProductDetails = await Products.findOne({
+                        where: { id: productAssociation.product_id },
+                        attributes: ['id', 'product_name'],
+                    });
 
-            associatedProducts.push(associatedProductDetails);
+                    associatedProducts.push(associatedProductDetails);
+                }
+            }
         }
+
 
         return res.response({
             code: 201,

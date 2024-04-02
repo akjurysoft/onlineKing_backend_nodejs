@@ -14,6 +14,7 @@ const CarBrands = require("./car_brands_model");
 const Combinations = require("./product_comination_model");
 const ProductBrand = require("./product_brand_model");
 const CarModel = require("./car_model_model");
+const ProductDiscounts = require("./product_discount_associations");
 // const SuperSubCategories = require('./super_sub_categories')
 
 class Products extends Model { }
@@ -206,5 +207,9 @@ Products.hasOne(Combinations, {
 Combinations.belongsTo(Products, {
     foreignKey: 'product_id',
 });
+
+Products.hasMany(ProductDiscounts, { foreignKey: 'product_id' });
+
+ProductDiscounts.belongsTo(Products, { foreignKey: 'product_id' });
 
 module.exports = Products;
