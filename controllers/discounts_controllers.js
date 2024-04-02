@@ -19,7 +19,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    CarBrands, Banners, BannerProductAssociations, Categories, SubCategories, SuperSubCategories, Coupons, Discounts, ProductDiscounts, Products, ProductBrands
+    CarBrands, Banners, BannerProductAssociations, Categories, SubCategories, SuperSubCategories, Coupons, Discounts, ProductDiscounts, Products, ProductBrands, ProductImages
 } = require("../models");
 const { Op } = require("sequelize");
 const axios = require("axios");
@@ -56,6 +56,7 @@ const fetchAllDiscounts = async (req, res) => {
                 ],
                 nest: true,
                 mapToModel: true,
+                order: [['id', 'DESC']],
                 // raw: true
             });
             return res.response({
@@ -77,6 +78,68 @@ const fetchAllDiscounts = async (req, res) => {
                 message: "You don't have permission for this action."
             }).code(403);
         }
+    } catch (error) {
+        console.error(error);
+        return res.response({
+            code: 500,
+            status: 'error',
+            message: 'Something went wrong',
+        }).code(500);
+    }
+};
+
+const fetchAllDiscountsToShowLikeBanner = async (req, res) => {
+    try {
+        const { discount_id } = req.query;
+
+        let filter = {
+            status: true
+        };
+        if (discount_id) filter = {
+            ...filter,
+            id: discount_id
+        }
+        const allDiscounts = await Discounts.findAll({
+            where: filter,
+            include: [
+                {
+                    model: Categories
+                },
+                {
+                    model: SubCategories
+                },
+                {
+                    model: SuperSubCategories
+                },
+                {
+                    model: ProductBrands
+                },
+                {
+                    model: ProductDiscounts,
+                    include: [
+                        {
+                            model: Products,
+                            include: [
+                                {
+                                    model: ProductImages,
+                                    as: 'images'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            nest: true,
+            mapToModel: true,
+            order: [['id', 'DESC']],
+            // raw: true
+        });
+        return res.response({
+            code: 200,
+            status: 'success',
+            message: 'All discounts fetched successfully',
+            discounts: allDiscounts,
+        }).code(200);
     } catch (error) {
         console.error(error);
         return res.response({
@@ -305,6 +368,7 @@ const deleteDiscount = async (req, res) => {
 };
 
 module.exports = {
+    fetchAllDiscountsToShowLikeBanner,
     fetchAllDiscounts,
     createDiscount,
     editDiscount,

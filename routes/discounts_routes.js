@@ -13,9 +13,22 @@ const discount_routes = [
             tags,
             validate: {
                 // headers: headerValidator,
-                // query: BannerValidator.banner_fetch_query
+                // query: discountValidators.banner_fetch_query
             },
             handler: discount_controllers.fetchAllDiscounts,
+        },
+    },
+    {
+        method: "GET",
+        path: "/get-all-discounts-like-offer",
+        options: {
+            description: "Getting Discounts like offer to show in website for customers.",
+            tags,
+            validate: {
+                // headers: headerValidator,
+                query: discountValidators.show_discount_in_web
+            },
+            handler: discount_controllers.fetchAllDiscountsToShowLikeBanner,
         },
     },
     {

@@ -35,9 +35,14 @@ const deleteDiscountPayload = Joi.object({
     discount_id: Joi.number().integer().required()
 });
 
+const show_discount_in_web = Joi.object({
+    discount_id: Joi.number().integer().allow(null)
+});
+
 module.exports = {
     createDiscountValidator,
     editDiscountValidator,
     statusUpdatePayload,
-    deleteDiscountPayload
+    deleteDiscountPayload,
+    show_discount_in_web
 };
