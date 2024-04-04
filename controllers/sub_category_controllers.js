@@ -127,7 +127,7 @@ const fetchSubCategoriesCustomer = async (req, res) => {
             mapToModel: true,
             where: whereCondition,
             raw: true,
-            order: [['createdAt', 'DESC']]
+            order: [['sub_category_name', 'ASC']]
         });
 
         return res

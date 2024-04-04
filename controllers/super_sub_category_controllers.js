@@ -124,7 +124,7 @@ const fetchSuperSubcategoriesCustomer = async (req, res) => {
                 where: filter,
                 nest: true,
                 mapToModel: true,
-                order: [['id', 'DESC']],
+                order: [['super_sub_category_name', 'ASC']]
             });
 
             return res

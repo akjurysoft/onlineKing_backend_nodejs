@@ -109,7 +109,7 @@ const getCategoriesCustomers = async (req, res) => {
         const categories = await Categories.findAll({
             where: filter,
             raw: true,
-            order: [['createdAt', 'DESC']]
+            order: [['category_name', 'ASC']]
         })
         return res
             .response({
