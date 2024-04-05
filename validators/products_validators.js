@@ -32,7 +32,7 @@ const addProductValidation = Joi.object({
     category_id: Joi.number().integer().required(),
     sub_category_id: Joi.number().integer().allow(null).optional(),
     super_sub_category_id: Joi.number().integer().allow(null).optional(),
-    minimum_order: Joi.number().integer(),
+    minimum_order: Joi.number().integer().allow(null),
     default_price: Joi.number().required(),
     stock: Joi.number().integer(),
     discount_type: Joi.string().allow(''),

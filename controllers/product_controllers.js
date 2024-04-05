@@ -257,8 +257,6 @@ const fetchProductCustomer = async (req, res) => {
             }
         }
 
-        console.log(whereCondition)
-
         const products = await Products.findAll({
             where: whereCondition,
             order: [['createdAt', 'DESC']],
