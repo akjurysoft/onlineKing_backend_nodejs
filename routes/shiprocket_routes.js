@@ -18,7 +18,7 @@ const shiprocket_routes = [
         options: {
             description: "Get Token for Shiprocket.", 
             validate: {
-                headers: headerValidator,
+                // headers: headerValidator,
                 query: ShiprocketValidators.shiprocketTokenValidator
             },
             tags,
@@ -32,7 +32,7 @@ const shiprocket_routes = [
         options: {
             description: "Get Shipping Price from Shiprocket.", 
             validate: {
-                headers: headerValidator,
+                // headers: headerValidator,
                 payload: ShiprocketValidators.shiprockeShippingValidator
             },
             tags,

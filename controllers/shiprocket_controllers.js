@@ -32,10 +32,10 @@ const {
 
 const getToken = async (req, res) => {
     try {
-        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+        // const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
-        const allowed_user = ['ADMIN', 'CUSTOMER', 'DEALER']
-        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+        // const allowed_user = ['ADMIN', 'CUSTOMER', 'DEALER']
+        // if (allowed_user.includes(user.role) && user.application === 'kardify') {
 
             const { email, password } = req.query;
 
@@ -53,23 +53,23 @@ const getToken = async (req, res) => {
                 message: 'Token created successfully.',
                 token: response.data.token
             }).code(200);
-        } else if (user == 'Session expired') {
-            return res
-                .response({
-                    code: 401,
-                    status: 'error',
-                    message: user,
-                })
-                .code(200);
-        } else {
-            return res
-                .response({
-                    code: 403,
-                    status: 'error',
-                    message: "You dont have permission for this action.",
-                })
-                .code(200);
-        }
+        // } else if (user == 'Session expired') {
+        //     return res
+        //         .response({
+        //             code: 401,
+        //             status: 'error',
+        //             message: user,
+        //         })
+        //         .code(200);
+        // } else {
+        //     return res
+        //         .response({
+        //             code: 403,
+        //             status: 'error',
+        //             message: "You dont have permission for this action.",
+        //         })
+        //         .code(200);
+        // }
     } catch (error) {
         console.error(error);
         return res
@@ -85,10 +85,10 @@ const getToken = async (req, res) => {
 
 const getShippingPrice = async (req, res) => {
     try {
-        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
+        // const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
-        const allowed_user = ['ADMIN', 'CUSTOMER', 'DEALER']
-        if (allowed_user.includes(user.role) && user.application === 'kardify') {
+        // const allowed_user = ['ADMIN', 'CUSTOMER', 'DEALER']
+        // if (allowed_user.includes(user.role) && user.application === 'kardify') {
 
             const { pickup_pincode, token, delivery_pincode, weight, COD } = req.payload
             const headers = {
@@ -135,23 +135,23 @@ const getShippingPrice = async (req, res) => {
                     data
                 }).code(200);
             }
-        } else if (user == 'Session expired') {
-            return res
-                .response({
-                    code: 401,
-                    status: 'error',
-                    message: user,
-                })
-                .code(200);
-        } else {
-            return res
-                .response({
-                    code: 403,
-                    status: 'error',
-                    message: "You dont have permission for this action.",
-                })
-                .code(200);
-        }
+        // } else if (user == 'Session expired') {
+        //     return res
+        //         .response({
+        //             code: 401,
+        //             status: 'error',
+        //             message: user,
+        //         })
+        //         .code(200);
+        // } else {
+        //     return res
+        //         .response({
+        //             code: 403,
+        //             status: 'error',
+        //             message: "You dont have permission for this action.",
+        //         })
+        //         .code(200);
+        // }
     } catch (error) {
         console.error(error);
         return res
