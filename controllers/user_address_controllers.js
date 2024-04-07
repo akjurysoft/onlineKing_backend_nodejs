@@ -112,7 +112,7 @@ const addAddressForCustomer = async (req, res) => {
             city,
             state,
             country,
-            pincode,
+            zipcode: pincode,
             area,
             landmark
         });
