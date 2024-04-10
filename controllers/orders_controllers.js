@@ -235,7 +235,7 @@ const createOrder = async (req, res) => {
                 payment_id, 
                 shipping_charge,  
                 total_product_amount,
-                products ,
+                products,
                 total_amount
             } = req.payload;
             let ownerId;
@@ -304,7 +304,17 @@ const createOrder = async (req, res) => {
                 await OrderDetails.create({
                     order_id: newOrder.id,
                     product_id: product.product_id,
-                    quantity: product.quantity
+                    quantity: product.quantity,
+                    category_id: product.category_id,
+                    sub_category_id: product.sub_category_id,
+                    super_sub_category_id: product.super_sub_category_id,
+                    product_type: product.product_type,
+                    car_brand_id: product.car_brand_id,
+                    car_model_id: product.car_model_id,
+                    unit_price: product.default_price,
+                    // sub_total: parseFloat(Number(product.default_price) * Number(product.quantity)).toFixed(2),
+                    gst: product.tax_rate,
+                    // total_amount: parseFloat((product.default_price * product.quantity) + (product.tax_rate * (product.default_price * product.quantity))).toFixed(2),
                 }, { transaction: t });
             }
     
