@@ -30,9 +30,14 @@ const fetch_banners = Joi.object({
     banner_id: Joi.number().integer().positive().allow(null)
 })
 
+const banner_toggle_delete = Joi.object({
+    banner_id: Joi.number().integer().positive().required()
+})
+
 
 module.exports = {
     bannerCreationValidator,
     product_id_for_banner,
-    fetch_banners
+    fetch_banners,
+    banner_toggle_delete
 };

@@ -284,6 +284,141 @@ const addBanners = async (req, res) => {
     }
 };
 
+const deleteBanner = async (req, res) => {
+    try {
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
+
+        if (user.role === "ADMIN" && user.application === 'kardify') {
+            const { banner_id } = req.query;
+
+            const existingBanner = await Banners.findOne({
+                where: {
+                    id: banner_id,
+                },
+            });
+
+            if (!existingBanner) {
+                return res
+                    .response({
+                        code: 404,
+                        status: "error",
+                        message: "Banner not found",
+                    })
+                    .code(200);
+            }
+
+            await existingBanner.destroy();
+
+            return res
+                .response({
+                    code: 200,
+                    status: 'success',
+                    message: `${existingBanner.banner_name} deleted successfully`,
+                })
+                .code(200);
+        } else if (user == 'Session expired') {
+            return res
+                .response({
+                    code: 401,
+                    status: 'error',
+                    message: user,
+                })
+                .code(200);
+        } else {
+            return res
+                .response({
+                    code: 403,
+                    status: 'error',
+                    message: "You dont have permission for this action.",
+                })
+                .code(200);
+        }
+    } catch (error) {
+        console.error(error);
+        return res
+            .response({
+                code: 500,
+                status: "error",
+                message: "Something went wrong",
+            })
+            .code(200);
+    }
+};
+const toggleBannerStatus = async (req, res) => {
+    try {
+
+        const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
+
+        if (user.role === "ADMIN" && user.application === 'kardify') {
+            const { banner_id } = req.query;
+
+            if (!Number.isInteger(banner_id) || banner_id <= 0) {
+                return res
+                    .response({
+                        code: 400,
+                        status: "error",
+                        message: "Invalid banner_id",
+                    })
+                    .code(200);
+            }
+
+            const existingBanner = await Banners.findOne({
+                where: {
+                    id: banner_id,
+                },
+            });
+
+            if (!existingBanner) {
+                return res
+                    .response({
+                        code: 404,
+                        status: "error",
+                        message: "Banner not found",
+                    })
+                    .code(200);
+            }
+
+            existingBanner.status = !existingBanner.status;
+
+            await existingBanner.save();
+
+            return res
+                .response({
+                    code: 200,
+                    status: 'success',
+                    message: "Banner status toggled successfully"
+                })
+                .code(200);
+        } else if (user == 'Session expired') {
+            return res
+                .response({
+                    code: 401,
+                    status: 'error',
+                    message: user,
+                })
+                .code(200);
+        } else {
+            return res
+                .response({
+                    code: 403,
+                    status: 'error',
+                    message: "You dont have permission for this action.",
+                })
+                .code(200);
+        }
+
+    } catch (error) {
+        console.error(error);
+        return res
+            .response({
+                code: 500,
+                status: "error",
+                message: "Something went wrong",
+            })
+            .code(200);
+    }
+};
+
 
 
 
@@ -294,5 +429,7 @@ const addBanners = async (req, res) => {
 module.exports = {
     getAllBanners,
     getAllBannersCustomers,
-    addBanners
+    addBanners,
+    deleteBanner,
+    toggleBannerStatus
 }

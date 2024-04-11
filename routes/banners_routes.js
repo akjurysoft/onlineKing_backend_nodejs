@@ -50,6 +50,32 @@ const banner_routes = [
             handler: banners_controllers.addBanners,
         },
     },
+    {
+        method: "POST",
+        path: "/delete-banner",
+        options: {
+            description: "Deleting banner.",
+            tags,
+            validate: {
+                headers: headerValidator,
+                query: bannerValidators.banner_toggle_delete
+            },
+            handler: banners_controllers.deleteBanner,
+        },
+    },
+    {
+        method: "POST",
+        path: "/toggle-banner-status",
+        options: {
+            description: "Toggling banner status.",
+            tags,
+            validate: {
+                headers: headerValidator,
+                query: bannerValidators.banner_toggle_delete
+            },
+            handler: banners_controllers.toggleBannerStatus,
+        },
+    },
 ]
 
 module.exports = banner_routes
