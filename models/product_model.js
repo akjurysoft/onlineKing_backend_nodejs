@@ -15,6 +15,7 @@ const Combinations = require("./product_comination_model");
 const ProductBrand = require("./product_brand_model");
 const CarModel = require("./car_model_model");
 const ProductDiscounts = require("./product_discount_associations");
+const BannerProductAssociation = require("./banner_product_associations_model");
 // const SuperSubCategories = require('./super_sub_categories')
 
 class Products extends Model { }
@@ -211,5 +212,8 @@ Combinations.belongsTo(Products, {
 Products.hasMany(ProductDiscounts, { foreignKey: 'product_id' });
 
 ProductDiscounts.belongsTo(Products, { foreignKey: 'product_id' });
+
+Products.belongsToMany(BannerProductAssociation, { through: 'BannerProductAssociation', foreignKey: 'product_id' });
+BannerProductAssociation.belongsTo(Products, { foreignKey: 'product_id' });
 
 module.exports = Products;

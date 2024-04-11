@@ -6,6 +6,9 @@ const {
         model_data_types: { INTEGER, STRING, DATETIME, BOOLEAN, FLOAT },
     },
 } = require("../config");
+const Categories = require("./categories");
+const SubCategories = require("./sub_categories");
+const SuperSubCategories = require("./super_sub_categories_model");
 
 class Banners extends Model { }
 
@@ -69,6 +72,15 @@ Banners.init(
         modelName: banners, // We need to choose the model name
     }
 );
+
+Categories.hasMany(Banners, { foreignKey: "category_id" });
+Banners.belongsTo(Categories, { foreignKey: "category_id" });
+
+SubCategories.hasMany(Banners, { foreignKey: "sub_category_id" });
+Banners.belongsTo(SubCategories, { foreignKey: "sub_category_id" });
+
+SuperSubCategories.hasMany(Banners, { foreignKey: "super_sub_category_id" });
+Banners.belongsTo(SuperSubCategories, { foreignKey: "super_sub_category_id" });
 
 
 module.exports = Banners;

@@ -26,7 +26,7 @@ const banner_routes = [
             tags,
             validate: {
                 // headers: headerValidator,
-                // query: BannerValidator.banner_fetch_query
+                query: bannerValidators.fetch_banners
             },
             handler: banners_controllers.getAllBannersCustomers,
         },

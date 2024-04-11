@@ -26,7 +26,13 @@ const bannerCreationValidator = Joi.object({
 const product_id_for_banner = Joi.array().items(Joi.number().positive().required())
 
 
+const fetch_banners = Joi.object({
+    banner_id: Joi.number().integer().positive().allow(null)
+})
+
+
 module.exports = {
     bannerCreationValidator,
-    product_id_for_banner
+    product_id_for_banner,
+    fetch_banners
 };

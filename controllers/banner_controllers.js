@@ -19,7 +19,7 @@ const {
     sequelize,
 } = require("../config");
 const {
-    CarBrands, Banners, BannerProductAssociation, Categories, SubCategories, SuperSubCategories
+    CarBrands, Banners, BannerProductAssociation, Categories, SubCategories, SuperSubCategories, Products, ProductImages
 } = require("../models");
 const { Op } = require("sequelize");
 const axios = require("axios");
@@ -93,28 +93,64 @@ const getAllBannersCustomers = async (req, res) => {
     const t = await sequelize.transaction();
 
     try {
+
+        const {
+            banner_id
+        } = req.query;
+
+        let whereCondition = {
+            status: true
+        };
+
+        if (banner_id) {
+            whereCondition.id = banner_id;
+        }
+
         const banners = await Banners.findAll({
-            where: {
-                status: true
-            },
-            include: [BannerProductAssociation],
+            where: whereCondition,
+            order: [['createdAt', 'DESC']],
+            include: [
+                {
+                    model: Categories
+                },
+                {
+                    model: SubCategories
+                },
+                {
+                    model: SuperSubCategories
+                },
+                {
+                    model: BannerProductAssociation,
+                    include: [
+                        {
+                            model: Products,
+                            include: [
+                                {
+                                    model: ProductImages,
+                                    as: "images"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
             transaction: t,
         });
 
         await t.commit();
 
-        if (!banners || banners.length === 0) {
-            return res.response({
-                code: 404,
-                status: "error",
-                message: "No banners found",
-            }).code(404);
-        }
+        // if (!banners || banners.length === 0) {
+        //     return res.response({
+        //         code: 404,
+        //         status: "error",
+        //         message: "No banners found",
+        //     }).code(404);
+        // }
 
         return res.response({
             code: 200,
             status: "success",
-            message: "Banners retrieved successfully",
+            message: "Banners fetched successfully",
             banners: banners,
         }).code(200);
     } catch (error) {
@@ -136,7 +172,7 @@ const addBanners = async (req, res) => {
         const { banner_name, banner_type, category_id, sub_category_id, super_sub_category_id, web_image_url, mob_image_url, product_ids } = req.payload;
 
         let createdBanner;
-        
+
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
 
         if (user.role === "ADMIN" && user.application === 'kardify') {
