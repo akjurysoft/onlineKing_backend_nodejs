@@ -419,13 +419,6 @@ const toggleBannerStatus = async (req, res) => {
     }
 };
 
-
-
-
-
-
-
-
 module.exports = {
     getAllBanners,
     getAllBannersCustomers,

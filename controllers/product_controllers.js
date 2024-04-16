@@ -75,7 +75,7 @@ const fetchProducts = async (req, res) => {
             whereCondition.id = product_id
         }
 
-        if(year){
+        if (year) {
             whereCondition = {
                 ...whereCondition,
                 start_year: {
@@ -92,7 +92,7 @@ const fetchProducts = async (req, res) => {
         if (user.role === "ADMIN" && user.application === 'kardify') {
             const products = await Products.findAll({
                 where: whereCondition,
-                
+
                 include: [
                     {
                         model: Categories,
@@ -245,7 +245,7 @@ const fetchProductCustomer = async (req, res) => {
             whereCondition.id = product_id
         }
 
-        if(year){
+        if (year) {
             whereCondition = {
                 ...whereCondition,
                 start_year: {
@@ -463,7 +463,7 @@ const addProduct = async (req, res) => {
                 product_brand_id,
                 category_id,
                 sub_category_id: sub_category_id ? sub_category_id : null,
-                super_sub_category_id : super_sub_category_id ? super_sub_category_id : null,
+                super_sub_category_id: super_sub_category_id ? super_sub_category_id : null,
                 minimum_order,
                 default_price,
                 stock,
@@ -667,31 +667,19 @@ const editProduct = async (req, res) => {
             quantity,
             has_warranty,
             warranty,
-            images,
+            image_count,
         } = req.payload;
 
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
         if (user.role === "ADMIN" && user.application === 'kardify') {
-            const existingProductByName = await Products.findOne({
+
+            const existingProduct = await Products.findOne({
                 where: {
-                    product_name
-                },
-                raw: true,
+                    id: product_id
+                }
             });
-    
-            if (existingProductByName) {
-                return res
-                    .response({
-                        code: 409,
-                        status: "error",
-                        message: "Product with the same name already exists",
-                    })
-                    .code(200);
-            }
-    
-            const existingProduct = await Products.findOne(product_id);
-    
+
             if (!existingProduct) {
                 return res
                     .response({
@@ -701,7 +689,25 @@ const editProduct = async (req, res) => {
                     })
                     .code(200);
             }
-    
+
+            if (existingProduct.product_name !== product_name) {
+                const productWithSameName = await Products.findOne({
+                    where: {
+                        product_name
+                    }
+                });
+
+                if (productWithSameName && productWithSameName.id !== product_id) {
+                    return res
+                        .response({
+                            code: 409,
+                            status: "error",
+                            message: "Product with the same name already exists",
+                        })
+                        .code(200);
+                }
+            }
+
             await existingProduct.update({
                 product_name,
                 product_desc,
@@ -727,9 +733,19 @@ const editProduct = async (req, res) => {
                 quantity,
                 has_warranty,
                 warranty,
-                image_urls: fileUrls,
             });
-    
+
+            if (image_count) {
+                await ProductImages.destroy({ where: { product_id } });
+
+                const newImages = [];
+                for (let i = 1; i <= image_count; i++) {
+                    const { file_url } = await uploadFile(req, req.payload[`image_${i}`], 'uploads/products/')
+                    newImages.push({ image_url: file_url, product_id });
+                }
+                await ProductImages.bulkCreate(newImages);
+            }
+
             return res
                 .response({
                     code: 200,
