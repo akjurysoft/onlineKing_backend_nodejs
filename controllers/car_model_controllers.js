@@ -108,7 +108,8 @@ const getCarModelsCustomers = async (req, res) => {
                     as: 'car_brand',
                 }
             ],
-            order: [['createdAt', 'DESC']],
+            // order: [['createdAt', 'DESC']],
+            order: [['model_name', 'ASC']],
         })
         return res
             .response({

@@ -84,7 +84,8 @@ const getCarBrandsCustomers = async (req, res) => {
         }
         const brandName = await CarBrands.findAll({
             where: filter,
-            order: [['createdAt', 'DESC']],
+            // order: [['createdAt', 'DESC']],
+            order: [['brand_name', 'ASC']],
             raw: true
         })
         return res
