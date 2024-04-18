@@ -76,6 +76,30 @@ Products.init(
             type: DOUBLE,
             allowNull: true,
         },
+        is_offer_avl:{
+            type: BOOLEAN,
+            allowNull: true,
+        },
+        offer_discount:{
+            type: DOUBLE,
+            allowNull: true,
+        },
+        offer_discount_type: {
+            type: STRING,
+            allowNull: true,
+        },
+        offer_start_date: {
+            type: DATETIME,
+            allowNull: true,
+        },
+        offer_end_date: {
+            type: DATETIME,
+            allowNull: true,
+        },
+        offer_end_date: {
+            type: DATETIME,
+            allowNull: true,
+        },
         tax_type: {
             type: STRING,
             allowNull: true,

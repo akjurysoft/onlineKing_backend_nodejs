@@ -308,52 +308,18 @@ const fetchProductCustomer = async (req, res) => {
 
         });
 
-        // const images = await ProductImages.findAll({
-        //     where: {
-        //         product_id: products.map(product => product.id),
-        //         status: 1,
-        //     },
-        //     attributes: ['id', 'product_id', 'image_url'],
-        //     raw: true,
-        // });
 
-        // const imagesMap = images.reduce((acc, image) => {
-        //     const { product_id } = image;
-        //     if (!acc[product_id]) {
-        //         acc[product_id] = [];
-        //     }
-        //     acc[product_id].push(image);
-        //     return acc;
-        // }, {});
+        const currentDate = new Date();
 
-
-        // const attributes = await Combinations.findAll({
-        //     where: {
-        //         product_id: products.map(product => product.id)
-        //     },
-
-        //     include:[
-        //         {
-        //             model: AttributeCombinatios,
-        //             required:true,
-        //         }
-        //     ],
-        // });
-
-        // const attributesMap = attributes.reduce((acc, atttr) => {
-        //     const { product_id } = atttr;
-        //     if (!acc[product_id]) {
-        //         acc[product_id] = [];
-        //     }
-        //     acc[product_id].push(atttr);
-        //     return acc;
-        // }, {});
-
-        // products.forEach(product => {
-        //     const productId = product.id;
-        //     product.atributes = attributesMap[productId] || [];
-        //     // product.images = imagesMap[productId] || [];
-        // });
+        products.forEach(product => {
+            if (
+                product.offer_start_date && product.is_offer_avl &&
+                new Date(product.offer_start_date) <= currentDate
+            ) {
+                product.discount = product.offer_discount;
+                product.discount_type = product.offer_discount_type;
+            }
+        });
 
         return res
             .response({

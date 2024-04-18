@@ -129,11 +129,25 @@ const fetchAllDiscountsToShowLikeBanner = async (req, res) => {
                     ]
                 }
             ],
-            nest: true,
-            mapToModel: true,
             order: [['id', 'DESC']],
             // raw: true
         });
+
+        const currentDate = new Date();
+
+        if (discount_id && allDiscounts.length > 0) {
+            const discount = allDiscounts[0];
+            discount.product_discount_associations.forEach(discountAssoc => {
+                const product = discountAssoc.product;
+                const start_date = new Date(product.offer_start_date);
+                const expiry_date = new Date(product.offer_end_date);
+                if (currentDate >= start_date && currentDate <= expiry_date) {
+                    product.discount = product.offer_discount;
+                    product.discount_type = product.offer_discount_type;
+                }
+            });
+        }
+
         return res.response({
             code: 200,
             status: 'success',
@@ -149,6 +163,171 @@ const fetchAllDiscountsToShowLikeBanner = async (req, res) => {
         }).code(500);
     }
 };
+
+// const createDiscount = async (req, res) => {
+//     try {
+//         const {
+//             discount_name,
+//             image,
+//             product_brand_id,
+//             category_id,
+//             sub_category_id,
+//             super_sub_category_id,
+//             products,
+//             discount_type,
+//             discount,
+//             min_amount,
+//             max_amount,
+//             start_date,
+//             expiry_date,
+//         } = req.payload;
+
+//         const existingDiscount = await Discounts.findOne({
+//             where: {
+//                 discount_name,
+//             },
+//         });
+
+//         if (existingDiscount) {
+//             return res.response({
+//                 code: 400,
+//                 status: 'error',
+//                 message: 'A discount with the same name already exists',
+//             }).code(400);
+//         }
+
+//         const { file_url } = await uploadFile(req, image, 'uploads/offers/')
+
+//         const createdDiscount = await Discounts.create({
+//             discount_name,
+//             image: file_url,
+//             product_brand_id,
+//             category_id,
+//             sub_category_id,
+//             super_sub_category_id,
+//             discount_type,
+//             discount,
+//             min_amount,
+//             max_amount,
+//             start_date,
+//             expiry_date,
+//             status: true
+//         });
+
+//         const associatedProducts = [];
+
+//         if (products) {
+//             const productsParse = JSON.parse(products);
+//             if (productsParse) {
+//                 for (const product of productsParse) {
+//                     const productAssociation = await ProductDiscounts.create({
+//                         discount_id: createdDiscount.id,
+//                         product_id: product.product_id,
+//                     });
+
+//                     await Products.update(
+//                         {
+//                             is_offer_avl: true,
+//                             offer_discount: discount,
+//                             offer_discount_type: discount_type,
+//                             offer_start_date: start_date,
+//                             offer_end_date: expiry_date
+//                         },
+//                         {
+//                             where: { id: product.product_id }
+//                         }
+//                     );
+
+
+//                     const associatedProductDetails = await Products.findOne({
+//                         where: { id: productAssociation.product_id },
+//                         attributes: ['id', 'product_name'],
+//                     });
+
+//                     return res.response({
+//                         code: 201,
+//                         status: 'success',
+//                         message: 'Discount created successfully',
+//                         products: associatedProductDetails
+//                     }).code(201);
+//                 }
+//             }
+//         }
+
+//         if(product_brand_id){
+//             const productsByBrand = await Products.findAll({
+//                 where: { id: product_brand_id },
+//                 attributes: ['id', 'product_name'],
+//             })
+
+//             if(!productsByBrand) {
+//                 return res.response({
+//                     code: 404,
+//                     status: 'error',
+//                     message: 'Product not found',
+//                 }).code(404);
+//             }
+
+//             for(const product of productsByBrand){
+//                 await Products.update(
+//                     {
+//                         is_offer_avl: true,
+//                         offer_discount: discount,
+//                         offer_discount_type: discount_type,
+//                         offer_start_date: start_date,
+//                         offer_end_date: expiry_date
+//                     },
+//                     {
+//                         where: { id: product.id }
+//                     }
+//                 );
+//             }
+//             return res.response({
+//                 code: 201,
+//                 status: 'success',
+//                 message: 'Discount created successfully',
+//             }).code(201);
+//         }
+
+//         if(category_id){
+//             const productsByCategory = await Products.findAll({
+//                 where: { category_id },
+//                 attributes: ['id', 'product_name'],
+//             })
+
+//             for(const product of productsByCategory){
+//                 await Products.update(
+//                     {
+//                         is_offer_avl: true,
+//                         offer_discount: discount,
+//                         offer_discount_type: discount_type,
+//                         offer_start_date: start_date,
+//                         offer_end_date: expiry_date
+//                     },
+//                     {
+//                         where: { id: product.id }
+//                     }
+//                 );
+//             }
+
+//             return res.response({
+//                 code: 201,
+//                 status: 'success',
+//                 message: 'Discount created successfully',
+//             }).code(201);
+//         }
+
+
+
+//     } catch (error) {
+//         console.error(error);
+//         return res.response({
+//             code: 500,
+//             status: 'error',
+//             message: 'Something went wrong',
+//         }).code(500);
+//     }
+// };
 
 const createDiscount = async (req, res) => {
     try {
@@ -182,7 +361,7 @@ const createDiscount = async (req, res) => {
             }).code(400);
         }
 
-        const { file_url } = await uploadFile(req, image, 'uploads/offers/')
+        const { file_url } = await uploadFile(req, image, 'uploads/offers/');
 
         const createdDiscount = await Discounts.create({
             discount_name,
@@ -200,8 +379,6 @@ const createDiscount = async (req, res) => {
             status: true
         });
 
-        const associatedProducts = [];
-
         if (products) {
             const productsParse = JSON.parse(products);
             if (productsParse) {
@@ -211,23 +388,109 @@ const createDiscount = async (req, res) => {
                         product_id: product.product_id,
                     });
 
-                    const associatedProductDetails = await Products.findOne({
-                        where: { id: productAssociation.product_id },
-                        attributes: ['id', 'product_name'],
-                    });
-
-                    associatedProducts.push(associatedProductDetails);
+                    await Products.update(
+                        {
+                            is_offer_avl: true,
+                            offer_discount: discount,
+                            offer_discount_type: discount_type,
+                            offer_start_date: start_date,
+                            offer_end_date: expiry_date
+                        },
+                        {
+                            where: { id: product.product_id }
+                        }
+                    );
                 }
             }
         }
 
+        if (product_brand_id) {
+            const productsByBrand = await Products.findAll({
+                where: { product_brand_id },
+                attributes: ['id', 'product_name'],
+            });
+
+            for (const product of productsByBrand) {
+                await Products.update(
+                    {
+                        is_offer_avl: true,
+                        offer_discount: discount,
+                        offer_discount_type: discount_type,
+                        offer_start_date: start_date,
+                        offer_end_date: expiry_date
+                    },
+                    {
+                        where: { id: product.id }
+                    }
+                );
+            }
+        }
+
+        if (category_id) {
+            const productsByCategory = await Products.findAll({
+                where: { category_id },
+                attributes: ['id', 'product_name'],
+            });
+
+            for (const product of productsByCategory) {
+                await Products.update(
+                    {
+                        is_offer_avl: true,
+                        offer_discount: discount,
+                        offer_discount_type: discount_type,
+                        offer_start_date: start_date,
+                        offer_end_date: expiry_date
+                    },
+                    {
+                        where: { id: product.id }
+                    }
+                );
+            }
+        }
+
+        if (category_id && products) {
+            const productsParse = JSON.parse(products);
+
+            for (const product of productsParse) {
+                await Products.update(
+                    {
+                        is_offer_avl: true,
+                        offer_discount: discount,
+                        offer_discount_type: discount_type,
+                        offer_start_date: start_date,
+                        offer_end_date: expiry_date
+                    },
+                    {
+                        where: { id: product.product_id }
+                    }
+                );
+            }
+
+            const productsByCategory = await Products.findAll({
+                where: { category_id },
+                attributes: ['id', 'product_name'],
+            });
+
+            for (const product of productsByCategory) {
+                await Products.update(
+                    {
+                        is_offer_avl: true,
+                        offer_discount: discount,
+                        offer_discount_type: discount_type,
+                        offer_start_date: start_date,
+                        offer_end_date: expiry_date
+                    },
+                    {
+                        where: { id: product.id }
+                    }
+                );
+            }
+        }
 
         return res.response({
             code: 201,
             status: 'success',
             message: 'Discount created successfully',
-            discount: createdDiscount,
-            products: associatedProducts
         }).code(201);
     } catch (error) {
         console.error(error);
@@ -238,6 +501,7 @@ const createDiscount = async (req, res) => {
         }).code(500);
     }
 };
+
 
 const editDiscount = async (req, res) => {
     try {
@@ -295,6 +559,23 @@ const toggleDiscountStatus = async (req, res) => {
             where: {
                 id: discount_id,
             },
+            include: [
+                {
+                    model: Categories
+                },
+                {
+                    model: SubCategories
+                },
+                {
+                    model: SuperSubCategories
+                },
+                {
+                    model: ProductBrands
+                },
+                {
+                    model: ProductDiscounts
+                },
+            ]
         });
 
         if (!existingDiscount) {
@@ -308,6 +589,33 @@ const toggleDiscountStatus = async (req, res) => {
         existingDiscount.status = !existingDiscount.status;
 
         await existingDiscount.save();
+
+        if (existingDiscount.category_id) {
+            await Products.update(
+                { is_offer_avl: existingDiscount.status },
+                { where: { category_id: existingDiscount.category_id } }
+            );
+        }
+
+        if (existingDiscount.product_brand_id) {
+            await Products.update(
+                { is_offer_avl: existingDiscount.status },
+                { where: { product_brand_id: existingDiscount.product_brand_id } }
+            );
+        }
+
+        console.log(existingDiscount)
+
+
+        const productDiscountAssociations = existingDiscount.product_discount_associations;
+        if (productDiscountAssociations) {
+            for (const productDiscount of productDiscountAssociations) {
+                await Products.update(
+                    { is_offer_avl: existingDiscount.status },
+                    { where: { id: productDiscount.product_id } }
+                );
+            }
+        }
 
         return res.response({
             code: 200,
