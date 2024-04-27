@@ -42,7 +42,7 @@ const product_routes = [
         options: {
             description: "Add products ",
             payload: {
-                maxBytes: 20 * 1024 * 1024,
+                maxBytes: 100 * 1024 * 1024,
                 output: 'file',
                 parse: true,
                 multipart: true  

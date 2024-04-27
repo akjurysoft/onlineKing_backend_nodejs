@@ -344,42 +344,44 @@ const fetchProductCustomer = async (req, res) => {
 const addProduct = async (req, res) => {
     const transact = await sequelize.transaction()
     try {
-        const {
-            product_name,
-            product_desc,
-            product_brand_id,
-            category_id,
-            sub_category_id,
-            super_sub_category_id,
-            minimum_order,
-            default_price,
-            stock,
-            discount_type,
-            discount,
-            tax_type,
-            tax_rate,
-            product_type,
-            car_brand_id,
-            car_model_id,
-            start_year,
-            end_year,
-            has_exchange_policy,
-            exchange_policy,
-            has_cancellation_policy,
-            cancellation_policy,
-            quantity,
-            has_warranty,
-            warranty,
-            image_count,
-        } = req.payload;
 
-        console.log(image_count)
-
-        const combinations = JSON.parse(req.payload.combinations)
 
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
         if (user.role === "ADMIN" && user.application === 'kardify') {
+            const {
+                product_name,
+                product_desc,
+                product_brand_id,
+                category_id,
+                sub_category_id,
+                super_sub_category_id,
+                minimum_order,
+                default_price,
+                stock,
+                discount_type,
+                discount,
+                tax_type,
+                tax_rate,
+                product_type,
+                car_brand_id,
+                car_model_id,
+                start_year,
+                end_year,
+                has_exchange_policy,
+                exchange_policy,
+                has_cancellation_policy,
+                cancellation_policy,
+                quantity,
+                has_warranty,
+                warranty,
+                image_count,
+            } = req.payload;
+
+            console.log(image_count)
+
+            const combinations = JSON.parse(req.payload.combinations)
+
             const existingProduct = await Products.findOne({
                 where: {
                     product_name,
@@ -398,11 +400,16 @@ const addProduct = async (req, res) => {
                     .code(200);
             }
 
-            let image_url_list = []
+
+            let image_url_list = [];
             if (image_count) {
                 for (let i = 1; i <= image_count; i++) {
-                    const { file_url } = await uploadFile(req, req.payload[`image_${i}`], 'uploads/products/')
-                    image_url_list.push({ image_url: file_url })
+                    try {
+                        const { file_url } = await uploadFile(req, req.payload[`image_${i}`], 'uploads/products/');
+                        image_url_list.push({ image_url: file_url });
+                    } catch (error) {
+                        console.error(`Error uploading image ${i}:`, error);
+                    }
                 }
             }
 
