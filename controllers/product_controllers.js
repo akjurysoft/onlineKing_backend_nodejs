@@ -373,6 +373,8 @@ const addProduct = async (req, res) => {
             image_count,
         } = req.payload;
 
+        console.log(image_count)
+
         const combinations = JSON.parse(req.payload.combinations)
 
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
@@ -601,9 +603,6 @@ const addBulkProduct = async (req, res) => {
         }).code(200);
     }
 };
-
-
-
 
 const editProduct = async (req, res) => {
     try {
