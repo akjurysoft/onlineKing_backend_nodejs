@@ -400,6 +400,7 @@ const addProduct = async (req, res) => {
 
 
             let image_url_list = [];
+            console.log(image_count)
             if (image_count) {
                 for (let i = 1; i <= image_count; i++) {
                     try {

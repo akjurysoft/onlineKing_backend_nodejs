@@ -57,7 +57,7 @@ const makeRefreshToken = (data) => {
 
 const uploadFile = async (req, file, store_path) => {
     try {
-        console.log(file)
+        // console.log(file)
         let file_url = null
         const file_name = `${store_path}${Date.now().valueOf()}.${(file.filename || 'unknown').split('.')[file.filename.split('.').length - 1]}`
         await fs.promises.copyFile(file.path, file_name)
