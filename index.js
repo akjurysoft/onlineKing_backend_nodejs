@@ -29,6 +29,10 @@ const init = async () => {
           console.error('Errors: ', err);
           throw err;
         }
+      },
+      timeout: {
+        socket: 60000,
+        server: 60000
       }
     }
   });

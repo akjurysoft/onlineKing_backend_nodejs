@@ -38,9 +38,12 @@ const getCarModels = async (req, res) => {
             ...filter,
             id
         }
-        if (brand_id) filter = {
-            ...filter,
-            brand_id
+        if (brand_id) {
+            if (Array.isArray(brand_id)) {
+                filter.brand_id = { [Op.in]: brand_id };
+            } else {
+                filter.brand_id = brand_id;
+            }
         }
         if (model_name) filter = {
             ...filter,

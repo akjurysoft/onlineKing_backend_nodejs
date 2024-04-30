@@ -378,8 +378,6 @@ const addProduct = async (req, res) => {
                 image_count,
             } = req.payload;
 
-            console.log(image_count)
-
             const combinations = JSON.parse(req.payload.combinations)
 
             const existingProduct = await Products.findOne({
