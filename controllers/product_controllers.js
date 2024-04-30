@@ -405,6 +405,7 @@ const addProduct = async (req, res) => {
                 for (let i = 1; i <= image_count; i++) {
                     try {
                         const { file_url } = await uploadFile(req, req.payload[`image_${i}`], 'uploads/products/');
+                        await new Promise(resolve => setTimeout(resolve, 2000));
                         image_url_list.push({ image_url: file_url });
                     } catch (error) {
                         console.error(`Error uploading image ${i}:`, error);
