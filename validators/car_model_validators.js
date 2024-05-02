@@ -2,6 +2,7 @@ const Joi = require("joi");
 
 const fetch_car_model_payload = Joi.object({
     id: Joi.number().integer().allow(null),
+    brand_id: Joi.number().integer().allow(null),
     model_name: Joi.string().allow(null),
 })
 const add_car_model_payload = Joi.object({
