@@ -39,6 +39,7 @@ const addProductValidation = Joi.object({
     discount: Joi.number(),
     tax_type: Joi.string().allow(''),
     tax_rate: Joi.number().allow(''),
+    weight: Joi.number().allow(''),
     product_type: Joi.string().allow(''),
     car_brand_id: Joi.number().integer().allow(null),
     car_model_id: Joi.number().integer().allow(null),

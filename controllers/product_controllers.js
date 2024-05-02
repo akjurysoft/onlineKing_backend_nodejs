@@ -375,6 +375,7 @@ const addProduct = async (req, res) => {
                 quantity,
                 has_warranty,
                 warranty,
+                weight,
                 image_count,
             } = req.payload;
 
@@ -400,7 +401,6 @@ const addProduct = async (req, res) => {
 
 
             let image_url_list = [];
-            console.log(image_count)
             if (image_count) {
                 for (let i = 1; i <= image_count; i++) {
                     try {
@@ -440,6 +440,7 @@ const addProduct = async (req, res) => {
                 sub_category_id: sub_category_id ? sub_category_id : null,
                 super_sub_category_id: super_sub_category_id ? super_sub_category_id : null,
                 minimum_order,
+                weight,
                 default_price,
                 stock,
                 discount_type,
