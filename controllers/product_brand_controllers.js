@@ -38,7 +38,11 @@ const getProductBrands = async (req, res) => {
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization);
 
         if (user.role === "ADMIN" && user.application === 'kardify') {
-            const brandNames = await ProductBrand.findAll({ where: filter, raw: true });
+            const brandNames = await ProductBrand.findAll({ 
+                where: filter,
+                raw: true ,
+                order: [['createdAt', 'DESC']]
+            });
 
                 return res.response({
                     code: 200,
