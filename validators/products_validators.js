@@ -131,16 +131,16 @@ const csvDataSchema = Joi.object({
             tax_type: Joi.string().allow(''),
             tax_rate: Joi.number().allow(''),
             product_type: Joi.string().allow(''),
-            car_brand_id: Joi.number().integer(),
-            car_model_id: Joi.number().integer(),
-            start_year: Joi.date(),
-            end_year: Joi.date(),
-            has_exchange_policy: Joi.boolean(),
+            car_brand_id: Joi.number().integer().allow(null),
+            car_model_id: Joi.number().integer().allow(null),
+            start_year: Joi.date().allow(null),
+            end_year: Joi.date().allow(null),
+            has_exchange_policy: Joi.boolean().allow(null),
             exchange_policy: Joi.string().allow(''),
             has_cancellation_policy: Joi.boolean(),
             cancellation_policy: Joi.string().allow(''),
-            quantity: Joi.number().integer(),
-            has_warranty: Joi.boolean(),
+            quantity: Joi.number().integer().allow(null),
+            has_warranty: Joi.boolean().allow(null),
             warranty: Joi.string().allow('')
         })
     )
