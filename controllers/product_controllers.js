@@ -575,7 +575,7 @@ const addBulkProduct = async (req, res) => {
             });
 
             await transact.commit();
-            await sequelize.close();
+            // await sequelize.close();
 
             return res.response({
                 code: 201,
@@ -643,6 +643,7 @@ const editProduct = async (req, res) => {
             image_count,
         } = req.payload;
 
+        console.log(req.payload)
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
         if (user.role === "ADMIN" && user.application === 'kardify') {
