@@ -539,7 +539,7 @@ CREATE TABLE `products` (
   `end_year` timestamp NULL DEFAULT NULL,
   `has_exchange_policy` tinyint(1) DEFAULT NULL,
   `exchange_policy` varchar(99) DEFAULT NULL,
-  `has_cancellaton_policy` tinyint(1) DEFAULT NULL,
+  `has_cancellation_policy` tinyint(1) DEFAULT NULL,
   `cancellation_policy` varchar(99) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `has_warranty` tinyint(1) DEFAULT NULL,

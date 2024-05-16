@@ -800,7 +800,7 @@ CREATE TABLE `products` (
   `end_year` int(11) DEFAULT NULL,
   `has_exchange_policy` tinyint(1) DEFAULT NULL,
   `exchange_policy` varchar(99) DEFAULT NULL,
-  `has_cancellaton_policy` tinyint(1) DEFAULT NULL,
+  `has_cancellation_policy` tinyint(1) DEFAULT NULL,
   `cancellation_policy` varchar(99) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `has_warranty` tinyint(1) DEFAULT NULL,
@@ -815,7 +815,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `product_name`, `product_desc`, `product_brand_id`, `category_id`, `sub_category_id`, `super_sub_category_id`, `minimum_order`, `default_price`, `stock`, `status`, `discount_type`, `discount`, `is_offer_avl`, `offer_discount`, `offer_discount_type`, `offer_start_date`, `offer_end_date`, `tax_type`, `tax_rate`, `product_type`, `car_brand_id`, `car_model_id`, `start_year`, `end_year`, `has_exchange_policy`, `exchange_policy`, `has_cancellaton_policy`, `cancellation_policy`, `quantity`, `has_warranty`, `warranty`, `weight`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
+INSERT INTO `products` (`id`, `product_name`, `product_desc`, `product_brand_id`, `category_id`, `sub_category_id`, `super_sub_category_id`, `minimum_order`, `default_price`, `stock`, `status`, `discount_type`, `discount`, `is_offer_avl`, `offer_discount`, `offer_discount_type`, `offer_start_date`, `offer_end_date`, `tax_type`, `tax_rate`, `product_type`, `car_brand_id`, `car_model_id`, `start_year`, `end_year`, `has_exchange_policy`, `exchange_policy`, `has_cancellation_policy`, `cancellation_policy`, `quantity`, `has_warranty`, `warranty`, `weight`, `createdAt`, `updatedAt`, `deletedAt`) VALUES
 (1, 'Shop by car testing product', '<p>asdas</p><p>asd</p><p>as</p><p>d</p><p>asd</p><p>as</p><p>d</p><p>asd</p>', 1, 2, 2, NULL, NULL, 1099, 12, 1, 'percent', 12, NULL, NULL, NULL, NULL, NULL, 'percent', 12, 'general', NULL, NULL, NULL, NULL, NULL, 'asdasd', NULL, 'asd', NULL, NULL, NULL, NULL, '2024-04-26 08:28:11', '2024-04-30 11:51:17', '2024-04-30 11:51:17'),
 (2, 'testing product', '<p>asdasd</p><p>asd</p><p>as</p><p>d</p><p>asd</p><p>a</p><p><br></p><p>sd</p>', 1, 2, 2, NULL, NULL, 1000, 23, 1, 'percent', 10, NULL, NULL, NULL, NULL, NULL, 'percent', 12, 'general', NULL, NULL, NULL, NULL, NULL, 'asdasd', NULL, 'asd', NULL, NULL, NULL, NULL, '2024-04-26 08:33:27', '2024-04-30 11:51:15', '2024-04-30 11:51:15'),
 (3, 'janksjdnka', '<p>jhasdkla</p><p>da</p><p>da</p><p>sdsdf</p><p><br></p><p>sdf</p>', 1, 2, 2, NULL, NULL, 1099, 12, 1, 'percent', 6, NULL, NULL, NULL, NULL, NULL, 'percent', 12, 'general', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-04-27 05:07:10', '2024-04-30 11:51:12', '2024-04-30 11:51:12'),

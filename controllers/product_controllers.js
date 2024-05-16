@@ -342,6 +342,7 @@ const fetchProductCustomer = async (req, res) => {
 };
 
 const addProduct = async (req, res) => {
+    console.log(req.payload);
     const transact = await sequelize.transaction()
     try {
 
@@ -380,6 +381,7 @@ const addProduct = async (req, res) => {
             } = req.payload;
 
             const combinations = JSON.parse(req.payload.combinations)
+            console.log('combinations: ', combinations)
 
             const existingProduct = await Products.findOne({
                 where: {
@@ -538,6 +540,8 @@ const addProduct = async (req, res) => {
 };
 
 const addBulkProduct = async (req, res) => {
+    console.log(req.payload);
+    console.log(req.headers);
     const transact = await sequelize.transaction();
     try {
 
@@ -643,7 +647,7 @@ const editProduct = async (req, res) => {
             image_count,
         } = req.payload;
 
-        console.log(req.payload)
+        
         const user = await checkToken(req.headers['Authorization'] ? req.headers['Authorization'] : req.headers.authorization)
 
         if (user.role === "ADMIN" && user.application === 'kardify') {
@@ -719,7 +723,7 @@ const editProduct = async (req, res) => {
                 }
                 await ProductImages.bulkCreate(newImages);
             }
-
+            console.log(existingProduct);
             return res
                 .response({
                     code: 200,
