@@ -136,7 +136,7 @@ Products.init(
             type: STRING,
             allowNull: true,
         },
-        has_cancellaton_policy: {
+        has_cancellation_policy: {
             type: BOOLEAN,
             allowNull: true,
         },
