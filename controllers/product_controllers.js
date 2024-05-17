@@ -541,7 +541,6 @@ const addProduct = async (req, res) => {
 
 const addBulkProduct = async (req, res) => {
     console.log(req.payload);
-    console.log(req.headers);
     const transact = await sequelize.transaction();
     try {
 
