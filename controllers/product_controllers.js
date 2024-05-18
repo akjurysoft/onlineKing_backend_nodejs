@@ -19,6 +19,8 @@ const {
   },
   sequelize,
 } = require("../config");
+const { QueryTypes } = require("sequelize");
+
 const {
   Products,
   Categories,
@@ -313,8 +315,30 @@ const fetchProductCustomer = async (req, res) => {
             // }
           ],
         },
+
+        // {
+        //   model: ProductAttributeAssociations,
+        //   include: [
+        //     {
+        //       model: AttributeCombinations,
+        //       include: [
+        //         {
+        //           model: Attributes,
+        //         },
+        //       ],
+        //     },
+        //   ],
+        //   required: false,
+        // },
       ],
     });
+
+    const productOption = await sequelize.query(
+      `select attribute_id, attribute_value from attributes_combinations where combination_id in (select id from product_attributes_associations where product_id=${product_id}) GROUP BY attribute_value;`,
+      {
+        type: QueryTypes.SELECT,
+      }
+    );
 
     const currentDate = new Date();
 
@@ -334,6 +358,7 @@ const fetchProductCustomer = async (req, res) => {
         code: 200,
         status: "success",
         message: "Products fetched successfully",
+        productOption,
         products,
       })
       .code(200);
