@@ -100,8 +100,8 @@ const editProductValidation = Joi.object({
   product_type: Joi.string().allow("").label("Product Type"),
   car_brand_id: Joi.number().integer().label("Car Brand ID"),
   car_model_id: Joi.number().integer().label("Car Model ID"),
-  start_year: Joi.date().label("Start Year"),
-  end_year: Joi.date().label("End Year"),
+  start_year: Joi.number().label("Start Year"),
+  end_year: Joi.number().label("End Year"),
   has_exchange_policy: Joi.boolean().label("Has Exchange Policy"),
   exchange_policy: Joi.string().allow("").label("Exchange Policy"),
   has_cancellation_policy: Joi.boolean().label("Has Cancellation Policy"),
@@ -110,41 +110,42 @@ const editProductValidation = Joi.object({
   has_warranty: Joi.boolean().label("Has Warranty"),
   warranty: Joi.string().allow("").label("Warranty"),
   image_count: Joi.number().integer().allow(null),
+  weight: Joi.number().allow(""),
 }).unknown();
 
 const csvDataSchema = Joi.object({
-    product_data: Joi.array().items(
-        Joi.object({
-            product_name: Joi.string().required().messages({
-                'any.required': 'Product Name is required',
-            }),
-            product_desc: Joi.string().allow(''),
-            product_brand: Joi.string().allow(''),
-            category_id: Joi.number().integer().required(),
-            sub_category_id: Joi.number().integer(),
-            super_sub_category_id: Joi.number().integer(),
-            minimum_order: Joi.number().integer(),
-            default_price: Joi.number().required(),
-            stock: Joi.number().integer(),
-            discount_type: Joi.string().allow(''),
-            discount: Joi.number(),
-            tax_type: Joi.string().allow(''),
-            tax_rate: Joi.number().allow(''),
-            product_type: Joi.string().allow(''),
-            car_brand_id: Joi.number().integer().allow(null),
-            car_model_id: Joi.number().integer().allow(null),
-            start_year: Joi.number().allow(null),
-            end_year: Joi.number().allow(null),
-            has_exchange_policy: Joi.boolean().allow(null),
-            exchange_policy: Joi.string().allow(''),
-            has_cancellation_policy: Joi.boolean(),
-            cancellation_policy: Joi.string().allow(''),
-            quantity: Joi.number().integer().allow(null),
-            has_warranty: Joi.boolean().allow(null),
-            warranty: Joi.string().allow(''),
-            weight: Joi.number().required()
-        })
-    )
+  product_data: Joi.array().items(
+    Joi.object({
+      product_name: Joi.string().required().messages({
+        "any.required": "Product Name is required",
+      }),
+      product_desc: Joi.string().allow(""),
+      product_brand: Joi.string().allow(""),
+      category_id: Joi.number().integer().required(),
+      sub_category_id: Joi.number().integer(),
+      super_sub_category_id: Joi.number().integer(),
+      minimum_order: Joi.number().integer(),
+      default_price: Joi.number().required(),
+      stock: Joi.number().integer(),
+      discount_type: Joi.string().allow(""),
+      discount: Joi.number(),
+      tax_type: Joi.string().allow(""),
+      tax_rate: Joi.number().allow(""),
+      product_type: Joi.string().allow(""),
+      car_brand_id: Joi.number().integer().allow(null),
+      car_model_id: Joi.number().integer().allow(null),
+      start_year: Joi.number().allow(null),
+      end_year: Joi.number().allow(null),
+      has_exchange_policy: Joi.boolean().allow(null),
+      exchange_policy: Joi.string().allow(""),
+      has_cancellation_policy: Joi.boolean(),
+      cancellation_policy: Joi.string().allow(""),
+      quantity: Joi.number().integer().allow(null),
+      has_warranty: Joi.boolean().allow(null),
+      warranty: Joi.string().allow(""),
+      weight: Joi.number().required(),
+    })
+  ),
 });
 
 const delete_product_validator = Joi.object({
