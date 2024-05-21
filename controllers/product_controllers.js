@@ -128,6 +128,20 @@ const fetchProducts = async (req, res) => {
             model: ProductBrand,
             required: false,
           },
+          // {
+          //   model: Combinations,
+          //   include: [
+          //     {
+          //       model: AttributeCombinatios,
+          //       include: [
+          //         {
+          //           model: ProductAttributes,
+          //         },
+          //       ],
+          //     },
+          //   ],
+          //   required: false,
+          // },
         ],
         raw: true,
         nest: true,
@@ -157,9 +171,22 @@ const fetchProducts = async (req, res) => {
         where: {
           product_id: products.map((product) => product.id),
         },
+        include: [
+          {
+            model: AttributeCombinatios,
+            // include: [
+            //   {
+            //     model: ProductAttributes,
+            //   },
+            // ],
+            //required: false,
+          },
+        ],
 
-        raw: true,
+        //raw: true,
       });
+
+      console.log(attributes, "attributes----");
 
       const attributesMap = attributes.reduce((acc, atttr) => {
         const { product_id } = atttr;
@@ -309,10 +336,10 @@ const fetchProductCustomer = async (req, res) => {
               model: AttributeCombinations,
               required: true,
             },
-            // {
-            //     model: VariantAttributes,
-            //     required: true
-            // }
+            {
+              model: ProductAttributes,
+              required: true,
+            },
           ],
         },
 
@@ -703,6 +730,8 @@ const editProduct = async (req, res) => {
       image_count,
     } = req.payload;
 
+    const combinations = JSON.parse(req.payload.combinations);
+
     const user = await checkToken(
       req.headers["Authorization"]
         ? req.headers["Authorization"]
@@ -788,6 +817,67 @@ const editProduct = async (req, res) => {
         }
         await ProductImages.bulkCreate(newImages);
       }
+      let combinationIds = [];
+      for (const combination of combinations) {
+        const existingCombination = await Combinations.findOne({
+          where: {
+            combination: combination.combination_name,
+            product_id: product_id,
+          },
+        });
+        // store existing combination id so old records can be deleted
+        let update = null;
+
+        if (existingCombination) {
+          update = await existingCombination.update({
+            price: combination.price,
+            stock: combination.stock,
+          });
+        } else {
+          update = await Combinations.create({
+            price: combination.price,
+            stock: combination.stock,
+            product_id: product_id,
+            combination: combination.combination_name,
+          });
+        }
+
+        combinationIds.push(update.id);
+
+        for (const attributeCombination of combination.combinations) {
+          const existingCombination = await AttributeCombinations.findOne({
+            where: {
+              combination_id: update.id,
+              attribute_id: attributeCombination.attribute_id,
+            },
+          });
+          if (!existingCombination) {
+            await AttributeCombinations.create({
+              combination_id: update.id,
+              attribute_id: attributeCombination.attribute_id,
+              attribute_value: attributeCombination.attribute_value,
+            });
+          }
+        }
+      }
+
+      await Combinations.destroy({
+        where: {
+          product_id: product_id,
+          id: {
+            [Op.notIn]: combinationIds,
+          },
+        },
+      });
+
+      AttributeCombinations.destroy({
+        where: {
+          combination_id: {
+            [Op.notIn]: combinationIds,
+          },
+        },
+      });
+
       console.log(existingProduct);
       return res
         .response({
