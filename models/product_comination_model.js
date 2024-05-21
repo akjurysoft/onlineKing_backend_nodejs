@@ -58,6 +58,6 @@ Combinations.init(
 
 //Products.hasMany(Combinations, { foreignKey: "product_id" });
 
-//Combinations.hasMany(Products, { foreignKey: "product_id" });
+//Combinations.belongsTo(Products, { foreignKey: "product_id" });
 
 module.exports = Combinations;

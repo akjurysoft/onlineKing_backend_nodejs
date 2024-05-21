@@ -229,11 +229,11 @@ Products.hasOne(Combinations, {
   foreignKey: "product_id",
 });
 
-Combinations.belongsTo(Products, {
-  foreignKey: "product_id",
-});
+// Combinations.belongsToMany(Products, {
+//   foreignKey: "product_id",
+// });
 
-// Products.belongsTo(Combinations, { foreignKey: "product_key" });
+Products.hasMany(Combinations, { foreignKey: "product_id" });
 
 Products.hasMany(ProductDiscounts, { foreignKey: "product_id" });
 

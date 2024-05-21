@@ -331,16 +331,16 @@ const fetchProductCustomer = async (req, res) => {
         {
           model: Combinations,
           required: false,
-          include: [
-            {
-              model: AttributeCombinations,
-              required: true,
-            },
-            {
-              model: ProductAttributes,
-              required: true,
-            },
-          ],
+          // include: [
+          //   {
+          //     model: AttributeCombinations,
+          //     required: true,
+          //   },
+          //   {
+          //     model: ProductAttributes,
+          //     required: true,
+          //   },
+          // ],
         },
 
         // {
