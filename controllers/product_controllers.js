@@ -186,7 +186,7 @@ const fetchProducts = async (req, res) => {
         //raw: true,
       });
 
-      console.log(attributes, "attributes----");
+      // console.log(attributes, "attributes----");
 
       const attributesMap = attributes.reduce((acc, atttr) => {
         const { product_id } = atttr;
@@ -401,7 +401,7 @@ const fetchProductCustomer = async (req, res) => {
 };
 
 const addProduct = async (req, res) => {
-  console.log(req.payload);
+  // console.log("req.payload", req.payload);
   const transact = await sequelize.transaction();
   try {
     const user = await checkToken(
@@ -442,7 +442,7 @@ const addProduct = async (req, res) => {
       } = req.payload;
 
       const combinations = JSON.parse(req.payload.combinations);
-      console.log("combinations: ", combinations);
+      // console.log("combinations: ", combinations);
 
       const existingProduct = await Products.findOne({
         where: {
@@ -610,7 +610,7 @@ const addProduct = async (req, res) => {
 };
 
 const addBulkProduct = async (req, res) => {
-  console.log(req.payload);
+  // console.log(req.payload);
   const transact = await sequelize.transaction();
   try {
     const user = await checkToken(
@@ -697,6 +697,9 @@ const addBulkProduct = async (req, res) => {
 };
 
 const editProduct = async (req, res) => {
+  console.log("req.headers", req.headers);
+  console.log("req.payload", req.payload);
+
   try {
     const {
       product_name,
@@ -729,13 +732,24 @@ const editProduct = async (req, res) => {
       image_count,
     } = req.payload;
 
-    const combinations = JSON.parse(req.payload.combinations);
+    // let combinations;
+    // if (req.payload.combinations) {
+    //   combinations = JSON.parse(req.payload.combinations);
+    // } else {
+    //   combinations = [];
+    // }
+    let combinations = null;
+    if (req.payload.combinations) {
+      combinations = JSON.parse(req.payload.combinations);
+    }
 
     const user = await checkToken(
       req.headers["Authorization"]
         ? req.headers["Authorization"]
         : req.headers.authorization
     );
+
+    // console.log(user, "user-------");
 
     if (user.role === "ADMIN" && user.application === "kardify") {
       const existingProduct = await Products.findOne({
@@ -816,68 +830,69 @@ const editProduct = async (req, res) => {
         }
         await ProductImages.bulkCreate(newImages);
       }
-      let combinationIds = [];
-      for (const combination of combinations) {
-        const existingCombination = await Combinations.findOne({
-          where: {
-            combination: combination.combination_name,
-            product_id: product_id,
-          },
-        });
-        // store existing combination id so old records can be deleted
-        let update = null;
-
-        if (existingCombination) {
-          update = await existingCombination.update({
-            price: combination.price,
-            stock: combination.stock,
-          });
-        } else {
-          update = await Combinations.create({
-            price: combination.price,
-            stock: combination.stock,
-            product_id: product_id,
-            combination: combination.combination_name,
-          });
-        }
-
-        combinationIds.push(update.id);
-
-        for (const attributeCombination of combination.combinations) {
-          const existingCombination = await AttributeCombinations.findOne({
+      if (combinations) {
+        let combinationIds = [];
+        for (const combination of combinations) {
+          const existingCombination = await Combinations.findOne({
             where: {
-              combination_id: update.id,
-              attribute_id: attributeCombination.attribute_id,
+              combination: combination.combination_name,
+              product_id: product_id,
             },
           });
-          if (!existingCombination) {
-            await AttributeCombinations.create({
-              combination_id: update.id,
-              attribute_id: attributeCombination.attribute_id,
-              attribute_value: attributeCombination.attribute_value,
+          // store existing combination id so old records can be deleted
+          let update = null;
+
+          if (existingCombination) {
+            update = await existingCombination.update({
+              price: combination.price,
+              stock: combination.stock,
+            });
+          } else {
+            update = await Combinations.create({
+              price: combination.price,
+              stock: combination.stock,
+              product_id: product_id,
+              combination: combination.combination_name,
             });
           }
+
+          combinationIds.push(update.id);
+
+          for (const attributeCombination of combination.combinations) {
+            const existingCombination = await AttributeCombinations.findOne({
+              where: {
+                combination_id: update.id,
+                attribute_id: attributeCombination.attribute_id,
+              },
+            });
+            if (!existingCombination) {
+              await AttributeCombinations.create({
+                combination_id: update.id,
+                attribute_id: attributeCombination.attribute_id,
+                attribute_value: attributeCombination.attribute_value,
+              });
+            }
+          }
+          await Combinations.destroy({
+            where: {
+              product_id: product_id,
+              id: {
+                [Op.notIn]: combinationIds,
+              },
+            },
+          });
+
+          AttributeCombinations.destroy({
+            where: {
+              combination_id: {
+                [Op.notIn]: combinationIds,
+              },
+            },
+          });
         }
       }
 
-      await Combinations.destroy({
-        where: {
-          product_id: product_id,
-          id: {
-            [Op.notIn]: combinationIds,
-          },
-        },
-      });
-
-      AttributeCombinations.destroy({
-        where: {
-          combination_id: {
-            [Op.notIn]: combinationIds,
-          },
-        },
-      });
-
-      console.log(existingProduct);
+      // console.log(existingProduct);
       return res
         .response({
           code: 200,
