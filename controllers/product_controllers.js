@@ -610,7 +610,6 @@ const addProduct = async (req, res) => {
 };
 
 const addBulkProduct = async (req, res) => {
-  // console.log(req.payload);
   const transact = await sequelize.transaction();
   try {
     const user = await checkToken(
@@ -639,13 +638,26 @@ const addBulkProduct = async (req, res) => {
         raw: true,
       });
 
+      
       if (existingProducts.length > 0) {
+
+        const nonExistingProducts = productsWithStatus.filter(product => 
+          !existingProducts.some(existingProduct => existingProduct.product_name === product.product_name)
+        );
+
+        const createdProducts = await Products.bulkCreate(nonExistingProducts, {
+          transaction: transact,
+        });
+
+        await transact.commit();
+
         return res
           .response({
             code: 409,
             status: "error",
             message: "One or more products with the same name already exist",
             existingProducts,
+            createdProducts,
           })
           .code(200);
       }
@@ -695,6 +707,7 @@ const addBulkProduct = async (req, res) => {
       .code(200);
   }
 };
+
 
 const editProduct = async (req, res) => {
   console.log("req.headers", req.headers);
