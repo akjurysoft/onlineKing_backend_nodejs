@@ -609,6 +609,75 @@ const addProduct = async (req, res) => {
   }
 };
 
+const uploadImagesHandler = async (req, h) => {
+  try {
+   
+      // Check if the user is authenticated and authorized
+      const user = await checkToken(
+          req.headers["Authorization"]
+              ? req.headers["Authorization"]
+              : req.headers.authorization
+      );
+
+      if (!(user.role === "ADMIN" && user.application === "kardify")) {
+          return h.response({
+              code: 403,
+              status: "error",
+              message: "You don't have permission for this action."
+          }).code(403);
+      }
+
+      // Ensure the uploads/products directory exists
+      const uploadsDir = 'uploads/products/';
+      if (!fs.existsSync(uploadsDir)) {
+          fs.mkdirSync(uploadsDir, { recursive: true });
+      }
+
+      // Function to upload file
+      const uploadImageFiles = async (req, file, uploadsDir) => {
+        try {
+            let file_url = null;
+            const file_name = `${uploadsDir}${file.hapi.filename}`;
+            await fs.promises.writeFile(file_name, file._data);
+            console.log(`Success: ${file_name} file created`);
+            file_url = `/${file_name}`;
+            return {
+                file_url
+            };
+        } catch (error) {
+            console.log(error);
+        }
+      };
+
+      let files = req.payload.files;
+
+        // Check if files is an array or a single file
+        if (!Array.isArray(files)) {
+          files = [files];
+        }
+
+      // Loop through each file in the payload and upload it
+      for (const file of files) {
+        await uploadImageFiles(req, file, uploadsDir);
+      }
+      return h.response({
+          code: 200,
+          status: "success",
+          message: "Images uploaded successfully",
+      }).code(200);
+  } catch (error) {
+      console.error(error);
+      return h.response({
+          code: 500,
+          status: "error",
+          message: "Something went wrong",
+          error: error.message
+      }).code(500);
+  }
+}
+
+
+
 const addBulkProduct = async (req, res) => {
   const transact = await sequelize.transaction();
   try {
@@ -620,7 +689,7 @@ const addBulkProduct = async (req, res) => {
 
     if (user.role === "ADMIN" && user.application === "kardify") {
       const { product_data } = req.payload;
-
+      
       const productsWithStatus = product_data.map((product) => ({
         ...product,
         status: true,
@@ -649,6 +718,21 @@ const addBulkProduct = async (req, res) => {
           transaction: transact,
         });
 
+        const productImages = [];
+        createdProducts.forEach((product, index) => {
+          const images = nonExistingProducts[index].images.split(',').map(img => img.trim());
+          images.forEach(image => {
+            productImages.push({
+              product_id: product.id,
+              image_url: `/uploads/products/${image}`
+            });
+          });
+        });
+  
+        await ProductImages.bulkCreate(productImages, {
+          transaction: transact,
+        });
+
         await transact.commit();
 
         return res
@@ -665,6 +749,22 @@ const addBulkProduct = async (req, res) => {
       const createdProducts = await Products.bulkCreate(productsWithStatus, {
         transaction: transact,
       });
+
+      const productImages = [];
+      createdProducts.forEach((product, index) => {
+        const images = productsWithStatus[index].images.split(',').map(img => img.trim());
+        images.forEach(image => {
+          productImages.push({
+            product_id: product.id,
+            image_url: `/uploads/products/${image}`
+          });
+        });
+      });
+      
+      await ProductImages.bulkCreate(productImages, {
+        transaction: transact,
+      });
+
 
       await transact.commit();
       // await sequelize.close();
@@ -1085,6 +1185,7 @@ module.exports = {
   fetchProducts,
   fetchProductCustomer,
   addProduct,
+  uploadImagesHandler,
   addBulkProduct,
   editProduct,
   deleteProduct,
