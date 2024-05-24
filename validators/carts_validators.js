@@ -13,10 +13,12 @@ const add_to_cart_payload = Joi.object({
 
 const handle_increament_payload = Joi.object({
   product_id: Joi.number().integer().required(),
+  combination_id: Joi.number().allow(null),
 });
 
 const handle_decrement_payload = Joi.object({
   product_id: Joi.number().integer().required(),
+  combination_id: Joi.number().allow(null),
 });
 
 const remove_from_cart_payload = Joi.object({

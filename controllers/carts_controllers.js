@@ -214,6 +214,12 @@ const getCart = async (req, res) => {
             },
           },
         ],
+        // include: [
+        //   {
+        //     model: Combinations,
+        //     where: {}
+        //   },
+        // ],
       });
 
       for (const cartItem of cartItems) {
@@ -262,7 +268,23 @@ const getCart = async (req, res) => {
           },
         });
 
-        if (product) {
+        const combination = await Combinations.findOne({
+          where: {
+            id: cartItem.combination_id,
+          },
+        });
+
+        if (combination) {
+          let itemPrice = combination.price;
+
+          if (product.discount_type === "amount") {
+            itemPrice -= product.discount;
+          } else if (product.discount_type === "percent") {
+            itemPrice -= itemPrice * (product.discount / 100);
+          }
+
+          totalPrice += itemPrice * cartItem.quantity;
+        } else if (product) {
           let itemPrice = product.default_price;
 
           if (product.discount_type === "amount") {
@@ -322,7 +344,7 @@ const handleIncrement = async (req, res) => {
 
     const allowed_user = ["DEALER", "CUSTOMER"];
     if (allowed_user.includes(user.role) && user.application === "kardify") {
-      const { product_id } = req.payload;
+      const { product_id, combination_id } = req.payload;
 
       let ownerId;
       if (user.role === "DEALER") {
@@ -331,21 +353,21 @@ const handleIncrement = async (req, res) => {
         ownerId = "user_id";
       }
 
-      const existingProduct = await Carts.findOne({
-        where: {
-          [ownerId]: user.id,
-          product_id,
-        },
-      });
-      if (!existingProduct) {
-        return res
-          .response({
-            code: 400,
-            status: "error",
-            message: "Product not found in the cart",
-          })
-          .code(200);
-      }
+      // const existingProduct = await Carts.findOne({
+      //   where: {
+      //     [ownerId]: user.id,
+      //     product_id,
+      //   },
+      // });
+      // if (!existingProduct) {
+      //   return res
+      //     .response({
+      //       code: 400,
+      //       status: "error",
+      //       message: "Product not found in the cart",
+      //     })
+      //     .code(200);
+      // }
 
       const availableProduct = await Products.findOne({
         where: {
@@ -365,30 +387,103 @@ const handleIncrement = async (req, res) => {
           .code(200);
       }
 
-      const totalQuantityInCart = existingProduct.quantity;
+      // ADD for variant logic-------------
 
-      const remainingStock = availableProduct.stock - totalQuantityInCart;
+      if (combination_id) {
+        console.log(combination_id, "combination_id");
 
-      if (remainingStock <= 0) {
-        return res
-          .response({
+        const availableCombination = await Combinations.findOne({
+          where: {
+            id: combination_id,
+          },
+          raw: true,
+        });
+
+        const existingCombination = await Carts.findOne({
+          where: {
+            [ownerId]: user.id,
+            combination_id,
+          },
+        });
+
+        if (!existingCombination) {
+          return res
+            .response({
+              code: 400,
+              status: "error",
+              message: "Varaint not found in the cart",
+            })
+            .code(200);
+        }
+
+        const totalVariantInCart = existingCombination.quantity;
+
+        const remainingVaraintStock =
+          availableCombination.stock - totalVariantInCart;
+
+        if (remainingVaraintStock <= 0) {
+          return res.response({
             code: 400,
             status: "error",
-            message: "Maximum quantity reached",
+            messages: "Maximum quantity reached",
+          });
+        }
+
+        existingCombination.quantity += 1;
+        await existingCombination.save();
+
+        return res
+          .response({
+            code: 200,
+            status: "success",
+            message: "Quantity  variant incremented successfully",
+          })
+          .code(200);
+      } else {
+        console.log(combination_id, "combination-idKL--------");
+
+        const existingProduct = await Carts.findOne({
+          where: {
+            [ownerId]: user.id,
+            product_id,
+            combination_id: null,
+          },
+        });
+        if (!existingProduct) {
+          return res
+            .response({
+              code: 400,
+              status: "error",
+              message: "Product not found in the cart",
+            })
+            .code(200);
+        }
+
+        const totalQuantityInCart = existingProduct.quantity;
+
+        const remainingStock = availableProduct.stock - totalQuantityInCart;
+
+        if (remainingStock <= 0) {
+          return res
+            .response({
+              code: 400,
+              status: "error",
+              message: "Maximum quantity reached",
+            })
+            .code(200);
+        }
+
+        existingProduct.quantity += 1;
+        await existingProduct.save();
+
+        return res
+          .response({
+            code: 200,
+            status: "success",
+            message: "Quantity incremented successfully",
           })
           .code(200);
       }
-
-      existingProduct.quantity += 1;
-      await existingProduct.save();
-
-      return res
-        .response({
-          code: 200,
-          status: "success",
-          message: "Quantity incremented successfully",
-        })
-        .code(200);
     } else if (user == "Session expired") {
       return res
         .response({
@@ -428,7 +523,7 @@ const handleDecrement = async (req, res) => {
 
     const allowed_user = ["DEALER", "CUSTOMER"];
     if (allowed_user.includes(user.role) && user.application === "kardify") {
-      const { product_id } = req.payload;
+      const { product_id, combination_id } = req.payload;
 
       let ownerId;
       if (user.role === "DEALER") {
@@ -441,23 +536,59 @@ const handleDecrement = async (req, res) => {
         where: {
           [ownerId]: user.id,
           product_id,
+          combination_id: null,
         },
       });
 
-      if (existingProduct) {
+      if (combination_id) {
+        const existingCombination = await Carts.findOne({
+          where: {
+            [ownerId]: user.id,
+            combination_id,
+          },
+        });
+
+        if (!existingCombination) {
+          return res
+            .response({
+              code: 400,
+              status: "error",
+              message: "Varaint not found in the cart",
+            })
+            .code(200);
+        }
+
+        if (existingCombination.quantity > 1) {
+          existingCombination.quantity -= 1;
+          await existingCombination.save();
+
+          return res
+            .response({
+              code: 200,
+              status: "success",
+              message: "Quantity decremented successfully",
+            })
+            .code(200);
+        } else {
+          return res.response({
+            code: 400,
+            status: "error",
+            messages: "Mainimum quantity reached",
+          });
+        }
+      } else if (existingProduct) {
         if (existingProduct.quantity > 1) {
           existingProduct.quantity -= 1;
           await existingProduct.save();
         }
+        return res
+          .response({
+            code: 200,
+            status: "success",
+            message: "Quantity decremented successfully",
+          })
+          .code(200);
       }
-
-      return res
-        .response({
-          code: 200,
-          status: "success",
-          message: "Quantity decremented successfully",
-        })
-        .code(200);
     } else if (user == "Session expired") {
       return res
         .response({
