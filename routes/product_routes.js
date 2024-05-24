@@ -111,24 +111,6 @@ const product_routes = [
   },
   {
     method: "POST",
-    path: "/upload-images",
-    options: {
-      description: "Upload images to the server",
-      validate: {
-        headers: headerValidator,
-      },
-      payload: {
-        output: "stream",
-        parse: true,
-        allow: "multipart/form-data",
-        maxBytes: 104857600, // 100MB maximum payload size
-        multipart: true,
-      },
-      handler: product_controllers.uploadImagesHandler,
-    },
-  },
-  {
-    method: "POST",
     path: "/delete-product",
     options: {
       description: "Delete product",
