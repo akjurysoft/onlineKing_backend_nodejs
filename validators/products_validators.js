@@ -30,7 +30,9 @@ const addProductValidation = Joi.object({
     "any.required": "Product Name is required",
   }),
   product_desc: Joi.string().allow(""),
-  product_brand_id: Joi.number().integer().allow(null),
+  product_brand_id: Joi.number().integer().required().messages({
+    "any.required": "Product brand Name is required",
+  }),
   category_id: Joi.number().integer().required(),
   sub_category_id: Joi.number().integer().allow(null).optional(),
   super_sub_category_id: Joi.number().integer().allow(null).optional(),
@@ -93,6 +95,7 @@ const editProductValidation = Joi.object({
   minimum_order: Joi.number().integer().label("Minimum Order"),
   default_price: Joi.number().required().label("Default Price"),
   stock: Joi.number().integer().label("Stock"),
+  product_brand_id: Joi.number().allow(null),
   discount_type: Joi.string().allow("").label("Discount Type"),
   discount: Joi.number().label("Discount"),
   tax_type: Joi.string().allow("").label("Tax Type"),

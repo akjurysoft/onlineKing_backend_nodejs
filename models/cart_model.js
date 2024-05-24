@@ -1,12 +1,13 @@
 const { Model } = require("sequelize");
 const {
-    sequelize,
-    databases: { carts },
-    dataTypes: {
-        model_data_types: { INTEGER, STRING, DATETIME, BOOLEAN },
-    },
+  sequelize,
+  databases: { carts },
+  dataTypes: {
+    model_data_types: { INTEGER, STRING, DATETIME, BOOLEAN },
+  },
 } = require("../config");
 const Products = require("./product_model");
+const Combinations = require("./product_comination_model");
 
 // const CarBrands = require("./car_brands_model");
 
@@ -29,6 +30,10 @@ Carts.init(
       allowNull: true,
     },
     product_id: {
+      type: INTEGER,
+      allowNull: true,
+    },
+    combination_id: {
       type: INTEGER,
       allowNull: true,
     },
@@ -57,8 +62,9 @@ Carts.init(
   }
 );
 
-// CarModel.belongsTo(CarBrands, { foreignKey: 'brand_id', as: 'carbrand' }); 
+// CarModel.belongsTo(CarBrands, { foreignKey: 'brand_id', as: 'carbrand' });
 
-Carts.belongsTo(Products, { foreignKey: 'product_id' });
+Carts.belongsTo(Products, { foreignKey: "product_id" });
+Carts.belongsTo(Combinations, { foreignKey: "combination_id" });
 
 module.exports = Carts;

@@ -401,8 +401,10 @@ const getProductAttributesCombination = async (req, res) => {
   try {
     const { product_id } = req.query;
 
+    const whereCondition = product_id ? { product_id } : {};
+
     const attributeAssociation = await Combinations.findAll({
-      where: { product_id },
+      where: whereCondition,
       order: [["createdAt", "DESC"]],
     });
 

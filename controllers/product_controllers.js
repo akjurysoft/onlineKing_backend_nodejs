@@ -730,6 +730,7 @@ const editProduct = async (req, res) => {
       has_warranty,
       warranty,
       image_count,
+      images,
     } = req.payload;
 
     // let combinations;
@@ -830,6 +831,36 @@ const editProduct = async (req, res) => {
         }
         await ProductImages.bulkCreate(newImages);
       }
+      // const newImages = [];
+      // for (let i = 1; i <= image_count; i++) {
+      //   const { file_url } = await uploadFile(
+      //     req,
+      //     req.payload[`image_${i}`],
+      //     "uploads/products/"
+      //   );
+      //   newImages.push({ image_url: file_url, product_id });
+      // }
+      // await ProductImages.bulkCreate(newImages);
+      // if (images) {
+      //   // Split the images string into an array of blob URLs
+      //   const imageArray = images.split(",");
+
+      //   // Clear existing images
+      //   await ProductImages.destroy({ where: { product_id } });
+
+      //   const newImages = [];
+      //   for (let i = 0; i < imageArray.length; i++) {
+      //     // Assuming uploadFile can handle blob URLs directly
+      //     const { file_url } = await uploadFile(
+      //       req,
+      //       imageArray[i], // Directly pass the blob URL
+      //       "uploads/products/"
+      //     );
+      //     newImages.push({ image_url: file_url, product_id });
+      //   }
+      //   await ProductImages.bulkCreate(newImages);
+      // }
+
       if (combinations) {
         let combinationIds = [];
         for (const combination of combinations) {
