@@ -147,6 +147,7 @@ const csvDataSchema = Joi.object({
       has_warranty: Joi.boolean().allow(null),
       warranty: Joi.string().allow(""),
       weight: Joi.number().required(),
+      images:Joi.string().allow(""),
     })
   ),
 });
