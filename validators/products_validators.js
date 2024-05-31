@@ -8,6 +8,11 @@ const fetch_all_product = Joi.object({
   car_model_id: Joi.number().integer().positive().allow(""),
   year: Joi.number().integer().allow(""),
   product_name: Joi.string().max(255).allow(""),
+  status: Joi.string().max(255).allow(""),
+  // is_features: Joi.string().max(255).allow(""),
+  // is_topDeals: Joi.string().max(255).allow(""),
+  // is_bestSelling: Joi.string().max(255).allow(""),
+  // is_latest: Joi.string().max(255).allow(""),
   product_id: Joi.number().integer().positive().allow(""),
   product_brand_id: Joi.number().integer().positive().allow(""),
 });
@@ -147,7 +152,7 @@ const csvDataSchema = Joi.object({
       has_warranty: Joi.boolean().allow(null),
       warranty: Joi.string().allow(""),
       weight: Joi.number().required(),
-      images:Joi.string().allow(""),
+      images: Joi.string().allow(""),
     })
   ),
 });

@@ -99,7 +99,7 @@ const fetchProducts = async (req, res) => {
 
     const user = await checkToken(
       req.headers["Authorization"]
-        ? req.headers["Authorization"]
+        ? req.headers["authorization"]
         : req.headers.authorization
     );
 
@@ -251,9 +251,35 @@ const fetchProductCustomer = async (req, res) => {
       product_name,
       product_id,
       product_brand_id,
+      status,
     } = req.query;
 
     let whereCondition = {};
+
+    switch (status) {
+      case "popular":
+        whereCondition = { is_popular: true };
+        break;
+      case "latest":
+        whereCondition = { is_latest: true };
+        break;
+      case "topDeals":
+        whereCondition = { is_topDeals: true };
+        break;
+      case "bestSelling":
+        whereCondition = { is_bestSelling: true };
+        break;
+      case "features":
+        whereCondition = { is_features: true };
+        break;
+      default:
+        console.log(status, "status");
+      // return res.status(400).json({
+      //   code: 400,
+      //   status: "error",
+      //   message: "Invalid query parameter",
+      // });
+    }
 
     if (category_id) {
       whereCondition.category_id = category_id;
@@ -331,6 +357,7 @@ const fetchProductCustomer = async (req, res) => {
         {
           model: Combinations,
           required: false,
+          include: [{ model: AttributeCombinatios, required: true }],
           // include: [
           //   {
           //     model: AttributeCombinations,
@@ -611,72 +638,75 @@ const addProduct = async (req, res) => {
 
 const uploadImagesHandler = async (req, h) => {
   try {
-   
-      // Check if the user is authenticated and authorized
-      const user = await checkToken(
-          req.headers["Authorization"]
-              ? req.headers["Authorization"]
-              : req.headers.authorization
-      );
+    // Check if the user is authenticated and authorized
+    const user = await checkToken(
+      req.headers["Authorization"]
+        ? req.headers["Authorization"]
+        : req.headers.authorization
+    );
 
-      if (!(user.role === "ADMIN" && user.application === "kardify")) {
-          return h.response({
-              code: 403,
-              status: "error",
-              message: "You don't have permission for this action."
-          }).code(403);
-      }
-
-      // Ensure the uploads/products directory exists
-      const uploadsDir = 'uploads/products/';
-      if (!fs.existsSync(uploadsDir)) {
-          fs.mkdirSync(uploadsDir, { recursive: true });
-      }
-
-      // Function to upload file
-      const uploadImageFiles = async (req, file, uploadsDir) => {
-        try {
-            let file_url = null;
-            const file_name = `${uploadsDir}${file.hapi.filename}`;
-            await fs.promises.writeFile(file_name, file._data);
-            console.log(`Success: ${file_name} file created`);
-            file_url = `/${file_name}`;
-            return {
-                file_url
-            };
-        } catch (error) {
-            console.log(error);
-        }
-      };
-
-      let files = req.payload.files;
-
-        // Check if files is an array or a single file
-        if (!Array.isArray(files)) {
-          files = [files];
-        }
-
-      // Loop through each file in the payload and upload it
-      for (const file of files) {
-        await uploadImageFiles(req, file, uploadsDir);
-      }
-      return h.response({
-          code: 200,
-          status: "success",
-          message: "Images uploaded successfully",
-      }).code(200);
-  } catch (error) {
-      console.error(error);
-      return h.response({
-          code: 500,
+    if (!(user.role === "ADMIN" && user.application === "kardify")) {
+      return h
+        .response({
+          code: 403,
           status: "error",
-          message: "Something went wrong",
-          error: error.message
-      }).code(500);
+          message: "You don't have permission for this action.",
+        })
+        .code(403);
+    }
+
+    // Ensure the uploads/products directory exists
+    const uploadsDir = "uploads/products/";
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+
+    // Function to upload file
+    const uploadImageFiles = async (req, file, uploadsDir) => {
+      try {
+        let file_url = null;
+        const file_name = `${uploadsDir}${file.hapi.filename}`;
+        await fs.promises.writeFile(file_name, file._data);
+        console.log(`Success: ${file_name} file created`);
+        file_url = `/${file_name}`;
+        return {
+          file_url,
+        };
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    let files = req.payload.files;
+
+    // Check if files is an array or a single file
+    if (!Array.isArray(files)) {
+      files = [files];
+    }
+
+    // Loop through each file in the payload and upload it
+    for (const file of files) {
+      await uploadImageFiles(req, file, uploadsDir);
+    }
+    return h
+      .response({
+        code: 200,
+        status: "success",
+        message: "Images uploaded successfully",
+      })
+      .code(200);
+  } catch (error) {
+    console.error(error);
+    return h
+      .response({
+        code: 500,
+        status: "error",
+        message: "Something went wrong",
+        error: error.message,
+      })
+      .code(500);
   }
-}
-
-
+};
 
 const addBulkProduct = async (req, res) => {
   const transact = await sequelize.transaction();
@@ -689,7 +719,7 @@ const addBulkProduct = async (req, res) => {
 
     if (user.role === "ADMIN" && user.application === "kardify") {
       const { product_data } = req.payload;
-      
+
       const productsWithStatus = product_data.map((product) => ({
         ...product,
         status: true,
@@ -707,11 +737,13 @@ const addBulkProduct = async (req, res) => {
         raw: true,
       });
 
-      
       if (existingProducts.length > 0) {
-
-        const nonExistingProducts = productsWithStatus.filter(product => 
-          !existingProducts.some(existingProduct => existingProduct.product_name === product.product_name)
+        const nonExistingProducts = productsWithStatus.filter(
+          (product) =>
+            !existingProducts.some(
+              (existingProduct) =>
+                existingProduct.product_name === product.product_name
+            )
         );
 
         const createdProducts = await Products.bulkCreate(nonExistingProducts, {
@@ -720,15 +752,17 @@ const addBulkProduct = async (req, res) => {
 
         const productImages = [];
         createdProducts.forEach((product, index) => {
-          const images = nonExistingProducts[index].images.split(',').map(img => img.trim());
-          images.forEach(image => {
+          const images = nonExistingProducts[index].images
+            .split(",")
+            .map((img) => img.trim());
+          images.forEach((image) => {
             productImages.push({
               product_id: product.id,
-              image_url: `/uploads/products/${image}`
+              image_url: `/uploads/products/${image}`,
             });
           });
         });
-  
+
         await ProductImages.bulkCreate(productImages, {
           transaction: transact,
         });
@@ -752,19 +786,20 @@ const addBulkProduct = async (req, res) => {
 
       const productImages = [];
       createdProducts.forEach((product, index) => {
-        const images = productsWithStatus[index].images.split(',').map(img => img.trim());
-        images.forEach(image => {
+        const images = productsWithStatus[index].images
+          .split(",")
+          .map((img) => img.trim());
+        images.forEach((image) => {
           productImages.push({
             product_id: product.id,
-            image_url: `/uploads/products/${image}`
+            image_url: `/uploads/products/${image}`,
           });
         });
       });
-      
+
       await ProductImages.bulkCreate(productImages, {
         transaction: transact,
       });
-
 
       await transact.commit();
       // await sequelize.close();
@@ -807,7 +842,6 @@ const addBulkProduct = async (req, res) => {
       .code(200);
   }
 };
-
 
 const editProduct = async (req, res) => {
   console.log("req.headers", req.headers);
@@ -1137,7 +1171,7 @@ const deleteProduct = async (req, res) => {
 
 const toggleProductStatus = async (req, res) => {
   try {
-    const { product_id } = req.query;
+    const { product_id, status } = req.query;
 
     const user = await checkToken(
       req.headers["Authorization"]
@@ -1170,8 +1204,35 @@ const toggleProductStatus = async (req, res) => {
           })
           .code(200);
       }
+      console.log(existingProduct, "existing-product-------");
+      switch (status) {
+        case "popular":
+          existingProduct = { ...existingProduct, is_popular: true };
+          break;
+        case "latest":
+          existingProduct = { ...existingProduct, is_latest: true };
+          break;
+        case "topDeals":
+          existingProduct = { ...existingProduct, is_topDeals: true };
+          break;
+        case "bestSelling":
+          existingProduct = { ...existingProduct, is_bestSelling: true };
+          break;
+        // case "features":
+        //   existingProduct = { ...existingProduct, is_features: true };
+        //   break;
+        default:
+          console.log(status, "status");
+        //  return res
+        //   .response({
+        //     code: 404,
+        //     status: "error",
+        //     message: "query not found",
+        //   })
+        //   .code(200);
+      }
 
-      existingProduct.status = !existingProduct.status;
+      existingProduct.is_features = !existingProduct.is_features;
 
       await existingProduct.save();
 

@@ -39,7 +39,21 @@ const getAttributes = async (req, res) => {
         attribute_name,
       };
     //---------------modify get attributes without validation-----------------------------------
-
+    if (!id && !attribute_name) {
+      const attributes = await ProductAttributes.findAll({
+        where: filter,
+        raw: true,
+        order: [["createdAt", "DESC"]],
+      });
+      return res
+        .response({
+          code: 200,
+          status: "success",
+          message: "Attributes fetched successfully",
+          attributes,
+        })
+        .code(200);
+    }
     //-------------------------------------------------modify end------------------------------------------
     const user = await checkToken(
       req.headers["Authorization"]

@@ -1,8 +1,9 @@
 "use strict";
 // importing env data from config file
-const { env, sequelize, } = require("./config");
+const { env, sequelize } = require("./config");
 // importing routes
-const { categoriesValidators } = require('./validators')
+const { categoriesValidators } = require("./validators");
+
 const routes = require("./routes");
 // importing sequelize file
 const seq = require("./config/sequelize");
@@ -14,41 +15,41 @@ const Vision = require("@hapi/vision");
 const HapiSwagger = require("hapi-swagger");
 const Pack = require("./package");
 // const SocketIO = require('socket.io');
-const HapiCors = require('hapi-cors');
+const HapiCors = require("hapi-cors");
 
 // initializing server
 const init = async () => {
   // creating a hapi server
   const server = Hapi.server({
     port: env.PORT,
-    host: '0.0.0.0' || env.HOST,
+    host: "192.168.68.122" || env.HOST,
     routes: {
       cors: true,
       validate: {
         failAction: async (request, h, err) => {
-          console.error('Errors: ', err);
+          console.error("Errors: ", err);
           throw err;
-        }
+        },
       },
       timeout: {
         socket: 60000,
-        server: 60000
-      }
-    }
+        server: 60000,
+      },
+    },
   });
 
   // // Register Hapi CORS plugin
   await server.register({
     plugin: HapiCors,
     options: {
-      origins: ['*'], // Adjust as needed for your specific requirements
+      origins: ["*"], // Adjust as needed for your specific requirements
     },
   });
 
   // adding swagger dependencies
   const swaggerOptions = {
     info: {
-      title: "Kadify API Documentation",
+      title: "OnlineKIng API Documentation",
       version: Pack.version,
     },
     sortEndpoints: "ordered",
@@ -64,53 +65,53 @@ const init = async () => {
       options: swaggerOptions,
     },
   ]);
-//   server.route({
-//     method: 'GET',
-//     path: '/remove-all-sockets',
-//     handler: (request, h) => {
-//         // Loop through connected sockets and disconnect them
-//         Object.keys(connectedUsers).forEach((socketId) => {
-//             const socket = connectedUsers[socketId].socket;
-//             socket.disconnect(true);
-//         });
+  //   server.route({
+  //     method: 'GET',
+  //     path: '/remove-all-sockets',
+  //     handler: (request, h) => {
+  //         // Loop through connected sockets and disconnect them
+  //         Object.keys(connectedUsers).forEach((socketId) => {
+  //             const socket = connectedUsers[socketId].socket;
+  //             socket.disconnect(true);
+  //         });
 
-//         // Clear the connectedUsers object
-//         Object.keys(connectedUsers).forEach((socketId) => {
-//             delete connectedUsers[socketId];
-//         });
+  //         // Clear the connectedUsers object
+  //         Object.keys(connectedUsers).forEach((socketId) => {
+  //             delete connectedUsers[socketId];
+  //         });
 
-//         return 'All sockets removed';
-//     },
-//   });
-//   server.route({
-//     method: 'GET',
-//     path: '/remove-socket/{socket_id}',
-//     handler: (request, h) => {
-//         const { socket_id } = request.params
+  //         return 'All sockets removed';
+  //     },
+  //   });
+  //   server.route({
+  //     method: 'GET',
+  //     path: '/remove-socket/{socket_id}',
+  //     handler: (request, h) => {
+  //         const { socket_id } = request.params
 
-//         // Loop through connected sockets and disconnect them
-//         const socket = connectedUsers[socket_id].socket;
-//         socket.disconnect(true);
-//         delete connectedUsers[socket_id];
+  //         // Loop through connected sockets and disconnect them
+  //         const socket = connectedUsers[socket_id].socket;
+  //         socket.disconnect(true);
+  //         delete connectedUsers[socket_id];
 
-//         return 'Socket removed';
-//     },
-// });
-  await server.register(require('hapi-response-time'));
+  //         return 'Socket removed';
+  //     },
+  // });
+  await server.register(require("hapi-response-time"));
   server.route({
     method: "GET",
     path: "/uploads/{path}/{image}",
-    options: {  
+    options: {
       description: "Fetching static files.",
       // tags,
       validate: {
         // headers: headerValidator,
-        params: categoriesValidators.category_image
+        params: categoriesValidators.category_image,
       },
-      handler:  async (req, res) => {
+      handler: async (req, res) => {
         try {
-          const { image , path } = req.params;
-          console.log(image)
+          const { image, path } = req.params;
+          console.log(image);
           const filepath = `./uploads/${path}/${image}`;
           return res.file(filepath);
         } catch (error) {
@@ -122,9 +123,9 @@ const init = async () => {
             })
             .code(200);
         }
-      }
+      },
     },
-  })
+  });
 
   // const io = SocketIO(server.listener,  {
   //   cors: {
@@ -163,13 +164,12 @@ const init = async () => {
   // });
   // setIoInstance(io);
 
-
   // starting the server
   await server.start();
   // registering the server with a prefix
   // so after base route we need to add /api and
   // then the route which needs to be accessed
-  
+
   await server.register(routes, {
     routes: {
       prefix: "/api",
@@ -208,7 +208,6 @@ const init = async () => {
   //   console.log('Categories available in redis.');
   // }
 
-
   // (async () => {
   //     await loadCategories()
   // })()
@@ -224,4 +223,3 @@ process.on("unhandledRejection", (err) => {
 });
 
 init();
-

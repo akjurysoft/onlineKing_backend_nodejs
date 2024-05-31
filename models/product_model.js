@@ -64,10 +64,27 @@ Products.init(
       type: INTEGER,
       allowNull: true,
     },
-    status: {
+    is_features: {
       type: BOOLEAN,
       allowNull: true,
     },
+    is_topDeals: {
+      type: BOOLEAN,
+      allowNull: true,
+    },
+    is_latest: {
+      type: BOOLEAN,
+      allowNull: true,
+    },
+    is_popular: {
+      type: BOOLEAN,
+      allowNull: true,
+    },
+    is_bestSelling: {
+      type: BOOLEAN,
+      allowNull: true,
+    },
+
     discount_type: {
       type: STRING,
       allowNull: true,
@@ -225,9 +242,9 @@ Products.belongsTo(CarModel, {
   foreignKey: "car_model_id",
 });
 
-Products.hasOne(Combinations, {
-  foreignKey: "product_id",
-});
+// Products.hasOne(Combinations, {
+//   foreignKey: "product_id",
+// });
 
 // Combinations.belongsToMany(Products, {
 //   foreignKey: "product_id",

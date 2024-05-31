@@ -35,27 +35,34 @@ module.exports = {
     MSG91_AUTH_KEY: process.env.MSG91_AUTH_KEY,
     MSG91_OTP_TEMP_ID: process.env.MSG91_OTP_TEMP_ID,
     SHIPROCKET_TOKEN_API_URL: process.env.SHIPROCKET_TOKEN_API_URL,
-    SHIPROCKET_SHIPPING_PRICE_API_URL: process.env.SHIPROCKET_SHIPPING_PRICE_API_URL,
-    SHIPROCKET_CREATE_ORDER_API_URL: process.env.SHIPROCKET_CREATE_ORDER_API_URL,
-    SHIPROCKET_TRACK_ORDER_API_URL: process.env.SHIPROCKET_TRACK_ORDER_API_URL
+    SHIPROCKET_SHIPPING_PRICE_API_URL:
+      process.env.SHIPROCKET_SHIPPING_PRICE_API_URL,
+    SHIPROCKET_CREATE_ORDER_API_URL:
+      process.env.SHIPROCKET_CREATE_ORDER_API_URL,
+    SHIPROCKET_TRACK_ORDER_API_URL: process.env.SHIPROCKET_TRACK_ORDER_API_URL,
   },
+
   databases,
   dataTypes,
   sequelize,
+
   makeHash: make_hash,
   checkHash: check_hash,
+
   makeToken(data) {
     const token = jwt.sign(data, process.env.JWTSECRET, {
       expiresIn: "4h",
     });
     return token;
   },
+
   makeRefreshToken(data) {
     const token = jwt.sign(data, process.env.JWTSECRET, {
       expiresIn: "1y",
     });
     return token;
   },
+
   checkToken(token) {
     try {
       const verifier = jwt.verify(token, process.env.JWTSECRET);
